@@ -41,7 +41,7 @@ export default function TrapEntertainmentsWebsite() {
     <div className="min-h-screen bg-black text-white font-sans selection:bg-purple-500 selection:text-white">
       
       {/* Hero Section */}
-      <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
+      <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-black to-black" />
         {/* Decorative background glow ambient circles */}
         <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-purple-600/10 blur-3xl" />
@@ -154,7 +154,7 @@ export default function TrapEntertainmentsWebsite() {
       </section>
 
       {/* Upcoming Events */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
+      <section id="event" className="mx-auto max-w-6xl px-6 py-24">
         <div className="mb-16 text-center">
           <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-400 font-medium">
             Upcoming Events
