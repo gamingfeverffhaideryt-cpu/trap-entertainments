@@ -10,11 +10,10 @@ import {
   MapPin, 
   Users, 
   Mail, 
-  X,
-  InstagramIcon 
+  X
 } from 'lucide-react';
 
-// Upgraded high-performance viewport reveal tracking hook
+// High-performance viewport reveal tracking hook
 function UseScrollReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
@@ -24,7 +23,6 @@ function UseScrollReveal() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Keeps transitions smooth by updating state based on viewport entry
         if (entry.isIntersecting) {
           setIsRevealed(true);
         } else {
@@ -70,12 +68,10 @@ export default function TrapEntertainmentWebsite() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth cinematic parallax & blur mechanics for Hero frame
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
   const heroBlur = Math.min(10, scrollY / 90); 
 
-  // Initialize Scroll Reveal Instances
   const eventsHeaderReveal = UseScrollReveal();
   const eventsGridReveal = UseScrollReveal();
   const aboutReveal = UseScrollReveal();
@@ -102,7 +98,7 @@ export default function TrapEntertainmentWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       
-      {/* Top-Right Interactive Sticky Instagram Handle */}
+      {/* Top-Right Interactive Sticky Instagram Handle (Using Native SVG to prevent build errors) */}
       <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none p-4 md:p-6 flex justify-end">
         <a 
           href="https://www.instagram.com/trap.entz/"
@@ -110,7 +106,22 @@ export default function TrapEntertainmentWebsite() {
           rel="noopener noreferrer"
           className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/50 border border-neutral-800/60 backdrop-blur-md text-xs md:text-sm font-semibold tracking-wide text-neutral-200 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:text-amber-400 hover:border-amber-500/40 hover:scale-[1.05] hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.6)]"
         >
-          <Instagram className="h-4 w-4 text-amber-500 transition-transform duration-500 group-hover:rotate-12 shrink-0" />
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            width="16" 
+            height="16" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="#f59e0b" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="transition-transform duration-500 group-hover:rotate-12 shrink-0"
+          >
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+          </svg>
           <span>@trap.entz</span>
         </a>
       </header>
@@ -175,7 +186,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Upcoming Events Section (Positioned Cleanly Above About Us) */}
+      {/* Upcoming Events Section (Positioned Above About Us) */}
       <section id="event" className="mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
