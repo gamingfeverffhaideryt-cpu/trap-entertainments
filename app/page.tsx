@@ -1,6 +1,6 @@
 "use client";
-import { useEffect } from "react";
-import React, { useState } from 'react';
+import { useEffect, useState } from "react";
+import React from 'react';
 import { 
   Ticket, 
   Image as ImageIcon, 
@@ -11,13 +11,16 @@ import {
   MapPin, 
   Users, 
   Mail, 
-  Instagram,
   X 
 } from 'lucide-react';
 
 export default function TrapEntertainmentsWebsite() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Triggers the smooth fade-in entry when the page loads
+    setIsLoaded(true);
   }, []);
 
   // State for controlling user interactive modals
@@ -32,7 +35,7 @@ export default function TrapEntertainmentsWebsite() {
       day: "Friday Night",
       date: "May 22, 2026",
       venue: "Cavore, Ashok Nagar",
-      features: ["The producers of the famous afro song Addicted are playing their exclusive set, submit your names to reserve your name in the exclusive guestlist."]
+      features: ["The producers of the famous afro song Addicted are playing their exclusive set. Submit your names to reserve your spot on the exclusive guestlist."]
     },
   ];
 
@@ -42,35 +45,33 @@ export default function TrapEntertainmentsWebsite() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-purple-500 selection:text-white">
+    <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-black to-black" />
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-purple-600/10 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-purple-800/10 blur-3xl" />
+        {/* Luxury Gold and Black Ambient Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-black to-black" />
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-yellow-600/5 blur-3xl" />
 
         <div className="relative z-10 max-w-4xl">
-          <p className="mb-4 flex items-center justify-center gap-2 text-sm uppercase tracking-[0.4em] text-purple-400 font-semibold">
+          <p className="mb-4 flex items-center justify-center gap-2 text-sm uppercase tracking-[0.4em] text-amber-400 font-semibold">
             <Sparkles className="h-4 w-4" /> Trap Entertainments
           </p>
-          
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
-            className="mx-auto mb-8 w-40 md:w-52 drop-shadow-[0_0_25px_rgba(255,215,0,0.35)]"
+            className="mx-auto mb-8 w-40 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.4)]"
           />
-          
-          <h1 className="text-5xl font-black leading-tight md:text-7xl tracking-tight">
+          <h1 className="text-5xl font-black leading-tight md:text-7xl tracking-tight text-neutral-100">
             Bangalore's Next-Level
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-500">
-              Party Experience
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
+              Premium Nightlife
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-300 md:text-xl leading-relaxed">
-            Exclusive nightlife events, DJ nights, college parties, luxury club
-            experiences, and unforgettable entertainment.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400 md:text-xl leading-relaxed font-light">
+            Exclusive nightlife experiences, top-tier DJ acts, custom college events, and luxury club hosting across Bangalore.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -82,7 +83,7 @@ export default function TrapEntertainmentsWebsite() {
                   behavior: "smooth",
                 });
               }}
-              className="group flex items-center gap-2 rounded-2xl bg-yellow-400 px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-yellow-500/20"
+              className="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-lg font-bold text-black transition-all duration-300 transform active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)]"
             >
               <Ticket className="h-5 w-5 transition-transform group-hover:rotate-12" />
               Book Events
@@ -91,7 +92,7 @@ export default function TrapEntertainmentsWebsite() {
             <button 
               type="button"
               onClick={() => alert("Our comprehensive photo gallery is launching soon! Follow our Instagram for real-time recaps.")}
-              className="flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-black hover:scale-[1.02]"
+              className="flex items-center gap-2 rounded-2xl border border-amber-500/20 bg-neutral-900/40 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent hover:scale-[1.03] active:scale-95"
             >
               <ImageIcon className="h-5 w-5" />
               View Gallery
@@ -100,83 +101,81 @@ export default function TrapEntertainmentsWebsite() {
         </div>
       </section>
 
-      {/* About */}
-      <section className="mx-auto max-w-6xl px-6 py-24">
+      {/* About Section */}
+      <section className="mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-400 font-medium">
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-500 font-medium">
               About Us
             </p>
-            <h2 className="text-4xl font-bold md:text-5xl tracking-tight leading-tight">
-              We Create Experiences,
-              <span className="block text-purple-500 mt-1">Not Just Parties.</span>
+            <h2 className="text-4xl font-bold md:text-5xl tracking-tight leading-tight text-neutral-100">
+              We Design Architecture,
+              <span className="block text-amber-400 mt-1 font-light">Not Just Bashes.</span>
             </h2>
           </div>
 
-          <div className="border-l-2 border-purple-600/30 pl-0 md:pl-8">
-            <p className="text-lg leading-8 text-gray-300">
-              Trap Entertainments is a youth-driven entertainment organization
-              focused on premium nightlife, artist collaborations, music events,
-              and unforgettable social experiences. From high-energy DJ nights
-              to curated luxury events, we bring Bangalore's nightlife crowd together under one roof.
+          <div className="border-l border-amber-500/20 pl-0 md:pl-8">
+            <p className="text-lg leading-8 text-neutral-400 font-light">
+              Trap Entertainments is a premium lifestyle collective built for the modern nightlife enthusiast. 
+              We curate global electronic music acts, high-energy college properties, and VIP club configurations—uniting Bangalore's elite elite night crowds under signature concepts.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="bg-gradient-to-b from-neutral-900/40 to-neutral-900/20 px-6 py-24 border-y border-white/5">
+      {/* Services Section */}
+      <section className="bg-gradient-to-b from-neutral-950 to-neutral-900/50 px-6 py-24 border-y border-amber-500/5">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 text-center">
-            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-400 font-medium">
+            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-400 font-medium">
               What We Do
             </p>
-            <h2 className="text-4xl font-bold md:text-5xl tracking-tight">
-              Events That Hit Different
+            <h2 className="text-4xl font-bold md:text-5xl tracking-tight text-neutral-100">
+              Curated Event Standards
             </h2>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
             {[
               {
-                icon: <PartyPopper className="h-6 w-6 text-purple-400" />,
+                icon: <PartyPopper className="h-6 w-6 text-amber-400" />,
                 title: 'Club Parties',
-                desc: 'Premium nightlife experiences with top-tier DJs at the most exclusive venues across Bangalore.',
+                desc: 'A-grade luxury nightlife modules matching exceptional production standards with exclusive target clubs.',
               },
               {
-                icon: <Users className="h-6 w-6 text-purple-400" />,
+                icon: <Users className="h-6 w-6 text-amber-400" />,
                 title: 'College Events',
-                desc: 'Youth-focused cultural festivals, high-energy freshers bashes, and tailored campus entertainment.',
+                desc: 'Custom high-volume cultural takeovers, vibrant orientation events, and scaled premium student entertainment.',
               },
               {
-                icon: <Music className="h-6 w-6 text-purple-400" />,
-                title: 'Artist Collaborations',
-                desc: 'Live performances, independent artist showcases, influencer guest appearances, and music agency partnerships.',
+                icon: <Music className="h-6 w-6 text-amber-400" />,
+                title: 'Artist Rosters',
+                desc: 'Bespoke independent lineup curation, global production touring properties, and strategic booking operations.',
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="group rounded-3xl border border-white/10 bg-black/40 p-8 shadow-2xl backdrop-blur transition-all duration-300 hover:border-purple-500/40 hover:-translate-y-1"
+                className="group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-8 shadow-2xl backdrop-blur transition-all duration-300 hover:border-amber-500/30 hover:-translate-y-1"
               >
-                <div className="mb-5 inline-block rounded-2xl bg-purple-950/50 p-4 border border-purple-500/20 group-hover:bg-purple-900/50 transition-colors">
+                <div className="mb-5 inline-block rounded-2xl bg-amber-950/30 p-4 border border-amber-500/10 group-hover:bg-amber-900/20 group-hover:border-amber-500/30 transition-all">
                   {item.icon}
                 </div>
-                <h3 className="mb-4 text-2xl font-bold tracking-tight">{item.title}</h3>
-                <p className="leading-7 text-gray-400">{item.desc}</p>
+                <h3 className="mb-4 text-2xl font-bold tracking-tight text-neutral-200">{item.title}</h3>
+                <p className="leading-7 text-neutral-400 font-light text-sm">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events */}
+      {/* Upcoming Events Section */}
       <section id="event" className="mx-auto max-w-6xl px-6 py-24">
         <div className="mb-16 text-center">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-purple-400 font-medium">
+          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-amber-400 font-medium">
             Upcoming Events
           </p>
-          <h2 className="text-4xl font-bold md:text-5xl tracking-tight">
-            Catch The Next Wave
+          <h2 className="text-4xl font-bold md:text-5xl tracking-tight text-neutral-100">
+            Secure Immediate Entry
           </h2>
         </div>
 
@@ -184,29 +183,29 @@ export default function TrapEntertainmentsWebsite() {
           {upcomingEvents.map((event) => (
             <div
               key={event.id}
-              className="flex flex-col justify-between rounded-3xl border border-white/10 bg-gradient-to-br from-purple-950/30 via-black to-black p-8 transition-all duration-300 hover:border-purple-500/30 w-full max-w-xl mx-auto"
+              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-8 transition-all duration-300 hover:border-amber-500/20 max-w-xl w-full mx-auto"
             >
               <div>
-                <span className="inline-block mb-4 rounded-full bg-purple-500/10 border border-purple-500/30 px-3 py-1 text-xs uppercase font-semibold tracking-wider text-purple-300">
+                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-semibold tracking-wider text-amber-400">
                   {event.day}
                 </span>
 
-                <h3 className="text-3xl font-black tracking-tight text-yellow-400">{event.title}</h3>
+                <h3 className="text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
                 
-                <div className="mt-4 space-y-2 text-gray-300">
+                <div className="mt-4 space-y-2 text-neutral-400 font-light">
                   <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="h-4 w-4 text-purple-400 shrink-0" />
+                    <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
                     <span>{event.date}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="h-4 w-4 text-purple-400 shrink-0" />
+                    <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
                     <span className="truncate">{event.venue}</span>
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-2">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {event.features.map((feature, idx) => (
-                    <span key={idx} className="bg-white/5 border border-white/5 rounded-lg p-3 text-xs leading-relaxed text-gray-300">
+                    <span key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light">
                       {feature}
                     </span>
                   ))}
@@ -216,7 +215,7 @@ export default function TrapEntertainmentsWebsite() {
               <button 
                 type="button"
                 onClick={() => handleOpenBooking(event.title)}
-                className="mt-8 w-full rounded-xl bg-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-200 hover:bg-purple-600 hover:text-white"
+                className="mt-8 w-full rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-200 hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]"
               >
                 Reserve Spot via Guestlist
               </button>
@@ -225,4 +224,135 @@ export default function TrapEntertainmentsWebsite() {
         </div>
       </section>
 
-      {
+      {/* Contact Call-to-Action */}
+      <section className="bg-neutral-950 border-t border-amber-500/10 relative overflow-hidden px-6 py-24 text-center">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-950/20 via-black to-black opacity-80" />
+        
+        <div className="relative z-10 mx-auto max-w-3xl">
+          <h2 className="text-4xl font-black md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
+            Ready To Party?
+          </h2> 
+
+          <p className="mt-6 text-lg md:text-xl text-neutral-400 max-w-xl mx-auto leading-relaxed font-light">
+            Contact Trap Entertainments for elite brand alignments, night bookings, sponsorship structures, and premium student festivals.
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <button 
+              type="button"
+              onClick={() => setActiveModal('contact')}
+              className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)]"
+            >
+              <Mail className="h-5 w-5" /> Contact Us
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-neutral-900 bg-black px-6 py-8 text-center text-xs tracking-wider text-neutral-600 font-light">
+        © 2026 Trap Entertainments. All rights reserved. Curated for the elite crowd in Bangalore, India.
+      </footer>
+
+      {/* Shared Interactive Modal Wrapper */}
+      {activeModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-fade-in">
+          <div className="relative w-full max-w-md rounded-3xl border border-amber-500/20 bg-neutral-950 p-8 shadow-2xl">
+            <button 
+              type="button"
+              onClick={() => setActiveModal(null)}
+              className="absolute top-4 right-4 text-neutral-500 hover:text-amber-400 transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {activeModal === 'book' ? (
+              <div>
+                <h3 className="text-2xl font-bold text-amber-400 mb-2 tracking-tight">Reserve Guestlist</h3>
+                <p className="text-sm text-neutral-400 mb-6 font-light">Booking request for: <strong className="text-white font-medium">{selectedEvent || "General Access"}</strong></p>
+                
+                <form 
+                  action="https://formspree.io/f/mwvzvjge"
+                  method="POST"
+                  className="space-y-4"
+                >
+                  <input type="hidden" name="Event Title" value={selectedEvent || "General Access"} />
+
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-neutral-300">
+                      Male Name
+                    </label>
+                    <input
+                      type="text"
+                      name="maleName"
+                      required
+                      placeholder="Enter male guest name"
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900/60 px-4 py-3 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-neutral-300">
+                      Female Name
+                    </label>
+                    <input
+                      type="text"
+                      name="femaleName"
+                      required
+                      placeholder="Enter female guest name"
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900/60 px-4 py-3 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-2 font-medium">
+                      Phone Number (WhatsApp)
+                    </label>
+                    <input 
+                      required 
+                      type="tel" 
+                      name="phone"
+                      className="w-full bg-neutral-900/60 border border-neutral-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
+                      placeholder="+91 XXXXX XXXXX" 
+                    />
+                  </div>
+                  
+                  <button type="submit" className="w-full mt-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+                    Submit Request
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-2xl font-bold text-amber-400 mb-2 tracking-tight">Let's Collaborate</h3>
+                <p className="text-sm text-neutral-400 mb-6 font-light">Drop us a line and team Trap will orchestrate your next concept.</p>
+                <form onSubmit={(e) => { e.preventDefault(); alert("Message dispatched successfully."); setActiveModal(null); }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Email Address</label>
+                    <input required type="email" className="w-full bg-neutral-900/60 border border-neutral-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="name@domain.com" />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Inquiry Type</label>
+                    <select className="w-full bg-neutral-900/60 border border-neutral-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400 text-sm">
+                      <option>Artist Booking / Lineup</option>
+                      <option>College Fest Pitch</option>
+                      <option>Brand Sponsor Sponsorship</option>
+                      <option>Other Collaboration</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Message Details</label>
+                    <textarea rows={3} required className="w-full bg-neutral-900/60 border border-neutral-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-400 text-sm placeholder-neutral-600" placeholder="Tell us about your strategy/event plans..."></textarea>
+                  </div>
+                  <button type="submit" className="w-full mt-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
