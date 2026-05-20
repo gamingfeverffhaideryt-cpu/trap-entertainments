@@ -51,7 +51,11 @@ export default function TrapEntertainmentsWebsite() {
           <p className="mb-4 flex items-center justify-center gap-2 text-sm uppercase tracking-[0.4em] text-purple-400 font-semibold">
             <Sparkles className="h-4 w-4" /> Trap Entertainments
           </p>
-
+<img
+  src="/logo.png"
+  alt="Trap Ent Logo"
+  className="mx-auto mb-8 w-40 md:w-52 drop-shadow-[0_0_25px_rgba(255,215,0,0.35)]"
+/>
           <h1 className="text-5xl font-black leading-tight md:text-7xl tracking-tight">
             Bangalore's Next-Level
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-purple-500 to-indigo-500">
