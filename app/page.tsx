@@ -16,8 +16,8 @@ import {
 
 export default function TrapEntertainmentsWebsite() {
   // State for controlling user interactive modals
-  const [activeModal, setActiveModal] = useState(null); // 'book' | 'contact' | 'gallery' | null
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [activeModal, setActiveModal] = useState<string | null>(null); // 'book' | 'contact' | 'gallery' | null
+  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
   // Structured upcoming events array
   const upcomingEvents = [
