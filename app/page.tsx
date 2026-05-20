@@ -67,6 +67,12 @@ export default function TrapEntertainmentsWebsite() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
            <a
   href="#event"
+  onClick={(e) => {
+    e.preventDefault();
+    document.getElementById("event")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }}
   className="group flex items-center gap-2 rounded-2xl bg-yellow-400 px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-yellow-500/20"
 >
   <Ticket className="h-5 w-5 transition-transform group-hover:rotate-12" />
