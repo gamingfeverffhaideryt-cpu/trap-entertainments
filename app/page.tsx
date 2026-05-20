@@ -268,18 +268,38 @@ export default function TrapEntertainmentsWebsite() {
                 <h3 className="text-2xl font-bold text-purple-400 mb-2">Reserve Guestlist</h3>
                 <p className="text-sm text-gray-400 mb-6">Booking request for: <strong className="text-white">{selectedEvent || "General Access"}</strong></p>
                 <form onSubmit={(e) => { e.preventDefault(); alert("Guestlist requested! We will text you confirmation details."); setActiveModal(null); }} className="space-y-4">
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1">Full Name</label>
-                    <input required type="text" className="w-full bg-black border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500 text-sm" placeholder="Your name" />
-                  </div>
+                  <div className="space-y-4">
+
+  <div>
+    <label className="mb-2 block text-sm font-medium text-gray-300">
+      Male Name
+    </label>
+
+    <input
+      type="text"
+      placeholder="Enter male guest name"
+      className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
+    />
+  </div>
+
+  <div>
+    <label className="mb-2 block text-sm font-medium text-gray-300">
+      Female Name
+    </label>
+
+    <input
+      type="text"
+      placeholder="Enter female guest name"
+      className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
+    />
+  </div>
+
+</div>
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1">Phone Number (WhatsApp)</label>
                     <input required type="tel" className="w-full bg-black border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500 text-sm" placeholder="+91 XXXXX XXXXX" />
                   </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-400 mb-1">Total Attendees</label>
-                    <input defaultValue="1" min="1" max="10" type="number" className="w-full bg-black border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500 text-sm" />
-                  </div>
+                  
                   <button type="submit" className="w-full mt-2 rounded-xl bg-purple-600 py-3 font-semibold text-white transition hover:bg-purple-500">
                     Submit Request
                   </button>
