@@ -86,6 +86,7 @@ export default function TrapEntertainmentsWebsite() {
       title: "DAYTONA",
       day: "Friday Night",
       date: "May 22, 2026",
+      Timming: "9:00 pm"
       venue: "Cavore, Ashok Nagar",
       features: ["The producers of the famous afro song Addicted are playing their exclusive set. Submit your names to reserve your spot on the exclusive guestlist."]
     },
