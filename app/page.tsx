@@ -13,24 +13,26 @@ import {
   X 
 } from 'lucide-react';
 
-// Optimized viewport tracking hook built to handle mobile touch-scroll physics perfectly
+// Upgraded viewport tracking hook - resets state when leaving the screen for endless looping
 function UseScrollReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Avoid running on servers
     if (typeof window === "undefined") return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // CHANGED HERE: If it's on screen, animate it. If it leaves, reset it!
         if (entry.isIntersecting) {
           setIsRevealed(true);
+        } else {
+          setIsRevealed(false); 
         }
       },
       { 
-        threshold: 0.05, // Lower threshold ensures it fires early on small phone screens
-        rootMargin: "0px 0px -20px 0px" 
+        threshold: 0.05, 
+        rootMargin: "0px 0px -40px 0px" 
       }
     );
 
@@ -61,7 +63,6 @@ export default function TrapEntertainmentsWebsite() {
       setScrollY(window.scrollY);
     };
 
-    // Passive listener prevents laggy scroll stutters on Android and iOS
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -69,12 +70,10 @@ export default function TrapEntertainmentsWebsite() {
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
-  // Core Apple Hero dynamics optimized to prevent clipping out of viewport boundaries
   const heroScale = Math.max(0.85, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
   const heroBlur = Math.min(6, scrollY / 100); 
 
-  // Initialize individual scroll animation states for sections
   const aboutReveal = UseScrollReveal();
   const serviceHeaderReveal = UseScrollReveal();
   const servicesGridReveal = UseScrollReveal();
@@ -163,7 +162,7 @@ export default function TrapEntertainmentsWebsite() {
       {/* About Section */}
       <section 
         ref={aboutReveal.elementRef}
-        className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-1000 ease-out transform will-change-transform ${
+        className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-700 ease-out transform will-change-transform ${
           aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >
@@ -192,7 +191,7 @@ export default function TrapEntertainmentsWebsite() {
         <div className="mx-auto max-w-6xl">
           <div 
             ref={serviceHeaderReveal.elementRef}
-            className={`mb-12 md:mb-16 text-center transition-all duration-1000 ease-out transform ${
+            className={`mb-12 md:mb-16 text-center transition-all duration-700 ease-out transform ${
               serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
@@ -227,7 +226,7 @@ export default function TrapEntertainmentsWebsite() {
             ].map((item, index) => (
               <div
                 key={item.title}
-                className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-700 ease-out transform will-change-transform ${
+                className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-500 ease-out transform will-change-transform ${
                   servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-6 scale-95" : "opacity-0 translate-x-6 scale-95"
                 } hover:border-amber-500/30 hover:-translate-y-2`}
               >
@@ -246,7 +245,7 @@ export default function TrapEntertainmentsWebsite() {
       <section id="event" className="mx-auto max-w-6xl px-6 py-24">
         <div 
           ref={eventsHeaderReveal.elementRef}
-          className={`mb-12 md:mb-16 text-center transition-all duration-1000 transform ${
+          className={`mb-12 md:mb-16 text-center transition-all duration-700 transform ${
             eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
           }`}
         >
@@ -260,7 +259,7 @@ export default function TrapEntertainmentsWebsite() {
 
         <div 
           ref={eventsGridReveal.elementRef}
-          className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-1000 transform will-change-transform ${
+          className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-700 transform will-change-transform ${
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12"
           }`}
         >
