@@ -286,17 +286,7 @@ export default function TrapEntertainmentsWebsite() {
     />
   </div>
 
-  <div>
-    <label className="mb-2 block text-sm font-medium text-gray-300">
-      Female Name
-    </label>
-
-    <input
-      type="text"
-      placeholder="Enter female guest name"
-      className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
-    />
-  </div>
+  
 
 </div>
                   <div>
