@@ -11,10 +11,10 @@ import {
   Users, 
   Mail, 
   X,
-  Instagram 
+  InstagramIcon 
 } from 'lucide-react';
 
-// Upgraded viewport tracking hook
+// Upgraded high-performance viewport reveal tracking hook
 function UseScrollReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
@@ -24,6 +24,7 @@ function UseScrollReveal() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        // Keeps transitions smooth by updating state based on viewport entry
         if (entry.isIntersecting) {
           setIsRevealed(true);
         } else {
@@ -32,7 +33,7 @@ function UseScrollReveal() {
       },
       { 
         threshold: 0.02, 
-        rootMargin: "0px 0px -20px 0px" 
+        rootMargin: "0px 0px -30px 0px" 
       }
     );
 
@@ -54,6 +55,8 @@ function UseScrollReveal() {
 export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
+  const [activeModal, setActiveModal] = useState<string | null>(null); 
+  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,15 +70,12 @@ export default function TrapEntertainmentWebsite() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [activeModal, setActiveModal] = useState<string | null>(null); 
-  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
+  // Smooth cinematic parallax & blur mechanics for Hero frame
+  const heroScale = Math.max(0.88, 1 - scrollY / 2500);
+  const heroOpacity = Math.max(0, 1 - scrollY / 700);
+  const heroBlur = Math.min(10, scrollY / 90); 
 
-  // Smooth cubic-bezier approximations for hero parallax
-  const heroScale = Math.max(0.85, 1 - scrollY / 3000);
-  const heroOpacity = Math.max(0, 1 - scrollY / 800);
-  const heroBlur = Math.min(8, scrollY / 120); 
-
-  // Scroll Reveal instances
+  // Initialize Scroll Reveal Instances
   const eventsHeaderReveal = UseScrollReveal();
   const eventsGridReveal = UseScrollReveal();
   const aboutReveal = UseScrollReveal();
@@ -102,40 +102,40 @@ export default function TrapEntertainmentWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       
-      {/* Floating Header Area for Top-Right Instagram Handle */}
-      <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none p-4 md:p-6 flex justify-end">
+      {/* Top-Right Interactive Sticky Instagram Handle */}
+      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none p-4 md:p-6 flex justify-end">
         <a 
           href="https://www.instagram.com/trap.entz/"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900/40 border border-neutral-800/40 backdrop-blur-md text-xs md:text-sm font-medium tracking-wide text-neutral-300 transition-all duration-300 hover:text-amber-400 hover:border-amber-500/30 hover:scale-[1.03] active:scale-95 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group"
+          className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/50 border border-neutral-800/60 backdrop-blur-md text-xs md:text-sm font-semibold tracking-wide text-neutral-200 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:text-amber-400 hover:border-amber-500/40 hover:scale-[1.05] hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.6)]"
         >
-          <Instagram className="h-4 w-4 transition-transform duration-300 group-hover:rotate-6 shrink-0" />
+          <Instagram className="h-4 w-4 text-amber-500 transition-transform duration-500 group-hover:rotate-12 shrink-0" />
           <span>@trap.entz</span>
         </a>
       </header>
 
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-black to-black" />
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-yellow-600/5 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-black to-black" />
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-yellow-600/5 blur-3xl animate-pulse" style={{ animationDuration: '12s' }} />
 
         <div 
-          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)"
+          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1)"
           style={{
-            transform: `scale(${heroScale}) translateY(${scrollY * 0.06}px)`,
+            transform: `scale(${heroScale}) translateY(${scrollY * 0.05}px)`,
             opacity: heroOpacity,
             filter: `blur(${heroBlur}px)`
           }}
         >
-          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.45em] text-amber-400 font-semibold">
+          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-400 font-bold tracking-widest">
             Trap Entertainment
           </p>
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
-            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.4)] transition-all duration-700 hover:scale-105 hover:drop-shadow-[0_0_45px_rgba(245,158,11,0.6)]"
+            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.35)] transition-all duration-700 cubic-bezier(0.16, 1, 0.3, 1) hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.55)]"
           />
           <h1 className="text-4xl font-black leading-tight md:text-7xl tracking-tight text-neutral-100">
             Bangalore's Next-Level
@@ -157,7 +157,7 @@ export default function TrapEntertainmentWebsite() {
                   behavior: "smooth",
                 });
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.45)]"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform active:scale-95 active:shadow-[0_0_35px_rgba(245,158,11,0.7)] hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
               <Ticket className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-12" />
               Book Events
@@ -175,15 +175,15 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
+      {/* Upcoming Events Section (Positioned Cleanly Above About Us) */}
       <section id="event" className="mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
-          className={`mb-12 md:mb-16 text-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
-            eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+          className={`mb-12 md:mb-16 text-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
+            eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
           }`}
         >
-          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-medium">
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
             Upcoming Events
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
@@ -194,16 +194,16 @@ export default function TrapEntertainmentWebsite() {
         <div 
           ref={eventsGridReveal.elementRef}
           className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
-            eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-16"
+            eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
           {upcomingEvents.map((event) => (
             <div
               key={event.id}
-              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:border-amber-500/50 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.8)] hover:shadow-[0_0_40px_rgba(245,158,11,0.05)]"
+              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:border-amber-500/40 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.85)] hover:shadow-[0_0_40px_rgba(245,158,11,0.08)]"
             >
               <div>
-                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-semibold tracking-wider text-amber-400">
+                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-bold tracking-wider text-amber-400">
                   {event.day}
                 </span>
 
@@ -222,7 +222,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {event.features.map((feature, idx) => (
-                    <span key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
+                    <span key={idx} className="bg-neutral-900 border border-neutral-800/80 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
                       {feature}
                     </span>
                   ))}
@@ -232,7 +232,7 @@ export default function TrapEntertainmentWebsite() {
               <button 
                 type="button"
                 onClick={() => handleOpenBooking(event.title)}
-                className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-300 cubic-bezier(0.16, 1, 0.3, 1) hover:scale-[1.02] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] text-sm md:text-base"
+                className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] text-sm md:text-base"
               >
                 Reserve Spot via Guestlist
               </button>
@@ -245,12 +245,12 @@ export default function TrapEntertainmentWebsite() {
       <section 
         ref={aboutReveal.elementRef}
         className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
-          aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
+          aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-500 font-medium">
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-500 font-bold">
               About Us
             </p>
             <h2 className="text-3xl font-bold md:text-5xl tracking-tight leading-tight text-neutral-100">
@@ -274,10 +274,10 @@ export default function TrapEntertainmentWebsite() {
           <div 
             ref={serviceHeaderReveal.elementRef}
             className={`mb-12 md:mb-16 text-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
-              serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"
             }`}
           >
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-medium">
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
               What We Do
             </p>
             <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
@@ -309,8 +309,8 @@ export default function TrapEntertainmentWebsite() {
               <div
                 key={item.title}
                 className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
-                  servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-8 scale-95" : "opacity-0 translate-x-8 scale-95"
-                } hover:border-amber-500/40 hover:-translate-y-2`}
+                  servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-6 scale-[0.96]" : "opacity-0 translate-x-6 scale-[0.96]"
+                } hover:border-amber-500/35 hover:-translate-y-2`}
               >
                 <div className="mb-5 inline-block rounded-2xl bg-amber-950/30 p-4 border border-amber-500/10 group-hover:bg-amber-900/20 group-hover:border-amber-500/30 transition-all duration-300">
                   {item.icon}
@@ -325,7 +325,7 @@ export default function TrapEntertainmentWebsite() {
 
       {/* Contact Call-to-Action */}
       <section className="bg-neutral-950 border-t border-amber-500/10 relative overflow-hidden px-6 py-24 text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-950/20 via-black to-black opacity-80" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-950/15 via-black to-black opacity-80" />
         
         <div className="relative z-10 mx-auto max-w-3xl">
           <h2 className="text-3xl font-black md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
@@ -340,7 +340,7 @@ export default function TrapEntertainmentWebsite() {
             <button 
               type="button"
               onClick={() => setActiveModal('contact')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg hover:shadow-amber-500/10"
             >
               <Mail className="h-5 w-5 shrink-0" /> Contact Us
             </button>
@@ -356,7 +356,7 @@ export default function TrapEntertainmentWebsite() {
       {/* Shared Interactive Modal Wrapper */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/80 transition-all duration-300 overflow-y-auto">
-          <div className="relative w-full max-w-md rounded-3xl border border-amber-500/20 bg-neutral-950 p-6 md:p-8 shadow-2xl my-auto">
+          <div className="relative w-full max-w-md rounded-3xl border border-amber-500/20 bg-neutral-950 p-6 md:p-8 shadow-2xl my-auto animate-in fade-in zoom-in-95 duration-300 ease-out">
             <button 
               type="button"
               onClick={() => setActiveModal(null)}
