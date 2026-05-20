@@ -29,14 +29,7 @@ export default function TrapEntertainmentsWebsite() {
       venue: "Cavore, Ashok Nagar",
       features: ["the producers of the famous afro song Addicted are playing their exclusive set, sumbit your names to reserve your name in the exclusive guestlist "]
     },
-    {
-      id: 2,
-      title: "BASS & BOUNCE 2.0",
-      day: "Friday Night",
-      date: "May 29, 2026",
-      venue: "Skydeck Club, Koramangala",
-      features: ["Hip-Hop Headliners", "Immersive Visuals", "Student Discounts Available"]
-    }
+    
   ];
 
   const handleOpenBooking = (eventTitle = "General Event Access") => {
