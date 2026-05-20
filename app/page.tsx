@@ -275,30 +275,44 @@ export default function TrapEntertainmentsWebsite() {
                 <h3 className="text-2xl font-bold text-purple-400 mb-2">Reserve Guestlist</h3>
                 <p className="text-sm text-gray-400 mb-6">Booking request for: <strong className="text-white">{selectedEvent || "General Access"}</strong></p>
                 <form onSubmit={(e) => { e.preventDefault(); alert("Guestlist requested! We will text you confirmation details."); setActiveModal(null); }} className="space-y-4">
-                  <div className="space-y-4">
+                  <form
+  action="https://formspree.io/f/mwvzvjge"
+  method="POST"
+  className="space-y-4"
+>
 
-  <div>
+  <form
+  action="https://formspree.io/f/mwvzvjge"
+  method="POST"
+  className="space-y-4"
+>
+
+  <form>
     <label className="mb-2 block text-sm font-medium text-gray-300">
       Male Name
     </label>
 
     <input
       type="text"
+      name="maleName"
       placeholder="Enter male guest name"
+      className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
+    />
+  </form>
+
+  <div>
+    <label className="mb-2 block text-sm font-medium text-gray-300">
+      Female Name
+    </label>
+
+    <input
+      type="text"
+      name="femaleName"
+      placeholder="Enter female guest name"
       className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
     />
   </div>
 
-<div>
-  <label className="mb-2 block text-sm font-medium text-gray-300">
-    Female Name
-  </label>
-
-  <input
-    type="text"
-    placeholder="Enter female guest name"
-    className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
-  />
 </div>
   
 
