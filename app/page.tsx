@@ -27,7 +27,7 @@ export default function TrapEntertainmentsWebsite() {
     {
       id: 1,
       title: "DAYTONA",
-      day: " Night",
+      day: "Friday Night",
       date: "May 22, 2026",
       venue: "Cavore, Ashok Nagar",
       features: ["the producers of the famous afro song Addicted are playing their exclusive set, sumbit your names to reserve your name in the exclusive guestlist "]
@@ -288,7 +288,7 @@ export default function TrapEntertainmentsWebsite() {
       className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none focus:border-yellow-400"
     />
   </div>
-  
+
 <div>
   <label className="mb-2 block text-sm font-medium text-gray-300">
     Female Name
