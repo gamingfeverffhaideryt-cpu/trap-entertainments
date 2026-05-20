@@ -65,13 +65,13 @@ export default function TrapEntertainmentsWebsite() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <button 
-              onClick={() => handleOpenBooking()}
-              className="group flex items-center gap-2 rounded-2xl bg-purple-600 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:bg-purple-500 hover:scale-[1.02] shadow-lg shadow-purple-600/20"
-            >
-              <Ticket className="h-5 w-5 transition-transform group-hover:rotate-12" />
-              Book Events
-            </button>
+           <a
+  href="#event"
+  className="group flex items-center gap-2 rounded-2xl bg-yellow-400 px-8 py-4 text-lg font-semibold text-black transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-yellow-500/20"
+>
+  <Ticket className="h-5 w-5 transition-transform group-hover:rotate-12" />
+  Book Events
+</a>
 
             <button 
               onClick={() => alert("Our comprehensive photo gallery is launching soon! Follow our Instagram for real-time recaps.")}
