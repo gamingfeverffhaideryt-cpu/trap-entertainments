@@ -10,10 +10,11 @@ import {
   MapPin, 
   Users, 
   Mail, 
-  X 
+  X,
+  Instagram 
 } from 'lucide-react';
 
-// Upgraded viewport tracking hook - resets state when leaving the screen for endless looping
+// Upgraded viewport tracking hook
 function UseScrollReveal() {
   const [isRevealed, setIsRevealed] = useState(false);
   const elementRef = useRef<HTMLDivElement>(null);
@@ -23,7 +24,6 @@ function UseScrollReveal() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // CHANGED HERE: If it's on screen, animate it. If it leaves, reset it!
         if (entry.isIntersecting) {
           setIsRevealed(true);
         } else {
@@ -31,8 +31,8 @@ function UseScrollReveal() {
         }
       },
       { 
-        threshold: 0.05, 
-        rootMargin: "0px 0px -40px 0px" 
+        threshold: 0.02, 
+        rootMargin: "0px 0px -20px 0px" 
       }
     );
 
@@ -51,7 +51,7 @@ function UseScrollReveal() {
   return { elementRef, isRevealed };
 }
 
-export default function TrapEntertainmentsWebsite() {
+export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -70,15 +70,17 @@ export default function TrapEntertainmentsWebsite() {
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
-  const heroScale = Math.max(0.85, 1 - scrollY / 2500);
-  const heroOpacity = Math.max(0, 1 - scrollY / 700);
-  const heroBlur = Math.min(6, scrollY / 100); 
+  // Smooth cubic-bezier approximations for hero parallax
+  const heroScale = Math.max(0.85, 1 - scrollY / 3000);
+  const heroOpacity = Math.max(0, 1 - scrollY / 800);
+  const heroBlur = Math.min(8, scrollY / 120); 
 
+  // Scroll Reveal instances
+  const eventsHeaderReveal = UseScrollReveal();
+  const eventsGridReveal = UseScrollReveal();
   const aboutReveal = UseScrollReveal();
   const serviceHeaderReveal = UseScrollReveal();
   const servicesGridReveal = UseScrollReveal();
-  const eventsHeaderReveal = UseScrollReveal();
-  const eventsGridReveal = UseScrollReveal();
 
   const upcomingEvents = [
     {
@@ -86,7 +88,7 @@ export default function TrapEntertainmentsWebsite() {
       title: "DAYTONA",
       day: "Friday Night",
       date: "May 22, 2026",
-      Timming: "9:00 pm"
+      timing: "9:00 pm",
       venue: "Cavore, Ashok Nagar",
       features: ["The producers of the famous afro song Addicted are playing their exclusive set. Submit your names to reserve your spot on the exclusive guestlist."]
     },
@@ -100,6 +102,19 @@ export default function TrapEntertainmentsWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       
+      {/* Floating Header Area for Top-Right Instagram Handle */}
+      <header className="fixed top-0 left-0 right-0 z-40 pointer-events-none p-4 md:p-6 flex justify-end">
+        <a 
+          href="https://www.instagram.com/trap.entz/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pointer-events-auto flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900/40 border border-neutral-800/40 backdrop-blur-md text-xs md:text-sm font-medium tracking-wide text-neutral-300 transition-all duration-300 hover:text-amber-400 hover:border-amber-500/30 hover:scale-[1.03] active:scale-95 shadow-[0_4px_20px_rgba(0,0,0,0.5)] group"
+        >
+          <Instagram className="h-4 w-4 transition-transform duration-300 group-hover:rotate-6 shrink-0" />
+          <span>@trap.entz</span>
+        </a>
+      </header>
+
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-950/20 via-black to-black" />
@@ -107,20 +122,20 @@ export default function TrapEntertainmentsWebsite() {
         <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-yellow-600/5 blur-3xl" />
 
         <div 
-          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-300 ease-out"
+          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1)"
           style={{
-            transform: `scale(${heroScale}) translateY(${scrollY * 0.08}px)`,
+            transform: `scale(${heroScale}) translateY(${scrollY * 0.06}px)`,
             opacity: heroOpacity,
             filter: `blur(${heroBlur}px)`
           }}
         >
           <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.45em] text-amber-400 font-semibold">
-            Trap Entertainments
+            Trap Entertainment
           </p>
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
-            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.4)] transition-transform duration-700 hover:scale-105"
+            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.4)] transition-all duration-700 hover:scale-105 hover:drop-shadow-[0_0_45px_rgba(245,158,11,0.6)]"
           />
           <h1 className="text-4xl font-black leading-tight md:text-7xl tracking-tight text-neutral-100">
             Bangalore's Next-Level
@@ -142,16 +157,16 @@ export default function TrapEntertainmentsWebsite() {
                   behavior: "smooth",
                 });
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 transform active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-[1.03] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)]"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) transform active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.45)]"
             >
-              <Ticket className="h-5 w-5 shrink-0 transition-transform group-hover:rotate-12" />
+              <Ticket className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-12" />
               Book Events
             </a>
 
             <button 
               type="button"
               onClick={() => alert("Our comprehensive photo gallery is launching soon! Follow our Instagram for real-time recaps.")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-500/20 bg-neutral-900/40 px-8 py-4 text-base md:text-lg font-semibold backdrop-blur-sm transition-all duration-300 text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent hover:scale-[1.03] active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-500/20 bg-neutral-900/40 px-8 py-4 text-base md:text-lg font-semibold backdrop-blur-sm transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent hover:scale-[1.04] active:scale-95"
             >
               <ImageIcon className="h-5 w-5 shrink-0" />
               View Gallery
@@ -160,11 +175,77 @@ export default function TrapEntertainmentsWebsite() {
         </div>
       </section>
 
+      {/* Upcoming Events Section */}
+      <section id="event" className="mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5">
+        <div 
+          ref={eventsHeaderReveal.elementRef}
+          className={`mb-12 md:mb-16 text-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
+            eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"
+          }`}
+        >
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-medium">
+            Upcoming Events
+          </p>
+          <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
+            Secure Immediate Entry
+          </h2>
+        </div>
+
+        <div 
+          ref={eventsGridReveal.elementRef}
+          className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
+            eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-16"
+          }`}
+        >
+          {upcomingEvents.map((event) => (
+            <div
+              key={event.id}
+              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:border-amber-500/50 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.8)] hover:shadow-[0_0_40px_rgba(245,158,11,0.05)]"
+            >
+              <div>
+                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-semibold tracking-wider text-amber-400">
+                  {event.day}
+                </span>
+
+                <h3 className="text-2xl md:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
+                
+                <div className="mt-4 space-y-2 text-neutral-400 font-light">
+                  <div className="flex items-center gap-2 text-xs md:text-sm">
+                    <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
+                    <span>{event.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs md:text-sm">
+                    <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
+                    <span className="truncate">{event.venue}</span>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {event.features.map((feature, idx) => (
+                    <span key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <button 
+                type="button"
+                onClick={() => handleOpenBooking(event.title)}
+                className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-300 cubic-bezier(0.16, 1, 0.3, 1) hover:scale-[1.02] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] text-sm md:text-base"
+              >
+                Reserve Spot via Guestlist
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* About Section */}
       <section 
         ref={aboutReveal.elementRef}
-        className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-700 ease-out transform will-change-transform ${
-          aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
+          aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
         }`}
       >
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
@@ -180,7 +261,7 @@ export default function TrapEntertainmentsWebsite() {
 
           <div className="border-t md:border-t-0 md:border-l border-amber-500/20 pt-6 md:pt-0 pl-0 md:pl-8">
             <p className="text-base md:text-lg leading-7 md:leading-8 text-neutral-400 font-light">
-              Trap Entertainments is a premium lifestyle collective built for the modern nightlife enthusiast. 
+              Trap Entertainment is a premium lifestyle collective built for the modern nightlife enthusiast. 
               We curate global electronic music acts, high-energy college properties, and VIP club configurations—uniting Bangalore's elite night crowds under signature concepts.
             </p>
           </div>
@@ -192,7 +273,7 @@ export default function TrapEntertainmentsWebsite() {
         <div className="mx-auto max-w-6xl">
           <div 
             ref={serviceHeaderReveal.elementRef}
-            className={`mb-12 md:mb-16 text-center transition-all duration-700 ease-out transform ${
+            className={`mb-12 md:mb-16 text-center transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform ${
               serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
@@ -227,9 +308,9 @@ export default function TrapEntertainmentsWebsite() {
             ].map((item, index) => (
               <div
                 key={item.title}
-                className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-500 ease-out transform will-change-transform ${
-                  servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-6 scale-95" : "opacity-0 translate-x-6 scale-95"
-                } hover:border-amber-500/30 hover:-translate-y-2`}
+                className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-1000 cubic-bezier(0.16, 1, 0.3, 1) transform will-change-transform ${
+                  servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-8 scale-95" : "opacity-0 translate-x-8 scale-95"
+                } hover:border-amber-500/40 hover:-translate-y-2`}
               >
                 <div className="mb-5 inline-block rounded-2xl bg-amber-950/30 p-4 border border-amber-500/10 group-hover:bg-amber-900/20 group-hover:border-amber-500/30 transition-all duration-300">
                   {item.icon}
@@ -239,72 +320,6 @@ export default function TrapEntertainmentsWebsite() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Upcoming Events Section */}
-      <section id="event" className="mx-auto max-w-6xl px-6 py-24">
-        <div 
-          ref={eventsHeaderReveal.elementRef}
-          className={`mb-12 md:mb-16 text-center transition-all duration-700 transform ${
-            eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
-          }`}
-        >
-          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-medium">
-            Upcoming Events
-          </p>
-          <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
-            Secure Immediate Entry
-          </h2>
-        </div>
-
-        <div 
-          ref={eventsGridReveal.elementRef}
-          className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-700 transform will-change-transform ${
-            eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12"
-          }`}
-        >
-          {upcomingEvents.map((event) => (
-            <div
-              key={event.id}
-              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 hover:border-amber-500/40 max-w-xl w-full mx-auto"
-            >
-              <div>
-                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-semibold tracking-wider text-amber-400">
-                  {event.day}
-                </span>
-
-                <h3 className="text-2xl md:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
-                
-                <div className="mt-4 space-y-2 text-neutral-400 font-light">
-                  <div className="flex items-center gap-2 text-xs md:text-sm">
-                    <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs md:text-sm">
-                    <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
-                    <span className="truncate">{event.venue}</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {event.features.map((feature, idx) => (
-                    <span key={idx} className="bg-neutral-900 border border-neutral-800 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light">
-                      {feature}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <button 
-                type="button"
-                onClick={() => handleOpenBooking(event.title)}
-                className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-200 hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.4)] text-sm md:text-base"
-              >
-                Reserve Spot via Guestlist
-              </button>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -318,7 +333,7 @@ export default function TrapEntertainmentsWebsite() {
           </h2> 
 
           <p className="mt-4 md:mt-6 text-base md:text-xl text-neutral-400 max-w-xl mx-auto leading-relaxed font-light">
-            Contact Trap Entertainments for elite brand alignments, night bookings, sponsorship structures, and premium student festivals.
+            Contact Trap Entertainment for elite brand alignments, night bookings, sponsorship structures, and premium student festivals.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4 px-4">
@@ -335,7 +350,7 @@ export default function TrapEntertainmentsWebsite() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-900 bg-black px-6 py-8 text-center text-xs tracking-wider text-neutral-600 font-light">
-        © 2026 Trap Entertainments. All rights reserved. Curated for the elite crowd in Bangalore, India.
+        © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
       </footer>
 
       {/* Shared Interactive Modal Wrapper */}
