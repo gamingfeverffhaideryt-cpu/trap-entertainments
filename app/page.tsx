@@ -73,7 +73,9 @@ export default function TrapEntertainmentWebsite() {
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
-  const heroBlur = Math.min(10, scrollY / 90); 
+  
+  // FIXED: Adjusted blur ceiling and step scale to prevent abrupt jagged rendering on scroll
+  const heroBlur = Math.min(6, scrollY / 140); 
 
   const eventsHeaderReveal = UseScrollReveal();
   const eventsGridReveal = UseScrollReveal();
@@ -117,7 +119,7 @@ export default function TrapEntertainmentWebsite() {
           rel="noopener noreferrer"
           className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 backdrop-blur-md text-xs md:text-sm font-bold tracking-wide text-neutral-200 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:text-pink-500 hover:border-pink-500/40 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.7)]"
         >
-          {/* Custom SVG Instagram Icon */}
+          {/* Custom SVG Instagram Icon with safe blur boundaries */}
           <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 24 24" 
@@ -523,96 +525,4 @@ export default function TrapEntertainmentWebsite() {
                                 type="text" 
                                 name="instagramHandle"
                                 className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="@username" 
-                              />
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Name
-                              </label>
-                              <input
-                                type="text"
-                                name="girlName"
-                                required
-                                placeholder="Your Full Name"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                              />
-                            </div>
-
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Phone Number (WhatsApp)
-                              </label>
-                              <input 
-                                required 
-                                type="tel" 
-                                name="girlPhone"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="+91 XXXXX XXXXX" 
-                              />
-                            </div>
-
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Instagram Handle
-                              </label>
-                              <input 
-                                required 
-                                type="text" 
-                                name="girlInstagram"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="@username" 
-                              />
-                            </div>
-                          </>
-                        )}
-                        
-                        <button type="submit" className="w-full mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 text-sm shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                          Request Premium Pass
-                        </button>
-                      </form>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ) : (
-              <div className="p-6 md:p-8 bg-neutral-950">
-                <h3 className="text-xl md:text-2xl font-bold text-amber-400 mb-1 tracking-tight">Let's Collaborate</h3>
-                <p className="text-xs md:text-sm text-neutral-400 mb-4 font-light">Drop us a line and team Trap will orchestrate your next concept.</p>
-                
-                <form 
-                  action="https://formspree.io/f/mwvzvjge"
-                  method="POST"
-                  className="space-y-3"
-                >
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Email Address</label>
-                    <input required type="email" name="email" className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="name@domain.com" />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Inquiry Type</label>
-                    <select name="inquiryType" className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm">
-                      <option>Artist Booking / Lineup</option>
-                      <option>Brand Sponsor Sponsorship</option>
-                      <option>Other Collaboration</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Message Details</label>
-                    <textarea name="message" rows={3} required className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm placeholder-neutral-600" placeholder="Tell us about your strategy plans..."></textarea>
-                  </div>
-                  <button type="submit" className="w-full mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 text-sm">
-                    Send Message
-                  </button>
-                </form>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+                                placeholder="@
