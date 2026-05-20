@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import React from 'react';
 import { 
   Ticket, 
-  Image as ImageIcon, 
+  ImageIcon, 
   PartyPopper, 
   Music, 
   Calendar, 
@@ -56,7 +56,6 @@ export default function TrapEntertainmentWebsite() {
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   
-  // Custom multi-step state management for the new custom guestlist options
   const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
   const [selectedTier, setSelectedTier] = useState<'stag' | 'girl' | 'couple' | null>(null);
 
@@ -102,7 +101,7 @@ export default function TrapEntertainmentWebsite() {
   };
 
   const handleSelectTier = (tier: 'stag' | 'girl' | 'couple') => {
-    if (tier === 'stag') return; // Nothing happens for stags as requested
+    if (tier === 'stag') return; 
     setSelectedTier(tier);
     setGuestlistStep('form');
   };
@@ -110,16 +109,30 @@ export default function TrapEntertainmentWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
       
-      {/* Top-Right Premium Internal Brand Portal Link */}
-      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none p-4 md:p-6 flex justify-end">
+      {/* Top-Right Premium Instagram Only Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none p-4 md:p-6 flex flex-row items-center justify-end">
         <a 
-          href="https://trap-entertainments-ickf.vercel.app/"
+          href="https://www.instagram.com/trap.entz?igsh=aXl1MnFzbGRsdXI2&utm_source=qr"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900/50 border border-neutral-800/60 backdrop-blur-md text-xs md:text-sm font-semibold tracking-wide text-neutral-200 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:text-amber-400 hover:border-amber-500/40 hover:scale-[1.05] hover:shadow-[0_0_25px_rgba(245,158,11,0.15)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.6)]"
+          className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 backdrop-blur-md text-xs md:text-sm font-bold tracking-wide text-neutral-200 transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) hover:text-pink-500 hover:border-pink-500/40 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.7)]"
         >
-          <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse inline-block mr-1"></span>
-          <span>Trap Portal</span>
+          {/* Custom SVG Instagram Icon */}
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:scale-110"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          <span>Instagram</span>
         </a>
       </header>
 
@@ -358,7 +371,7 @@ export default function TrapEntertainmentWebsite() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-900 bg-black px-6 py-8 text-center text-xs tracking-wider text-neutral-600 font-light">
-        © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
+        © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in <a href="https://www.instagram.com/trap.entz?igsh=aXl1MnFzbGRsdXI2&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-pink-500 transition-colors font-medium underline underline-offset-2">Bangalore, India</a>.
       </footer>
 
       {/* Multi-tier Immersive Video Modal Wrapper */}
@@ -377,7 +390,6 @@ export default function TrapEntertainmentWebsite() {
             {activeModal === 'book' ? (
               <div className="flex flex-col">
                 
-                {/* Local Loop Video Area at the top */}
                 <div className="relative h-44 md:h-52 bg-neutral-900 overflow-hidden flex flex-col justify-end p-6 z-10">
                   <video 
                     autoPlay 
@@ -399,12 +411,10 @@ export default function TrapEntertainmentWebsite() {
                   </div>
                 </div>
 
-                {/* Bottom Interactive Area */}
                 <div className="p-6 md:p-8 bg-neutral-950">
                   {guestlistStep === 'tier-select' ? (
                     <div className="space-y-3">
                       
-                      {/* Option 1: Stag (No action follows click) */}
                       <div className="flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 opacity-75 cursor-not-allowed group transition-all">
                         <div className="flex flex-col">
                           <span className="text-base font-bold text-neutral-300">Stag Entry</span>
@@ -413,7 +423,6 @@ export default function TrapEntertainmentWebsite() {
                         <span className="text-sm font-black tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1.5 rounded-xl border border-neutral-800">4K PRICE</span>
                       </div>
 
-                      {/* Option 2: Girls Walkin */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('girl')}
@@ -429,7 +438,6 @@ export default function TrapEntertainmentWebsite() {
                         </div>
                       </button>
 
-                      {/* Option 3: Couples */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('couple')}
@@ -448,7 +456,6 @@ export default function TrapEntertainmentWebsite() {
                     </div>
                   ) : (
                     <div>
-                      {/* Back to selector link */}
                       <button 
                         type="button"
                         onClick={() => setGuestlistStep('tier-select')}
@@ -467,7 +474,6 @@ export default function TrapEntertainmentWebsite() {
 
                         {selectedTier === 'couple' ? (
                           <>
-                            {/* Couples Conditional Fields */}
                             <div className="grid grid-cols-2 gap-3">
                               <div>
                                 <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
@@ -523,7 +529,6 @@ export default function TrapEntertainmentWebsite() {
                           </>
                         ) : (
                           <>
-                            {/* Girls Conditional Fields - Exactly 3 Fields */}
                             <div>
                               <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
                                 Name
@@ -574,7 +579,6 @@ export default function TrapEntertainmentWebsite() {
                 </div>
               </div>
             ) : (
-              /* Contact Modal Section */
               <div className="p-6 md:p-8 bg-neutral-950">
                 <h3 className="text-xl md:text-2xl font-bold text-amber-400 mb-1 tracking-tight">Let's Collaborate</h3>
                 <p className="text-xs md:text-sm text-neutral-400 mb-4 font-light">Drop us a line and team Trap will orchestrate your next concept.</p>
