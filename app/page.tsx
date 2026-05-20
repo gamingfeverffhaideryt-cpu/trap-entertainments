@@ -23,11 +23,11 @@ export default function TrapEntertainmentsWebsite() {
   const upcomingEvents = [
     {
       id: 1,
-      title: "TRAP NIGHT VOL. 4",
+      title: "DAYTONA",
       day: "Saturday Night",
-      date: "May 23, 2026",
-      venue: "Onyx Luxury Lounge, Indiranagar",
-      features: ["Live Trap DJs", "VIP Access Lounge", "Premium Crowd Only"]
+      date: "May 22, 2026",
+      venue: "Cavore, Ashok Nagar",
+      features: ["the producers of the famous afro song Addicted are playing their exclusive set, sumbit your names to reserve your name in the exclusive guestlist "]
     },
     {
       id: 2,
