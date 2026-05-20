@@ -1,5 +1,5 @@
 "use client";
-
+import { useEffect } from "react";
 import React, { useState } from 'react';
 import { 
   Ticket, 
@@ -15,6 +15,9 @@ import {
 } from 'lucide-react';
 
 export default function TrapEntertainmentsWebsite() {
+  useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
   // State for controlling user interactive modals
   const [activeModal, setActiveModal] = useState<string | null>(null); // 'book' | 'contact' | 'gallery' | null
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
