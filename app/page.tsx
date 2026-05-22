@@ -111,7 +111,6 @@ export default function TrapEntertainmentWebsite() {
     
     const updateTrail = () => {
       setTrailPos((prev) => {
-        // Linear interpolation to make the outer ring drag with a smooth elastic delay
         const ease = 0.15; 
         const dx = mousePos.x - prev.x;
         const dy = mousePos.y - prev.y;
@@ -173,6 +172,15 @@ export default function TrapEntertainmentWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix select-none md:cursor-none ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ scrollBehavior: 'smooth' }}>
       
+      {/* Dynamic Style Override to Hide Default OS Hand Cursors on Hover */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (min-width: 768px) {
+          a, button, [role="button"], .clickable-target, input, select, textarea {
+            cursor: none !important;
+          }
+        }
+      `}} />
+
       {/* 1. Custom Cyberpunk Luxury Cursor Engine */}
       <div 
         className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] will-change-transform mix-blend-difference"
