@@ -59,11 +59,11 @@ export default function TrapEntertainmentWebsite() {
   
   const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
   const [selectedTier, setSelectedTier] = useState<'stag' | 'girl' | 'couple' | null>(null);
+  const [galleryAlert, setGalleryAlert] = useState(false);
 
-  // Custom Cursor Coordination States
-  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
-  const [trailPos, setTrailPos] = useState({ x: -100, y: -100 });
-  const [isHoveringClickable, setIsHoveringClickable] = useState(false);
+  // Refs for zero-lag cursor management
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -72,13 +72,23 @@ export default function TrapEntertainmentWebsite() {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Immersive Custom Cursor Trackers
+    // Hardware-accelerated smooth cursor orchestration
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX - 4}px, ${mouseY - 4}px, 0)`;
+      }
     };
 
-    // Watch for hovered clickable interfaces dynamically
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
@@ -86,45 +96,42 @@ export default function TrapEntertainmentWebsite() {
         target.tagName === 'A' || 
         target.closest('button') || 
         target.closest('a') ||
-        target.classList.contains('clickable-target')
+        target.classList.contains('clickable-target') ||
+        target.onclick
       ) {
-        setIsHoveringClickable(true);
+        ringRef.current?.classList.add("w-14", "h-14", "bg-amber-400/10", "border-amber-400/80", "shadow-[0_0_20px_rgba(245,158,11,0.4)]", "scale-110");
+        ringRef.current?.classList.remove("w-7", "h-7", "bg-transparent", "border-neutral-500/40");
       } else {
-        setIsHoveringClickable(false);
+        ringRef.current?.classList.remove("w-14", "h-14", "bg-amber-400/10", "border-amber-400/80", "shadow-[0_0_20px_rgba(245,158,11,0.4)]", "scale-110");
+        ringRef.current?.classList.add("w-7", "h-7", "bg-transparent", "border-neutral-500/40");
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    const renderCursorLoop = () => {
+      const ease = 0.15;
+      ringX += (mouseX - ringX) * ease;
+      ringY += (mouseY - ringY) * ease;
+
+      if (ringRef.current) {
+        const isHovered = ringRef.current.classList.contains("w-14");
+        const offset = isHovered ? 28 : 14;
+        ringRef.current.style.transform = `translate3d(${ringX - offset}px, ${ringY - offset}px, 0)`;
+      }
+
+      requestAnimationFrame(renderCursorLoop);
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    const animationId = requestAnimationFrame(renderCursorLoop);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
+      cancelAnimationFrame(animationId);
     };
   }, []);
-
-  // Premium Elastic Custom Cursor Interpolation
-  useEffect(() => {
-    let animationFrameId: number;
-    
-    const updateTrail = () => {
-      setTrailPos((prev) => {
-        const ease = 0.15; 
-        const dx = mousePos.x - prev.x;
-        const dy = mousePos.y - prev.y;
-        return {
-          x: prev.x + dx * ease,
-          y: prev.y + dy * ease,
-        };
-      });
-      animationFrameId = requestAnimationFrame(updateTrail);
-    };
-    
-    animationFrameId = requestAnimationFrame(updateTrail);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [mousePos]);
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
@@ -161,7 +168,6 @@ export default function TrapEntertainmentWebsite() {
     setGuestlistStep('form');
   };
 
-  // Modern Clean Reload Trigger
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
@@ -181,23 +187,16 @@ export default function TrapEntertainmentWebsite() {
         }
       `}} />
 
-      {/* 1. Custom Cyberpunk Luxury Cursor Engine */}
+      {/* 1. Low-Latency Custom Cyberpunk Luxury Cursor Elements */}
       <div 
+        ref={dotRef}
         className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] will-change-transform mix-blend-difference"
-        style={{
-          transform: `translate3d(${mousePos.x - 4}px, ${mousePos.y - 4}px, 0)`,
-          transition: "transform 0.05s linear"
-        }}
+        style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
       <div 
-        className={`hidden md:block fixed top-0 left-0 rounded-full pointer-events-none z-[9998] will-change-transform border transition-all duration-300 ease-out ${
-          isHoveringClickable 
-            ? "w-14 h-14 bg-amber-400/10 border-amber-400/80 shadow-[0_0_20px_rgba(245,158,11,0.4)] scale-110" 
-            : "w-7 h-7 bg-transparent border-neutral-500/40"
-        }`}
-        style={{
-          transform: `translate3d(${trailPos.x - (isHoveringClickable ? 28 : 14)}px, ${trailPos.y - (isHoveringClickable ? 28 : 14)}px, 0)`,
-        }}
+        ref={ringRef}
+        className="hidden md:block fixed top-0 left-0 rounded-full pointer-events-none z-[9998] will-change-transform border transition-all duration-300 ease-out w-7 h-7 bg-transparent border-neutral-500/40"
+        style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
 
       {/* Top-Right Premium Instagram Only Header */}
@@ -244,7 +243,6 @@ export default function TrapEntertainmentWebsite() {
             Trap Entertainment
           </p>
           
-          {/* Big Interactive Logo Feature */}
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
@@ -280,7 +278,7 @@ export default function TrapEntertainmentWebsite() {
 
             <button 
               type="button"
-              onClick={() => alert("Our comprehensive photo gallery is launching soon! Follow our channels for real-time recaps.")}
+              onClick={() => setGalleryAlert(true)}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-500/20 bg-neutral-900/40 px-8 py-4 text-base md:text-lg font-semibold backdrop-blur-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent hover:scale-[1.04] active:scale-95"
             >
               <ImageIcon className="h-5 w-5 shrink-0" />
@@ -357,7 +355,7 @@ export default function TrapEntertainmentWebsite() {
       </section>
 
       {/* About Section */}
-      <section 
+      <section id="about"
         ref={aboutReveal.elementRef}
         className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
           aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
@@ -384,7 +382,7 @@ export default function TrapEntertainmentWebsite() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-gradient-to-b from-neutral-950 to-neutral-900/50 px-6 py-24 border-y border-amber-500/5 overflow-hidden">
+      <section id="services" className="bg-gradient-to-b from-neutral-950 to-neutral-900/50 px-6 py-24 border-y border-amber-500/5 overflow-hidden">
         <div className="mx-auto max-w-6xl">
           <div 
             ref={serviceHeaderReveal.elementRef}
@@ -467,6 +465,28 @@ export default function TrapEntertainmentWebsite() {
       <footer className="border-t border-neutral-900 bg-black px-6 py-8 text-center text-xs tracking-wider text-neutral-600 font-light">
         © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in <a href="https://www.instagram.com/trap.entz?igsh=aXl1MnFzbGRsdXI2&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-pink-500 transition-colors font-medium underline underline-offset-2">Bangalore, India</a>.
       </footer>
+
+      {/* In-UI Elegant Modal Notification Alternative to Browser Alerts */}
+      {galleryAlert && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-950 p-6 md:p-8 text-center shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/20">
+              <ImageIcon className="h-6 w-6 text-amber-400" />
+            </div>
+            <h3 className="text-lg font-bold text-neutral-100">Gallery Syncing</h3>
+            <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">
+              Our high-definition event recap vault is currently processing. Follow our official Instagram channel for immediate access to upcoming highlight tapes.
+            </p>
+            <button
+              type="button"
+              onClick={() => setGalleryAlert(false)}
+              className="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-2.5 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)]"
+            >
+              Acknowledge
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Multi-tier Immersive Video Modal Wrapper */}
       {activeModal && (
