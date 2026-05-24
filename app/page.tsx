@@ -143,7 +143,6 @@ export default function TrapEntertainmentWebsite() {
   const serviceHeaderReveal = useScrollReveal();
   const servicesGridReveal = useScrollReveal();
 
-  // Daytona has been fully cleared out for post-event phase execution
   const upcomingEvents: any[] = [];
 
   const handleOpenBooking = (eventTitle = "General Event Access") => {
@@ -169,7 +168,6 @@ export default function TrapEntertainmentWebsite() {
   return (
     <div className={`min-h-screen bg-black text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out overlay-scroll-fix select-none md:cursor-none ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ scrollBehavior: 'smooth' }}>
       
-      {/* Dynamic Style Override to Hide Default OS Hand Cursors on Hover */}
       <style dangerouslySetInnerHTML={{__html: `
         @media (min-width: 768px) {
           a, button, [role="button"], .clickable-target, input, select, textarea {
@@ -178,7 +176,6 @@ export default function TrapEntertainmentWebsite() {
         }
       `}} />
 
-      {/* 1. Low-Latency Custom Cyberpunk Luxury Cursor Elements */}
       <div 
         ref={dotRef}
         className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] will-change-transform mix-blend-difference"
@@ -190,7 +187,6 @@ export default function TrapEntertainmentWebsite() {
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
 
-      {/* Top-Right Premium Instagram Only Header */}
       <header className="fixed top-0 left-0 right-0 z-50 pointer-events-none p-4 md:p-6 flex flex-row items-center justify-end">
         <a 
           href="https://www.instagram.com/trap.entz?igsh=aXl1MnFzbGRsdXI2&utm_source=qr"
@@ -346,7 +342,7 @@ export default function TrapEntertainmentWebsite() {
               ))}
             </div>
           ) : (
-            /* Cyberpunk Styled Interactive Premium Fallback State */
+            /* Button removed completely */
             <div className="max-w-xl mx-auto rounded-3xl border border-neutral-800 bg-neutral-950 p-8 md:p-12 text-center shadow-[0_0_60px_rgba(0,0,0,0.85)] relative overflow-hidden group">
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
               <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/5 border border-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.02)] group-hover:border-amber-400/30 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] transition-all duration-500">
@@ -358,15 +354,8 @@ export default function TrapEntertainmentWebsite() {
               </div>
               <h3 className="text-xl md:text-2xl font-black text-neutral-200 tracking-tight">No New Events Right Now</h3>
               <p className="mt-3 text-sm text-neutral-400 font-light leading-relaxed max-w-sm mx-auto">
-                Our curated modules are currently executing backend processing. Join our early alert list for unannounced layout disclosures and secure VIP access slots.
+                Our curated modules are currently executing backend processing. Follow our official channels for upcoming layout disclosures.
               </p>
-              <button
-                type="button"
-                onClick={() => handleOpenBooking("Early Access Notification")}
-                className="mt-8 px-6 py-3 rounded-xl border border-amber-500/20 bg-amber-500/5 text-xs font-bold uppercase tracking-wider text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent transition-all duration-500 hover:scale-[1.03] active:scale-95 shadow-[0_0_20px_rgba(245,158,11,0.05)]"
-              >
-                Join Early Access Register
-              </button>
             </div>
           )}
         </div>
