@@ -143,17 +143,8 @@ export default function TrapEntertainmentWebsite() {
   const serviceHeaderReveal = useScrollReveal();
   const servicesGridReveal = useScrollReveal();
 
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "DAYTONA",
-      day: "Friday Night",
-      date: "May 22, 2026",
-      timing: "9:00 pm",
-      venue: "Cavore, Ashok Nagar",
-      features: ["The producers of the famous afro song Addicted are playing their exclusive set. Submit your names to reserve your spot on the exclusive guestlist."]
-    },
-  ];
+  // Daytona has been fully cleared out for post-event phase execution
+  const upcomingEvents: any[] = [];
 
   const handleOpenBooking = (eventTitle = "General Event Access") => {
     setSelectedEvent(eventTitle);
@@ -297,7 +288,7 @@ export default function TrapEntertainmentWebsite() {
           }`}
         >
           <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
-            Upcoming Events
+            Showcase Schedule
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
             Secure Immediate Entry
@@ -306,51 +297,78 @@ export default function TrapEntertainmentWebsite() {
 
         <div 
           ref={eventsGridReveal.elementRef}
-          className={`grid gap-8 md:grid-cols-2 justify-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
+          className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          {upcomingEvents.map((event) => (
-            <div
-              key={event.id}
-              className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-amber-500/40 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.85)] hover:shadow-[0_0_40px_rgba(245,158,11,0.08)]"
-            >
-              <div>
-                <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-bold tracking-wider text-amber-400">
-                  {event.day}
-                </span>
-
-                <h3 className="text-2xl md:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
-                
-                <div className="mt-4 space-y-2 text-neutral-400 font-light">
-                  <div className="flex items-center gap-2 text-xs md:text-sm">
-                    <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-xs md:text-sm">
-                    <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
-                    <span className="truncate">{event.venue}</span>
-                  </div>
-                </div>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {event.features.map((feature, idx) => (
-                    <span key={idx} className="bg-neutral-900 border border-neutral-800/80 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
-                      {feature}
+          {upcomingEvents.length > 0 ? (
+            <div className="grid gap-8 md:grid-cols-2 justify-center">
+              {upcomingEvents.map((event) => (
+                <div
+                  key={event.id}
+                  className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-amber-500/40 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.85)] hover:shadow-[0_0_40px_rgba(245,158,11,0.08)]"
+                >
+                  <div>
+                    <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-bold tracking-wider text-amber-400">
+                      {event.day}
                     </span>
-                  ))}
-                </div>
-              </div>
 
-              <button 
+                    <h3 className="text-2xl md:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
+                    
+                    <div className="mt-4 space-y-2 text-neutral-400 font-light">
+                      <div className="flex items-center gap-2 text-xs md:text-sm">
+                        <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs md:text-sm">
+                        <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
+                        <span className="truncate">{event.venue}</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {event.features.map((feature: string, idx: number) => (
+                        <span key={idx} className="bg-neutral-900 border border-neutral-800/80 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button 
+                    type="button"
+                    onClick={() => handleOpenBooking(event.title)}
+                    className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] text-sm md:text-base"
+                  >
+                    Reserve Spot via Guestlist
+                  </button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Cyberpunk Styled Interactive Premium Fallback State */
+            <div className="max-w-xl mx-auto rounded-3xl border border-neutral-800 bg-neutral-950 p-8 md:p-12 text-center shadow-[0_0_60px_rgba(0,0,0,0.85)] relative overflow-hidden group">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/5 border border-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.02)] group-hover:border-amber-400/30 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] transition-all duration-500">
+                <Ticket className="h-6 w-6 text-amber-500/70 group-hover:text-amber-400 group-hover:scale-110 transition-all duration-500" />
+              </div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/60 text-[10px] uppercase font-black tracking-widest text-neutral-400 mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                Vault Offline
+              </div>
+              <h3 className="text-xl md:text-2xl font-black text-neutral-200 tracking-tight">No New Events Right Now</h3>
+              <p className="mt-3 text-sm text-neutral-400 font-light leading-relaxed max-w-sm mx-auto">
+                Our curated modules are currently executing backend processing. Join our early alert list for unannounced layout disclosures and secure VIP access slots.
+              </p>
+              <button
                 type="button"
-                onClick={() => handleOpenBooking(event.title)}
-                className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] text-sm md:text-base"
+                onClick={() => handleOpenBooking("Early Access Notification")}
+                className="mt-8 px-6 py-3 rounded-xl border border-amber-500/20 bg-amber-500/5 text-xs font-bold uppercase tracking-wider text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent transition-all duration-500 hover:scale-[1.03] active:scale-95 shadow-[0_0_20px_rgba(245,158,11,0.05)]"
               >
-                Reserve Spot via Guestlist
+                Join Early Access Register
               </button>
             </div>
-          ))}
+          )}
         </div>
       </section>
 
@@ -488,7 +506,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       )}
 
-      {/* Multi-tier Immersive Video Modal Wrapper */}
+      {/* Multi-tier Immersive Modal Wrapper */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
           <div className="relative w-full max-w-xl rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
@@ -501,7 +519,7 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
-            {activeModal === 'book' ? (
+            {activeModal === 'book' && (
               <div className="flex flex-col">
                 <div className="relative h-44 md:h-52 bg-gradient-to-br from-neutral-900 to-neutral-950 overflow-hidden flex flex-col justify-end p-6 z-10">
                   <video 
@@ -586,147 +604,146 @@ export default function TrapEntertainmentWebsite() {
                         <input type="hidden" name="Selected Entry Type" value={selectedTier || "Unknown"} />
 
                         {selectedTier === 'couple' ? (
-                          <>
-                            <div className="grid grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                  Male Name
-                                </label>
-                                <input
-                                  type="text"
-                                  name="maleName"
-                                  required
-                                  placeholder="Full Name"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                  Female Name
-                                </label>
-                                <input
-                                  type="text"
-                                  name="femaleName"
-                                  required
-                                  placeholder="Full Name"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                                />
-                              </div>
-                            </div>
-                            
+                          <div className="grid grid-cols-2 gap-3">
                             <div>
                               <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Phone Number (WhatsApp)
-                              </label>
-                              <input 
-                                required 
-                                type="tel" 
-                                name="phone"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="+91 XXXXX XXXXX" 
-                              />
-                            </div>
-
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Instagram Handle
-                              </label>
-                              <input 
-                                required 
-                                type="text" 
-                                name="instagramHandle"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="@username" 
-                              />
-                            </div>
-                          </>
-                        ) : (
-                          <>
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Name
+                                Male Name
                               </label>
                               <input
                                 type="text"
-                                name="girlName"
+                                name="maleName"
                                 required
-                                placeholder="Your Full Name"
+                                placeholder="Full Name"
                                 className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
                               />
                             </div>
-
                             <div>
                               <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Phone Number (WhatsApp)
+                                Female Name
                               </label>
-                              <input 
-                                required 
-                                type="tel" 
-                                name="girlPhone"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="+91 XXXXX XXXXX" 
+                              <input
+                                type="text"
+                                name="femaleName"
+                                required
+                                placeholder="Full Name"
+                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
                               />
                             </div>
-
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Instagram Handle
-                              </label>
-                              <input 
-                                required 
-                                type="text" 
-                                name="girlInstagram"
-                                className="w-full bg-neutral-900 border border-neutral-800 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400 text-sm transition-all" 
-                                placeholder="@username" 
-                              />
-                            </div>
-                          </>
+                          </div>
+                        ) : (
+                          <div>
+                            <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
+                              Full Name
+                            </label>
+                            <input
+                              type="text"
+                              name="guestName"
+                              required
+                              placeholder="Your Full Name"
+                              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                            />
+                          </div>
                         )}
                         
-                        <button type="submit" className="w-full mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 text-sm shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                          Request Premium Pass
+                        <div>
+                          <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
+                            Phone Number (WhatsApp)
+                          </label>
+                          <input 
+                            type="tel"
+                            name="phoneNumber"
+                            required 
+                            placeholder="+91 XXXXX XXXXX"
+                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
+                            Instagram Handle (Optional)
+                          </label>
+                          <input 
+                            type="text"
+                            name="instagramHandle"
+                            placeholder="@username"
+                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                          />
+                        </div>
+
+                        <button
+                          type="submit"
+                          className="mt-2 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                        >
+                          Request Guestlist Entry
                         </button>
                       </form>
                     </div>
                   )}
                 </div>
               </div>
-            ) : (
-              <div className="p-6 md:p-8 bg-neutral-950">
-                <h3 className="text-xl md:text-2xl font-bold text-amber-400 mb-1 tracking-tight">Let's Collaborate</h3>
-                <p className="text-xs md:text-sm text-neutral-400 mb-4 font-light">Drop us a line and team Trap will orchestrate your next concept.</p>
-                
+            )}
+
+            {activeModal === 'contact' && (
+              <div className="p-6 md:p-8 bg-neutral-950 flex flex-col">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300 tracking-tight">Connect with Trap</h3>
+                  <p className="text-xs text-neutral-400 font-light mt-1">Sponsorship configurations, commercial night partnerships, or exclusive luxury hosting configurations.</p>
+                </div>
+
                 <form 
                   action="https://formspree.io/f/mwvzvjge"
                   method="POST"
-                  className="space-y-3"
+                  className="space-y-4"
                 >
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Email Address</label>
-                    <input required type="email" name="email" className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm" placeholder="name@domain.com" />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Inquiry Type</label>
-                    <select name="inquiryType" className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm">
-                      <option value="Artist Booking">Artist Booking / Roster Operations</option>
-                      <option value="Brand Alignment">Brand Alignment / Sponsorship Structures</option>
-                      <option value="Private Showcase">Ultra-High-End Private Showcase</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-neutral-400 mb-1">Message Details</label>
-                    <textarea required name="message" rows={4} className="w-full bg-neutral-900 border border-neutral-800 rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-400 text-sm resize-none" placeholder="Describe your brand layout context..."></textarea>
-                  </div>
+                  <input type="hidden" name="Form Purpose" value="General Business Query" />
                   
-                  <button type="submit" className="w-full mt-2 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black transition hover:scale-[1.01] active:scale-95 text-sm shadow-[0_0_20px_rgba(245,158,11,0.2)]">
-                    Send Blueprint Request
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Name / Organization</label>
+                    <input 
+                      type="text" 
+                      name="contactName" 
+                      required 
+                      placeholder="Your Name or Brand" 
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Email Address</label>
+                    <input 
+                      type="email" 
+                      name="contactEmail" 
+                      required 
+                      placeholder="business@domain.com" 
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Proposal Message</label>
+                    <textarea 
+                      name="contactMessage" 
+                      rows={4} 
+                      required 
+                      placeholder="Outline your partnership vision..." 
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="mt-2 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                  >
+                    Transmit Message
                   </button>
                 </form>
               </div>
             )}
+
           </div>
         </div>
       )}
+
     </div>
   );
 }
