@@ -12,7 +12,9 @@ import {
   Users, 
   Mail, 
   X,
-  ChevronRight
+  ChevronRight,
+  ShieldCheck,
+  Instagram
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -58,7 +60,7 @@ export default function TrapEntertainmentWebsite() {
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   
   const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
-  const [selectedTier, setSelectedTier] = useState<'stag' | 'girl' | 'couple' | null>(null);
+  const [selectedTier, setSelectedTier] = useState<'girl' | 'couple' | null>(null);
   const [galleryAlert, setGalleryAlert] = useState(false);
 
   // Refs for zero-lag cursor management
@@ -74,7 +76,6 @@ export default function TrapEntertainmentWebsite() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Hardware-accelerated smooth cursor orchestration
     let mouseX = -100;
     let mouseY = -100;
     let ringX = -100;
@@ -143,7 +144,22 @@ export default function TrapEntertainmentWebsite() {
   const serviceHeaderReveal = useScrollReveal();
   const servicesGridReveal = useScrollReveal();
 
-  const upcomingEvents: any[] = [];
+  // Active Showcase Module Array sitting on the CASATROPICA asset configuration
+  const upcomingEvents = [
+    {
+      id: "casa-tropica-2026",
+      day: "THIS SUNDAY",
+      title: "CASA TROPICA 🌴",
+      date: "Sunday, May 31, 2026 • 3:00 PM Onwards",
+      venue: "JW Marriott Executive Apartments, Bangalore",
+      poster: "/CASATROPICA.jpg",
+      features: [
+        "Premium Tropical Daytime Curation",
+        "Exclusive High-Tier Liquid Rigs & Layouts",
+        "Bespoke Island Ambience Experience"
+      ]
+    }
+  ];
 
   const handleOpenBooking = (eventTitle = "General Event Access") => {
     setSelectedEvent(eventTitle);
@@ -152,8 +168,7 @@ export default function TrapEntertainmentWebsite() {
     setActiveModal('book');
   };
 
-  const handleSelectTier = (tier: 'stag' | 'girl' | 'couple') => {
-    if (tier === 'stag') return; 
+  const handleSelectTier = (tier: 'girl' | 'couple') => {
     setSelectedTier(tier);
     setGuestlistStep('form');
   };
@@ -194,16 +209,7 @@ export default function TrapEntertainmentWebsite() {
           rel="noopener noreferrer"
           className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 backdrop-blur-md text-xs md:text-sm font-bold tracking-wide text-neutral-200 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-pink-500 hover:border-pink-500/40 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.7)]"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:scale-110"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0 transition-transform duration-300 group-hover:scale-110">
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
             <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -216,7 +222,6 @@ export default function TrapEntertainmentWebsite() {
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
         <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-black to-black" />
         <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-1/4 right-1/4 -z-10 h-92 w-92 rounded-full bg-yellow-600/5 blur-3xl animate-pulse" style={{ animationDuration: '12s' }} />
 
         <div 
           className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -244,33 +249,18 @@ export default function TrapEntertainmentWebsite() {
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base md:text-lg text-neutral-400 leading-relaxed font-light px-2">
-            Curated nightlife for the elite. Bringing you unparalleled DJ lineups, bespoke showcase events, and high-tier club hosting across Bangalore's most exclusive venues.
-          </p>
-
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4 w-full max-w-md mx-auto sm:max-w-none">
             <a
               href="#event"
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById("event")?.scrollIntoView({
-                  behavior: "smooth",
-                });
+                document.getElementById("event")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 active:shadow-[0_0_35px_rgba(245,158,11,0.7)] hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
               <Ticket className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-12" />
-              Book Events
+              Book Tickets
             </a>
-
-            <button 
-              type="button"
-              onClick={() => setGalleryAlert(true)}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl border border-amber-500/20 bg-neutral-900/40 px-8 py-4 text-base md:text-lg font-semibold backdrop-blur-sm transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] text-amber-400 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 hover:text-black hover:border-transparent hover:scale-[1.04] active:scale-95"
-            >
-              <ImageIcon className="h-5 w-5 shrink-0" />
-              View Gallery
-            </button>
           </div>
         </div>
       </section>
@@ -297,36 +287,47 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          {upcomingEvents.length > 0 ? (
-            <div className="grid gap-8 md:grid-cols-2 justify-center">
-              {upcomingEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="flex flex-col justify-between rounded-3xl border border-neutral-800 bg-gradient-to-br from-neutral-900 via-black to-black p-6 md:p-8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-amber-500/40 hover:scale-[1.02] max-w-xl w-full mx-auto shadow-[0_0_50px_rgba(0,0,0,0.85)] hover:shadow-[0_0_40px_rgba(245,158,11,0.08)]"
-                >
+          <div className="grid gap-8 justify-center">
+            {upcomingEvents.map((event) => (
+              <div
+                key={event.id}
+                className="relative flex flex-col justify-between rounded-3xl border border-neutral-800 bg-black min-h-[460px] max-w-2xl w-full mx-auto overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-amber-500/50 hover:scale-[1.01] transition-all duration-500 group"
+              >
+                {/* Dynamic Poster Background Configuration */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out scale-100 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${event.poster})` }}
+                />
+                {/* High Spec Dark Vignette System */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black/50 z-10" />
+                <div className="absolute inset-0 bg-black/40 z-10" />
+
+                <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between flex-1">
                   <div>
-                    <span className="inline-block mb-4 rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs uppercase font-bold tracking-wider text-amber-400">
+                    <span className="inline-block mb-4 rounded-full bg-amber-500 text-black font-black px-4 py-1 text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                       {event.day}
                     </span>
 
-                    <h3 className="text-2xl md:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300">{event.title}</h3>
+                    <h3 className="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                      {event.title}
+                    </h3>
                     
-                    <div className="mt-4 space-y-2 text-neutral-400 font-light">
-                      <div className="flex items-center gap-2 text-xs md:text-sm">
-                        <Calendar className="h-4 w-4 text-amber-500 shrink-0" />
+                    <div className="mt-6 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)]">
+                      <div className="flex items-center gap-2.5 text-sm md:text-base">
+                        <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
                         <span>{event.date}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs md:text-sm">
-                        <MapPin className="h-4 w-4 text-amber-500 shrink-0" />
-                        <span className="truncate">{event.venue}</span>
+                      <div className="flex items-center gap-2.5 text-sm md:text-base">
+                        <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
+                        <span>{event.venue}</span>
                       </div>
                     </div>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
+                    <div className="mt-8 flex flex-col gap-2 max-w-md">
                       {event.features.map((feature: string, idx: number) => (
-                        <span key={idx} className="bg-neutral-900 border border-neutral-800/80 rounded-xl p-3.5 text-xs text-neutral-400 leading-relaxed font-light block shadow-inner">
+                        <div key={idx} className="bg-black/70 border border-neutral-800/60 rounded-xl px-4 py-2.5 text-xs md:text-sm text-neutral-300 font-light backdrop-blur-sm">
                           {feature}
-                        </span>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -334,30 +335,14 @@ export default function TrapEntertainmentWebsite() {
                   <button 
                     type="button"
                     onClick={() => handleOpenBooking(event.title)}
-                    className="mt-6 md:mt-8 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-3.5 font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.01] active:scale-95 active:shadow-[0_0_30px_rgba(245,158,11,0.6)] hover:shadow-[0_0_25px_rgba(245,158,11,0.35)] text-sm md:text-base"
+                    className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] text-base uppercase tracking-wider shadow-lg"
                   >
-                    Reserve Spot via Guestlist
+                    Select Pass & Book Module
                   </button>
                 </div>
-              ))}
-            </div>
-          ) : (
-            /* Button removed completely */
-            <div className="max-w-xl mx-auto rounded-3xl border border-neutral-800 bg-neutral-950 p-8 md:p-12 text-center shadow-[0_0_60px_rgba(0,0,0,0.85)] relative overflow-hidden group">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[1px] bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/5 border border-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.02)] group-hover:border-amber-400/30 group-hover:shadow-[0_0_30px_rgba(245,158,11,0.08)] transition-all duration-500">
-                <Ticket className="h-6 w-6 text-amber-500/70 group-hover:text-amber-400 group-hover:scale-110 transition-all duration-500" />
               </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neutral-800 bg-neutral-900/60 text-[10px] uppercase font-black tracking-widest text-neutral-400 mb-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                Vault Offline
-              </div>
-              <h3 className="text-xl md:text-2xl font-black text-neutral-200 tracking-tight">No New Events Right Now</h3>
-              <p className="mt-3 text-sm text-neutral-400 font-light leading-relaxed max-w-sm mx-auto">
-                Our curated modules are currently executing backend processing. Follow our official channels for upcoming layout disclosures.
-              </p>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -370,19 +355,15 @@ export default function TrapEntertainmentWebsite() {
       >
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-500 font-bold">
-              About Us
-            </p>
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-500 font-bold">About Us</p>
             <h2 className="text-3xl font-bold md:text-5xl tracking-tight leading-tight text-neutral-100">
               We Design Architecture,
               <span className="block text-amber-400 mt-1 font-light">Not Just Bashes.</span>
             </h2>
           </div>
-
           <div className="border-t md:border-t-0 md:border-l border-amber-500/20 pt-6 md:pt-0 pl-0 md:pl-8">
             <p className="text-base md:text-lg leading-7 md:leading-8 text-neutral-400 font-light">
-              Trap Entertainment is a premium lifestyle collective built exclusively for the modern nightlife enthusiast. 
-              We curate global electronic music configurations, ultra-exclusive signature properties, and high-tier club layouts—uniting Bangalore's high-tier evening crowds under carefully calculated settings.
+              Trap Entertainment is a premium lifestyle collective built exclusively for the modern nightlife enthusiast. We curate global setups, ultra-exclusive signature properties, and high-tier club layouts.
             </p>
           </div>
         </div>
@@ -397,18 +378,11 @@ export default function TrapEntertainmentWebsite() {
               serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"
             }`}
           >
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
-              What We Do
-            </p>
-            <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
-              Curated Event Standards
-            </h2>
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">What We Do</p>
+            <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">Curated Event Standards</h2>
           </div>
 
-          <div 
-            ref={servicesGridReveal.elementRef}
-            className="grid gap-6 md:grid-cols-3"
-          >
+          <div ref={servicesGridReveal.elementRef} className="grid gap-6 md:grid-cols-3">
             {[
               {
                 icon: <PartyPopper className="h-6 w-6 text-amber-400 shrink-0" />,
@@ -443,24 +417,20 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Contact Call-to-Action */}
+      {/* Contact Section */}
       <section className="bg-neutral-950 border-t border-amber-500/10 relative overflow-hidden px-6 py-24 text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-950/15 via-black to-black opacity-80" />
-        
         <div className="relative z-10 mx-auto max-w-3xl">
           <h2 className="text-3xl font-black md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
             Ready To Party?
           </h2> 
-
-          <p className="mt-4 md:mt-6 text-base md:text-xl text-neutral-400 max-w-xl mx-auto leading-relaxed font-light">
+          <p className="mt-4 md:mt-6 text-base md:text-xl text-neutral-400 max-w-xl mx-auto font-light">
             Contact Trap Entertainment for premium brand alignments, premium night bookings, sponsorship structures, and ultra-high-end private showcases.
           </p>
-
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4 px-4">
             <button 
               type="button"
               onClick={() => setActiveModal('contact')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg hover:shadow-amber-500/10"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg"
             >
               <Mail className="h-5 w-5 shrink-0" /> Contact Us
             </button>
@@ -470,32 +440,10 @@ export default function TrapEntertainmentWebsite() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-900 bg-black px-6 py-8 text-center text-xs tracking-wider text-neutral-600 font-light">
-        © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in <a href="https://www.instagram.com/trap.entz?igsh=aXl1MnFzbGRsdXI2&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-pink-500 transition-colors font-medium underline underline-offset-2">Bangalore, India</a>.
+        © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
       </footer>
 
-      {/* In-UI Elegant Modal Notification Alternative to Browser Alerts */}
-      {galleryAlert && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 backdrop-blur-md bg-black/80 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md rounded-2xl border border-neutral-800 bg-neutral-950 p-6 md:p-8 text-center shadow-2xl animate-in zoom-in-95 duration-200">
-            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/20">
-              <ImageIcon className="h-6 w-6 text-amber-400" />
-            </div>
-            <h3 className="text-lg font-bold text-neutral-100">Gallery Syncing</h3>
-            <p className="mt-2 text-sm text-neutral-400 font-light leading-relaxed">
-              Our high-definition event recap vault is currently processing. Follow our official Instagram channel for immediate access to upcoming highlight tapes.
-            </p>
-            <button
-              type="button"
-              onClick={() => setGalleryAlert(false)}
-              className="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-2.5 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-            >
-              Acknowledge
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Multi-tier Immersive Modal Wrapper */}
+      {/* Multi-tier Immersive Formspree Modal System */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
           <div className="relative w-full max-w-xl rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
@@ -503,31 +451,23 @@ export default function TrapEntertainmentWebsite() {
             <button 
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-30 bg-black/40 rounded-full backdrop-blur-sm"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-30 bg-black/40 rounded-full"
             >
               <X className="h-5 w-5 shrink-0" />
             </button>
 
             {activeModal === 'book' && (
               <div className="flex flex-col">
-                <div className="relative h-44 md:h-52 bg-gradient-to-br from-neutral-900 to-neutral-950 overflow-hidden flex flex-col justify-end p-6 z-10">
-                  <video 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline 
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
-                  >
-                    <source src="/party-loop.mp4" type="video/mp4" />
-                  </video>
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
+                <div className="relative h-44 md:h-52 overflow-hidden flex flex-col justify-end p-6 z-10">
+                  <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('/CASATROPICA.jpg')` }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-black/40 z-10" />
                   
                   <div className="relative z-20">
-                    <span className="text-amber-400 font-bold uppercase tracking-widest text-[10px] bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md">
-                      Access Pass
+                    <span className="text-amber-400 font-black uppercase tracking-widest text-[10px] bg-black border border-amber-500/30 px-2 py-0.5 rounded-md">
+                      Official Entry Gate
                     </span>
                     <h3 className="text-2xl font-black text-white mt-1.5 tracking-tight">{selectedEvent}</h3>
-                    <p className="text-xs text-neutral-300 font-light mt-0.5">Select your entrance option below to join our premium layout</p>
+                    <p className="text-xs text-neutral-300 font-light mt-0.5">Select a valid pass option to run submission parameters</p>
                   </div>
                 </div>
 
@@ -535,42 +475,54 @@ export default function TrapEntertainmentWebsite() {
                   {guestlistStep === 'tier-select' ? (
                     <div className="space-y-3">
                       
-                      <div className="flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 opacity-75 cursor-not-allowed group transition-all">
+                      {/* 1. STAG ENTRY: Displayed clearly but strictly NON-CLICKABLE */}
+                      <div className="w-full p-4 rounded-2xl border border-neutral-800 bg-neutral-900/20 opacity-50 relative overflow-hidden group select-none">
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-300">Stag Entry</span>
-                          <span className="text-xs text-neutral-500 font-light mt-0.5">Strict venue terms applicable</span>
+                          <span className="text-base font-bold text-neutral-400 flex items-center gap-1.5">
+                            👑 Island King <span className="text-xs font-normal text-neutral-500">(Stag Entry)</span>
+                          </span>
+                          <span className="text-xs text-neutral-500 font-light mt-1 space-y-0.5 block">
+                            <span className="block">• 3:00 PM – 5:00 PM: <strong>₹3,000</strong></span>
+                            <span className="block">• 5:00 PM – 7:00 PM: <strong>₹5,000</strong></span>
+                            <span className="block text-amber-500/80 text-[10px] uppercase tracking-wider font-semibold mt-1">⚠️ Online Requests Closed • Dynamic cover updates apply at door</span>
+                          </span>
                         </div>
-                        <span className="text-sm font-black tracking-wider text-neutral-400 bg-neutral-900 px-3 py-1.5 rounded-xl border border-neutral-800">4K PRICE</span>
                       </div>
 
-                      <button 
-                        type="button"
-                        onClick={() => handleSelectTier('girl')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/50 hover:border-amber-500/30 hover:bg-neutral-900/80 transition-all text-left group"
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-200 group-hover:text-amber-400 transition-colors">Girls Walk-in</span>
-                          <span className="text-xs text-neutral-400 font-light mt-0.5">Complimentary complete access</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-lg uppercase">Free</span>
-                          <ChevronRight className="h-4 w-4 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
-                        </div>
-                      </button>
-
+                      {/* 2. COUPLE ENTRY: Fully Interactive Option */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('couple')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/50 hover:border-amber-500/30 hover:bg-neutral-900/80 transition-all text-left group"
+                        className="w-full flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:border-amber-500/40 hover:bg-neutral-900/60 transition-all text-left group"
                       >
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-200 group-hover:text-amber-400 transition-colors">Couple Entry</span>
-                          <span className="text-xs text-neutral-400 font-light mt-0.5">Free entry till 10:00 pm (Cover charges post 10:00 pm)</span>
+                          <span className="text-base font-bold text-neutral-100 group-hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                            💑 Tropic Pair <span className="text-xs font-normal text-neutral-400">(Couple Entry)</span>
+                          </span>
+                          <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
+                            <span className="block">• Entry till 4:30 PM: <strong className="text-emerald-400">FREE</strong></span>
+                            <span className="block">• Post 4:30 PM: <strong>₹4,000</strong> (Mandatory Cover)</span>
+                          </span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-lg uppercase">Free / Cover</span>
-                          <ChevronRight className="h-4 w-4 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
+                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
+                      </button>
+
+                      {/* 3. LADIES ENTRY: Fully Interactive Option */}
+                      <button 
+                        type="button"
+                        onClick={() => handleSelectTier('girl')}
+                        className="w-full flex items-center justify-between p-4 rounded-2xl border border-neutral-800 bg-neutral-900/30 hover:border-amber-500/40 hover:bg-neutral-900/60 transition-all text-left group"
+                      >
+                        <div className="flex flex-col">
+                          <span className="text-base font-bold text-neutral-100 group-hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                            🌺 Island Queen <span className="text-xs font-normal text-neutral-400">(Ladies Entry)</span>
+                          </span>
+                          <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
+                            <span className="block">• Entry till 5:00 PM: <strong className="text-emerald-400">FREE</strong></span>
+                            <span className="block">• Post 5:00 PM: <strong>₹2,000</strong> (Cover applies)</span>
+                          </span>
                         </div>
+                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
                       </button>
 
                     </div>
@@ -579,91 +531,137 @@ export default function TrapEntertainmentWebsite() {
                       <button 
                         type="button"
                         onClick={() => setGuestlistStep('tier-select')}
-                        className="text-xs font-semibold text-amber-500 hover:underline mb-4 flex items-center gap-1"
+                        className="text-xs font-bold text-amber-500 hover:text-amber-400 mb-4 flex items-center gap-1"
                       >
-                        ← Change Entry Selection
+                        ← Back to Entry Modules
                       </button>
 
                       <form 
-                        action="https://formspree.io/f/mwvzvjge"
+                        action="https://formspree.io/f/mnjrokkb"
                         method="POST"
                         className="space-y-4"
                       >
-                        <input type="hidden" name="Event Title" value={selectedEvent || "General Access"} />
-                        <input type="hidden" name="Selected Entry Type" value={selectedTier || "Unknown"} />
+                        <input type="hidden" name="Event Title" value={selectedEvent || "CASA TROPICA"} />
+                        <input type="hidden" name="Selected Ticket Bracket" value={selectedTier === 'couple' ? 'Tropic Pair (Couple)' : 'Island Queen (Ladies)'} />
 
                         {selectedTier === 'couple' ? (
-                          <div className="grid grid-cols-2 gap-3">
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Male Name
-                              </label>
-                              <input
-                                type="text"
-                                name="maleName"
-                                required
-                                placeholder="Full Name"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                              />
+                          /* Couple Entry Mode Form Setup */
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              <div>
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Male Full Name</label>
+                                <input
+                                  type="text"
+                                  name="male_name"
+                                  required
+                                  placeholder="Full Name"
+                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                />
+                              </div>
+                              <div>
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Female Full Name</label>
+                                <input
+                                  type="text"
+                                  name="female_name"
+                                  required
+                                  placeholder="Full Name"
+                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                />
+                              </div>
                             </div>
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                                Female Name
-                              </label>
-                              <input
-                                type="text"
-                                name="femaleName"
-                                required
-                                placeholder="Full Name"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                              />
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              <div>
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
+                                  <Instagram className="w-3 h-3 text-pink-500" /> Male Insta Handle
+                                </label>
+                                <input
+                                  type="text"
+                                  name="male_instagram"
+                                  required
+                                  placeholder="@username"
+                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                />
+                              </div>
+                              <div>
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
+                                  <Instagram className="w-3 h-3 text-pink-500" /> Female Insta Handle
+                                </label>
+                                <input
+                                  type="text"
+                                  name="female_instagram"
+                                  required
+                                  placeholder="@username"
+                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                />
+                              </div>
                             </div>
                           </div>
                         ) : (
-                          <div>
-                            <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                              Full Name
-                            </label>
-                            <input
-                              type="text"
-                              name="guestName"
-                              required
-                              placeholder="Your Full Name"
-                              className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                            />
+                          /* Ladies Entry Mode Form Setup */
+                          <div className="space-y-4">
+                            <div>
+                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Guest Full Name</label>
+                              <input
+                                type="text"
+                                name="ladies_name"
+                                required
+                                placeholder="Enter Full Name"
+                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                              />
+                            </div>
+                            <div>
+                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
+                                <Instagram className="w-3 h-3 text-pink-500" /> Instagram Handle
+                              </label>
+                              <input
+                                type="text"
+                                name="ladies_instagram"
+                                required
+                                placeholder="@username"
+                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                              />
+                            </div>
                           </div>
                         )}
-                        
+
+                        {/* Unified Single Contact Field Container */}
                         <div>
-                          <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                            Phone Number (WhatsApp)
-                          </label>
-                          <input 
+                          <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Mobile Number</label>
+                          <input
                             type="tel"
-                            name="phoneNumber"
-                            required 
+                            name="contact_mobile_number"
+                            required
                             placeholder="+91 XXXXX XXXXX"
-                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
                           />
                         </div>
 
                         <div>
-                          <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">
-                            Instagram Handle (Optional)
-                          </label>
-                          <input 
-                            type="text"
-                            name="instagramHandle"
-                            placeholder="@username"
-                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                          />
+                          <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Planned Arrival Time</label>
+                          <select 
+                            name="expectedArrivalTime"
+                            className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm cursor-pointer"
+                          >
+                            <option value="3:00 PM - 4:30 PM">3:00 PM - 4:30 PM</option>
+                            <option value="4:30 PM - 5:00 PM">4:30 PM - 5:00 PM</option>
+                            <option value="Post 5:00 PM">Post 5:00 PM</option>
+                          </select>
+                        </div>
+
+                        <div className="p-3 rounded-xl border border-neutral-800 bg-neutral-900/60 space-y-1 text-[11px] text-neutral-400 font-light">
+                          <div className="flex items-center gap-1 text-amber-400 font-bold uppercase tracking-wider text-[10px]">
+                            <ShieldCheck className="w-3.5 h-3.5" /> Entry Reminders:
+                          </div>
+                          <p>• Prices are dynamic and subject to adjustments based on physical venue demand parameters.</p>
+                          <p>• Absolute club rules, age regulations, and couples matching ratios apply strictly at the door.</p>
                         </div>
 
                         <button
                           type="submit"
-                          className="mt-2 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                          className="w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-black text-black hover:scale-[1.01] active:scale-95 transition-all text-sm uppercase tracking-wide shadow-md"
                         >
-                          Request Guestlist Entry
+                          Confirm Entry Allocation
                         </button>
                       </form>
                     </div>
@@ -673,57 +671,78 @@ export default function TrapEntertainmentWebsite() {
             )}
 
             {activeModal === 'contact' && (
-              <div className="p-6 md:p-8 bg-neutral-950 flex flex-col">
+              <div className="p-6 md:p-8 bg-neutral-950">
                 <div className="mb-6">
-                  <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300 tracking-tight">Connect with Trap</h3>
-                  <p className="text-xs text-neutral-400 font-light mt-1">Sponsorship configurations, commercial night partnerships, or exclusive luxury hosting configurations.</p>
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/20 mb-3">
+                    <Mail className="h-5 w-5 text-amber-400" />
+                  </div>
+                  <h3 className="text-xl font-black text-neutral-100 tracking-tight">Connect with Trap Ent</h3>
+                  <p className="text-xs text-neutral-400 font-light mt-0.5">Inquire for brand integrations, ultra-premium tables, or event sponsorships.</p>
                 </div>
 
-                <form 
-                  action="https://formspree.io/f/mwvzvjge"
-                  method="POST"
-                  className="space-y-4"
-                >
-                  <input type="hidden" name="Form Purpose" value="General Business Query" />
+                <form action="https://formspree.io/f/mnjrokkb" method="POST" className="space-y-4">
+                  <input type="hidden" name="Form Type" value="General Contact Query" />
                   
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Name / Organization</label>
-                    <input 
-                      type="text" 
-                      name="contactName" 
-                      required 
-                      placeholder="Your Name or Brand" 
-                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
+                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Your Name / Enterprise Title</label>
+                    <input
+                      type="text"
+                      name="contactName"
+                      required
+                      placeholder="Full Name"
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
                     />
                   </div>
 
-                  <div>
-                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Email Address</label>
-                    <input 
-                      type="email" 
-                      name="contactEmail" 
-                      required 
-                      placeholder="business@domain.com" 
-                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all"
-                    />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Email Address</label>
+                      <input
+                        type="email"
+                        name="contactEmail"
+                        required
+                        placeholder="name@enterprise.com"
+                        className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Contact Number</label>
+                      <input
+                        type="tel"
+                        name="contactPhone"
+                        required
+                        placeholder="+91 XXXXX XXXXX"
+                        className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                      />
+                    </div>
                   </div>
 
                   <div>
-                    <label className="mb-1 block text-xs font-medium text-neutral-400 uppercase tracking-wider">Proposal Message</label>
-                    <textarea 
-                      name="contactMessage" 
-                      rows={4} 
-                      required 
-                      placeholder="Outline your partnership vision..." 
-                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-400 text-sm transition-all resize-none"
+                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Inquiry Configuration</label>
+                    <select name="inquiryType" className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm">
+                      <option value="VIP Lounges & Tables">VIP Lounges & Luxury Tables</option>
+                      <option value="Corporate Hosting">Corporate & Private Showcases</option>
+                      <option value="Sponsorship & Brand alignment">Sponsorship & Brand Integrations</option>
+                      <option value="Other Operations">Other Custom System Queries</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Operational Details</label>
+                    <textarea
+                      name="contactMessage"
+                      rows={4}
+                      required
+                      placeholder="Outline your detailed request configurations here..."
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="mt-2 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3 text-sm font-bold text-black hover:scale-[1.01] active:scale-95 transition-all shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                    className="w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 py-3.5 font-bold text-black text-sm uppercase tracking-wide"
                   >
-                    Transmit Message
+                    Dispatch Message Securely
                   </button>
                 </form>
               </div>
