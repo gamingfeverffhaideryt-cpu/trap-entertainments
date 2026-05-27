@@ -13,8 +13,7 @@ import {
   Mail, 
   X,
   ChevronRight,
-  ShieldCheck,
-  Instagram
+  ShieldCheck
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -61,7 +60,6 @@ export default function TrapEntertainmentWebsite() {
   
   const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
   const [selectedTier, setSelectedTier] = useState<'girl' | 'couple' | null>(null);
-  const [galleryAlert, setGalleryAlert] = useState(false);
 
   // Refs for zero-lag cursor management
   const dotRef = useRef<HTMLDivElement>(null);
@@ -144,24 +142,7 @@ export default function TrapEntertainmentWebsite() {
   const serviceHeaderReveal = useScrollReveal();
   const servicesGridReveal = useScrollReveal();
 
-  // Active Showcase Module Array sitting on the CASATROPICA asset configuration
-  const upcomingEvents = [
-    {
-      id: "casa-tropica-2026",
-      day: "THIS SUNDAY",
-      title: "CASA TROPICA 🌴",
-      date: "Sunday, May 31, 2026 • 3:00 PM Onwards",
-      venue: "JW Marriott Executive Apartments, Bangalore",
-      poster: "/CASATROPICA.jpg",
-      features: [
-        "Premium Tropical Daytime Curation",
-        "Exclusive High-Tier Liquid Rigs & Layouts",
-        "Bespoke Island Ambience Experience"
-      ]
-    }
-  ];
-
-  const handleOpenBooking = (eventTitle = "General Event Access") => {
+  const handleOpenBooking = (eventTitle = "CASA TROPICA 🌴") => {
     setSelectedEvent(eventTitle);
     setGuestlistStep('tier-select');
     setSelectedTier(null);
@@ -288,60 +269,57 @@ export default function TrapEntertainmentWebsite() {
           }`}
         >
           <div className="grid gap-8 justify-center">
-            {upcomingEvents.map((event) => (
-              <div
-                key={event.id}
-                className="relative flex flex-col justify-between rounded-3xl border border-neutral-800 bg-black min-h-[460px] max-w-2xl w-full mx-auto overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-amber-500/50 hover:scale-[1.01] transition-all duration-500 group"
-              >
-                {/* Dynamic Poster Background Configuration */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out scale-100 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${event.poster})` }}
-                />
-                {/* High Spec Dark Vignette System */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black/50 z-10" />
-                <div className="absolute inset-0 bg-black/40 z-10" />
+            <div className="relative flex flex-col justify-between rounded-3xl border border-neutral-800 bg-black min-h-[460px] max-w-2xl w-full mx-auto overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-amber-500/50 hover:scale-[1.01] transition-all duration-500 group">
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out scale-100 group-hover:scale-105"
+                style={{ backgroundImage: `url('/CASATROPICA.jpg')` }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-black/50 z-10" />
+              <div className="absolute inset-0 bg-black/40 z-10" />
 
-                <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between flex-1">
-                  <div>
-                    <span className="inline-block mb-4 rounded-full bg-amber-500 text-black font-black px-4 py-1 text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.4)]">
-                      {event.day}
-                    </span>
+              <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between flex-1">
+                <div>
+                  <span className="inline-block mb-4 rounded-full bg-amber-500 text-black font-black px-4 py-1 text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.4)]">
+                    THIS SUNDAY
+                  </span>
 
-                    <h3 className="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                      {event.title}
-                    </h3>
-                    
-                    <div className="mt-6 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)]">
-                      <div className="flex items-center gap-2.5 text-sm md:text-base">
-                        <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
-                        <span>{event.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2.5 text-sm md:text-base">
-                        <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
-                        <span>{event.venue}</span>
-                      </div>
+                  <h3 className="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+                    CASA TROPICA 🌴
+                  </h3>
+                  
+                  <div className="mt-6 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)]">
+                    <div className="flex items-center gap-2.5 text-sm md:text-base">
+                      <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
+                      <span>31st May | Sunday • 3:00 PM Onwards</span>
                     </div>
-
-                    <div className="mt-8 flex flex-col gap-2 max-w-md">
-                      {event.features.map((feature: string, idx: number) => (
-                        <div key={idx} className="bg-black/70 border border-neutral-800/60 rounded-xl px-4 py-2.5 text-xs md:text-sm text-neutral-300 font-light backdrop-blur-sm">
-                          {feature}
-                        </div>
-                      ))}
+                    <div className="flex items-center gap-2.5 text-sm md:text-base">
+                      <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
+                      <span>JW Marriott Executive Apartments</span>
                     </div>
                   </div>
 
-                  <button 
-                    type="button"
-                    onClick={() => handleOpenBooking(event.title)}
-                    className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] text-base uppercase tracking-wider shadow-lg"
-                  >
-                    Select Pass & Book Module
-                  </button>
+                  <div className="mt-8 flex flex-col gap-2 max-w-md">
+                    <div className="bg-black/70 border border-neutral-800/60 rounded-xl px-4 py-2.5 text-xs md:text-sm text-neutral-300 font-light backdrop-blur-sm">
+                      🌴 Premium Tropical Daytime Curation
+                    </div>
+                    <div className="bg-black/70 border border-neutral-800/60 rounded-xl px-4 py-2.5 text-xs md:text-sm text-neutral-300 font-light backdrop-blur-sm">
+                      👑 Exclusive High-Tier Liquid Rigs & Layouts
+                    </div>
+                    <div className="bg-black/70 border border-neutral-800/60 rounded-xl px-4 py-2.5 text-xs md:text-sm text-neutral-300 font-light backdrop-blur-sm">
+                      🌺 Bespoke Island Ambience Experience
+                    </div>
+                  </div>
                 </div>
+
+                <button 
+                  type="button"
+                  onClick={() => handleOpenBooking("CASA TROPICA 🌴")}
+                  className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(245,158,11,0.5)] text-base uppercase tracking-wider shadow-lg"
+                >
+                  Select Pass & Book Module
+                </button>
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -443,7 +421,7 @@ export default function TrapEntertainmentWebsite() {
         © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
       </footer>
 
-      {/* Multi-tier Immersive Formspree Modal System */}
+      {/* Modal Systems */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
           <div className="relative w-full max-w-xl rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
@@ -467,7 +445,7 @@ export default function TrapEntertainmentWebsite() {
                       Official Entry Gate
                     </span>
                     <h3 className="text-2xl font-black text-white mt-1.5 tracking-tight">{selectedEvent}</h3>
-                    <p className="text-xs text-neutral-300 font-light mt-0.5">Select a valid pass option to run submission parameters</p>
+                    <p className="text-xs text-neutral-300 font-light mt-0.5">Select an entry layout option to complete your request parameters</p>
                   </div>
                 </div>
 
@@ -475,8 +453,8 @@ export default function TrapEntertainmentWebsite() {
                   {guestlistStep === 'tier-select' ? (
                     <div className="space-y-3">
                       
-                      {/* 1. STAG ENTRY: Displayed clearly but strictly NON-CLICKABLE */}
-                      <div className="w-full p-4 rounded-2xl border border-neutral-800 bg-neutral-900/20 opacity-50 relative overflow-hidden group select-none">
+                      {/* Stag Entry View Block */}
+                      <div className="w-full p-4 rounded-2xl border border-neutral-800 bg-neutral-900/20 opacity-50 relative overflow-hidden select-none">
                         <div className="flex flex-col">
                           <span className="text-base font-bold text-neutral-400 flex items-center gap-1.5">
                             👑 Island King <span className="text-xs font-normal text-neutral-500">(Stag Entry)</span>
@@ -489,7 +467,7 @@ export default function TrapEntertainmentWebsite() {
                         </div>
                       </div>
 
-                      {/* 2. COUPLE ENTRY: Fully Interactive Option */}
+                      {/* Couple Entry Selector */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('couple')}
@@ -507,7 +485,7 @@ export default function TrapEntertainmentWebsite() {
                         <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
                       </button>
 
-                      {/* 3. LADIES ENTRY: Fully Interactive Option */}
+                      {/* Ladies Entry Selector */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('girl')}
@@ -541,11 +519,10 @@ export default function TrapEntertainmentWebsite() {
                         method="POST"
                         className="space-y-4"
                       >
-                        <input type="hidden" name="Event Title" value={selectedEvent || "CASA TROPICA"} />
+                        <input type="hidden" name="Event Title" value={selectedEvent || "CASA TROPICA 🌴"} />
                         <input type="hidden" name="Selected Ticket Bracket" value={selectedTier === 'couple' ? 'Tropic Pair (Couple)' : 'Island Queen (Ladies)'} />
 
                         {selectedTier === 'couple' ? (
-                          /* Couple Entry Mode Form Setup */
                           <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div>
@@ -572,8 +549,9 @@ export default function TrapEntertainmentWebsite() {
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-                                  <Instagram className="w-3 h-3 text-pink-500" /> Male Insta Handle
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 text-pink-500"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                  <span>Male Insta Handle</span>
                                 </label>
                                 <input
                                   type="text"
@@ -584,8 +562,9 @@ export default function TrapEntertainmentWebsite() {
                                 />
                               </div>
                               <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-                                  <Instagram className="w-3 h-3 text-pink-500" /> Female Insta Handle
+                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 text-pink-500"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                  <span>Female Insta Handle</span>
                                 </label>
                                 <input
                                   type="text"
@@ -598,7 +577,6 @@ export default function TrapEntertainmentWebsite() {
                             </div>
                           </div>
                         ) : (
-                          /* Ladies Entry Mode Form Setup */
                           <div className="space-y-4">
                             <div>
                               <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Guest Full Name</label>
@@ -611,8 +589,9 @@ export default function TrapEntertainmentWebsite() {
                               />
                             </div>
                             <div>
-                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1">
-                                <Instagram className="w-3 h-3 text-pink-500" /> Instagram Handle
+                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-3.5 w-3.5 text-pink-500"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                <span>Instagram Handle</span>
                               </label>
                               <input
                                 type="text"
@@ -625,7 +604,6 @@ export default function TrapEntertainmentWebsite() {
                           </div>
                         )}
 
-                        {/* Unified Single Contact Field Container */}
                         <div>
                           <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Mobile Number</label>
                           <input
