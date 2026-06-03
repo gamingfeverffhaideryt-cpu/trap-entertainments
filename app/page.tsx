@@ -346,7 +346,7 @@ export default function TrapEntertainmentWebsite() {
                   <div className="mt-4 space-y-2.5 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] text-sm">
                     <div className="flex items-center gap-2.5">
                       <Calendar className="h-4 w-4 text-emerald-400 shrink-0" />
-                      <span>6th June | Friday • 8:30 PM Onwards</span>
+                      <span>6th June | Saturday • 9:00 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       <MapPin className="h-4 w-4 text-emerald-400 shrink-0" />
@@ -524,7 +524,7 @@ export default function TrapEntertainmentWebsite() {
                             {selectedEvent?.includes("BRASIL") ? (
                               <>
                                 <span className="block">• Entry Before 9:00 PM: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
-                                <span className="block">• Entry Post 9:00 PM: <strong>₹1,500</strong> Cover Charge Enforced</span>
+                                <span className="block">• Entry Post 9:00 PM: <strong>1,500</strong> Cover Charge Enforced</span>
                               </>
                             ) : (
                               <>
@@ -573,7 +573,7 @@ export default function TrapEntertainmentWebsite() {
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
                             {selectedEvent?.includes("BRASIL") ? (
-                              <span className="block">• General Door Cover Parameter: <strong>₹2,000</strong> Cover Charge</span>
+                              <span className="block">• General Door Cover Parameter: <strong>2,000</strong> Cover Charge</span>
                             ) : (
                               <>
                                 <span className="block">• General Door Cover Parameter: <strong>₹6,000</strong> Cover Charge</span>
@@ -775,7 +775,7 @@ export default function TrapEntertainmentWebsite() {
                               <ShieldCheck className={`h-4 w-4 shrink-0 mt-0.5 ${selectedEvent?.includes("BRASIL") ? "text-emerald-400" : "text-amber-400"}`} />
                               <p className="text-[11px] text-neutral-400 leading-normal">
                                 {selectedEvent?.includes("BRASIL") ? (
-                                  <span>Stag passes for this event require a flat ₹2,000 cover charge parameter at the entry gates of Kitty Ko.</span>
+                                  <span>Stag passes for this event require a flat 2,000 cover charge parameter at the entry gates of Kitty Ko.</span>
                                 ) : (
                                   <span>Male stag registrations secure allocation context for door evaluation. Standard cover profiles apply firmly upon arrival parameters.</span>
                                 )}
@@ -817,15 +817,15 @@ export default function TrapEntertainmentWebsite() {
                   <input type="hidden" name="Context" value="General Business Inquiry" />
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
-                    <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-500/50" />
+                    <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Email Protocol</label>
-                    <input type="email" name="email" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-500/50" />
+                    <input type="email" name="email" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Brief Message</label>
-                    <textarea name="message" rows={4} required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-500/50 resize-none"></textarea>
+                    <textarea name="message" rows={4} required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
                   </div>
                   <button type="submit" className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
                     Dispatch Briefing
