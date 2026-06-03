@@ -346,7 +346,7 @@ export default function TrapEntertainmentWebsite() {
                   <div className="mt-4 space-y-2.5 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] text-sm">
                     <div className="flex items-center gap-2.5">
                       <Calendar className="h-4 w-4 text-emerald-400 shrink-0" />
-                      <span>6th June | Saturday • 9:00 PM Onwards</span>
+                      <span>6th June | Saturday • 8:30 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       <MapPin className="h-4 w-4 text-emerald-400 shrink-0" />
