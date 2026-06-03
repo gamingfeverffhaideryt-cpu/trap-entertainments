@@ -356,10 +356,10 @@ export default function TrapEntertainmentWebsite() {
 
                   <div className="mt-6 flex flex-wrap gap-2">
                     <span className="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-medium backdrop-blur-sm">
-                      🌺 Girls Entry: FREE
+                      Girls: FREE ALL NIGHT
                     </span>
                     <span className="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-medium backdrop-blur-sm">
-                      💑 Couples Entry: FREE
+                      Couples: FREE TILL 9 PM
                     </span>
                   </div>
                 </div>
@@ -518,11 +518,14 @@ export default function TrapEntertainmentWebsite() {
                       >
                         <div className="flex flex-col">
                           <span className={`text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 ${selectedEvent?.includes("BRASIL") ? "group-hover:text-emerald-400" : "group-hover:text-amber-400"}`}>
-                            💑 Couple Entry Ticket Bracket
+                            Couple Entry Ticket Bracket
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
                             {selectedEvent?.includes("BRASIL") ? (
-                              <span className="block">• Entry Bracket Validation: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
+                              <>
+                                <span className="block">• Entry Before 9:00 PM: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
+                                <span className="block">• Entry Post 9:00 PM: <strong>₹1,500</strong> Cover Charge Enforced</span>
+                              </>
                             ) : (
                               <>
                                 <span className="block">• Entry Before 9:00 PM: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
@@ -542,11 +545,11 @@ export default function TrapEntertainmentWebsite() {
                       >
                         <div className="flex flex-col">
                           <span className={`text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 ${selectedEvent?.includes("BRASIL") ? "group-hover:text-emerald-400" : "group-hover:text-amber-400"}`}>
-                            🌺 Ladies Entry Ticket Bracket
+                            Girls Entry Ticket Bracket
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
                             {selectedEvent?.includes("BRASIL") ? (
-                              <span className="block">• Entry Bracket Validation: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
+                              <span className="block">• Entry Bracket Validation: <strong className="text-emerald-400">FREE ALL NIGHT</strong></span>
                             ) : (
                               <>
                                 <span className="block">• Entry Before 9:00 PM: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
@@ -561,26 +564,16 @@ export default function TrapEntertainmentWebsite() {
                       {/* Male Stag Selector */}
                       <button 
                         type="button"
-                        disabled={selectedEvent?.includes("BRASIL")}
                         onClick={() => handleSelectTier('stag-male')}
-                        className={`w-full flex items-center justify-between p-4 rounded-2xl border transition-all text-left group ${
-                          selectedEvent?.includes("BRASIL") 
-                            ? "opacity-40 cursor-not-allowed border-neutral-900 bg-neutral-950" 
-                            : "border-neutral-800 bg-neutral-900/30 hover:border-amber-400/40 hover:bg-neutral-900/60"
-                        }`}
+                        className={`w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group ${selectedEvent?.includes("BRASIL") ? "hover:border-emerald-500/40 hover:bg-neutral-900/60 border-neutral-800" : "hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"}`}
                       >
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 flex items-center gap-1.5">
-                            👑 Male Stag Ticket Bracket 
-                            {selectedEvent?.includes("BRASIL") && (
-                              <span className="text-[10px] bg-red-500/20 text-red-400 font-black px-2 py-0.5 rounded border border-red-500/20 flex items-center gap-1">
-                                <Lock className="h-2.5 w-2.5" /> LOCKED
-                              </span>
-                            )}
+                          <span className={`text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 ${selectedEvent?.includes("BRASIL") ? "group-hover:text-emerald-400" : "group-hover:text-amber-400"}`}>
+                            Male Stag Ticket Bracket 
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
                             {selectedEvent?.includes("BRASIL") ? (
-                              <span className="block text-neutral-500">Online allocations closed for this particular curation.</span>
+                              <span className="block">• General Door Cover Parameter: <strong>₹2,000</strong> Cover Charge</span>
                             ) : (
                               <>
                                 <span className="block">• General Door Cover Parameter: <strong>₹6,000</strong> Cover Charge</span>
@@ -589,9 +582,7 @@ export default function TrapEntertainmentWebsite() {
                             )}
                           </span>
                         </div>
-                        {!selectedEvent?.includes("BRASIL") && (
-                          <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all" />
-                        )}
+                        <ChevronRight className={`h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all ${selectedEvent?.includes("BRASIL") ? "group-hover:text-emerald-400" : "group-hover:text-amber-400"}`} />
                       </button>
 
                     </div>
@@ -745,7 +736,7 @@ export default function TrapEntertainmentWebsite() {
                         {selectedTier === 'stag-male' && (
                           <div className="space-y-4">
                             <div>
-                              <label className="mb-1 block text-xs font-bold text-amber-400 uppercase tracking-wider">
+                              <label className={`mb-1 block text-xs font-bold uppercase tracking-wider ${selectedEvent?.includes("BRASIL") ? "text-emerald-400" : "text-amber-400"}`}>
                                 Stag Full Name
                               </label>
                               <input
@@ -753,7 +744,7 @@ export default function TrapEntertainmentWebsite() {
                                 name="stag_primary_name"
                                 required
                                 placeholder="Legal First & Last Name"
-                                className="w-full rounded-xl border border-amber-500/30 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500 text-sm"
+                                className={`w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors ${selectedEvent?.includes("BRASIL") ? "border-emerald-500/30 focus:border-emerald-500" : "border-amber-500/30 focus:border-amber-500"}`}
                               />
                             </div>
                             
@@ -780,10 +771,14 @@ export default function TrapEntertainmentWebsite() {
                               </div>
                             </div>
 
-                            <div className="bg-amber-950/40 border border-amber-500/20 p-3.5 rounded-xl flex items-start gap-2.5">
-                              <ShieldCheck className="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
+                            <div className={`border p-3.5 rounded-xl flex items-start gap-2.5 ${selectedEvent?.includes("BRASIL") ? "bg-emerald-950/40 border-emerald-500/20" : "bg-amber-950/40 border-amber-500/20"}`}>
+                              <ShieldCheck className={`h-4 w-4 shrink-0 mt-0.5 ${selectedEvent?.includes("BRASIL") ? "text-emerald-400" : "text-amber-400"}`} />
                               <p className="text-[11px] text-neutral-400 leading-normal">
-                                Male stag registrations secure allocation context for door evaluation. Standard cover profiles apply firmly upon arrival parameters.
+                                {selectedEvent?.includes("BRASIL") ? (
+                                  <span>Stag passes for this event require a flat ₹2,000 cover charge parameter at the entry gates of Kitty Ko.</span>
+                                ) : (
+                                  <span>Male stag registrations secure allocation context for door evaluation. Standard cover profiles apply firmly upon arrival parameters.</span>
+                                )}
                               </p>
                             </div>
                           </div>
