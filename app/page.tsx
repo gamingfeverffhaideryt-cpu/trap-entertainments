@@ -59,7 +59,6 @@ export default function TrapEntertainmentWebsite() {
   
   const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
   const [selectedTier, setSelectedTier] = useState<'girl' | 'couple' | 'stag-male' | null>(null);
-  const [ladiesCount, setLadiesCount] = useState<string>("1");
 
   // Refs for zero-lag cursor management
   const dotRef = useRef<HTMLDivElement>(null);
@@ -146,7 +145,6 @@ export default function TrapEntertainmentWebsite() {
     setSelectedEvent(eventTitle);
     setGuestlistStep('tier-select');
     setSelectedTier(null);
-    setLadiesCount("1");
     setActiveModal('book');
   };
 
@@ -291,11 +289,11 @@ export default function TrapEntertainmentWebsite() {
                   <div className="mt-6 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)]">
                     <div className="flex items-center gap-2.5 text-sm md:text-base">
                       <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
-                      <span>Doors Open at 7:00 PM Onwards</span>
+                      <span>5th June | Thursday • 7:00 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-2.5 text-sm md:text-base">
                       <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
-                      <span>Premium Nightlife Venue, Bangalore</span>
+                      <span>Cavore, Bangalore</span>
                     </div>
                   </div>
 
@@ -539,23 +537,27 @@ export default function TrapEntertainmentWebsite() {
                           <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Male Full Name</label>
+                                <label className="mb-1 block text-xs font-bold text-amber-400 uppercase tracking-wider animate-pulse">
+                                  Male Full Name (First & Last Required)
+                                </label>
                                 <input
                                   type="text"
                                   name="male_full_name"
                                   required
-                                  placeholder="First & Last Name"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                  placeholder="Enter Full Legal Name"
+                                  className="w-full rounded-xl border border-amber-500/30 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500 text-sm"
                                 />
                               </div>
                               <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Female Full Name</label>
+                                <label className="mb-1 block text-xs font-bold text-amber-400 uppercase tracking-wider animate-pulse">
+                                  Female Full Name (First & Last Required)
+                                </label>
                                 <input
                                   type="text"
                                   name="female_full_name"
                                   required
-                                  placeholder="First & Last Name"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                  placeholder="Enter Full Legal Name"
+                                  className="w-full rounded-xl border border-amber-500/30 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500 text-sm"
                                 />
                               </div>
                             </div>
@@ -589,41 +591,26 @@ export default function TrapEntertainmentWebsite() {
                         {selectedTier === 'girl' && (
                           <div className="space-y-4">
                             <div>
-                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Lead Guest Full Name</label>
+                              <label className="mb-1 block text-xs font-bold text-amber-400 uppercase tracking-wider animate-pulse">
+                                Lead Guest Full Name (First & Last Required)
+                              </label>
                               <input
                                 type="text"
                                 name="ladies_primary_name"
                                 required
-                                placeholder="First & Last Name"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                placeholder="Enter Full Legal Name"
+                                className="w-full rounded-xl border border-amber-500/30 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500 text-sm"
                               />
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Instagram Handle</label>
-                                <input
-                                  type="text"
-                                  name="ladies_instagram_handle"
-                                  required
-                                  placeholder="@username"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Total Girls Attending</label>
-                                <select
-                                  name="total_girls_count"
-                                  value={ladiesCount}
-                                  onChange={(e) => setLadiesCount(e.target.value)}
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm md:cursor-none"
-                                >
-                                  <option value="1">Just Me (1 Girl)</option>
-                                  <option value="2">2 Girls (Shared Guestlist)</option>
-                                  <option value="3">3 Girls (Group Pass)</option>
-                                  <option value="4">4 Girls (Group Pass)</option>
-                                  <option value="5+">5+ Girls (Elite Squad Walk-in)</option>
-                                </select>
-                              </div>
+                            <div>
+                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Instagram Handle</label>
+                              <input
+                                type="text"
+                                name="ladies_instagram_handle"
+                                required
+                                placeholder="@username"
+                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                              />
                             </div>
                           </div>
                         )}
@@ -632,13 +619,15 @@ export default function TrapEntertainmentWebsite() {
                         {selectedTier === 'stag-male' && (
                           <div className="space-y-4">
                             <div>
-                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Stag Full Name</label>
+                              <label className="mb-1 block text-xs font-bold text-amber-400 uppercase tracking-wider animate-pulse">
+                                Stag Full Name (First & Last Required)
+                              </label>
                               <input
                                 type="text"
                                 name="male_stag_name"
                                 required
-                                placeholder="First & Last Name"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500/50 text-sm"
+                                placeholder="Enter Full Legal Name"
+                                className="w-full rounded-xl border border-amber-500/30 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-amber-500 text-sm"
                               />
                             </div>
                             <div>
