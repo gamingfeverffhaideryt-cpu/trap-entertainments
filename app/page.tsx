@@ -97,10 +97,10 @@ export default function TrapEntertainmentWebsite() {
         target.classList.contains('clickable-target') ||
         target.onclick
       ) {
-        ringRef.current?.classList.add("w-14", "h-14", "bg-emerald-400/10", "border-emerald-400/80", "shadow-[0_0_20px_rgba(16,185,129,0.4)]", "scale-110");
+        ringRef.current?.classList.add("w-14", "h-14", "bg-amber-400/10", "border-amber-400/80", "shadow-[0_0_20px_rgba(245,158,11,0.4)]", "scale-110");
         ringRef.current?.classList.remove("w-7", "h-7", "bg-transparent", "border-neutral-500/40");
       } else {
-        ringRef.current?.classList.remove("w-14", "h-14", "bg-emerald-400/10", "border-emerald-400/80", "shadow-[0_0_20px_rgba(16,185,129,0.4)]", "scale-110");
+        ringRef.current?.classList.remove("w-14", "h-14", "bg-amber-400/10", "border-amber-400/80", "shadow-[0_0_20px_rgba(245,158,11,0.4)]", "scale-110");
         ringRef.current?.classList.add("w-7", "h-7", "bg-transparent", "border-neutral-500/40");
       }
     };
@@ -161,7 +161,7 @@ export default function TrapEntertainmentWebsite() {
   };
 
   return (
-    <div className={`min-h-screen bg-neutral-950 text-white font-sans selection:bg-emerald-500 selection:text-black transition-opacity duration-1000 ease-out select-none md:cursor-none ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ scrollBehavior: 'smooth' }}>
+    <div className={`min-h-screen bg-neutral-950 text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out select-none md:cursor-none ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ scrollBehavior: 'smooth' }}>
       
       <style dangerouslySetInnerHTML={{__html: `
         @media (min-width: 768px) {
@@ -173,7 +173,7 @@ export default function TrapEntertainmentWebsite() {
 
       <div 
         ref={dotRef}
-        className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-emerald-400 rounded-full pointer-events-none z-[9999] will-change-transform mix-blend-difference"
+        className="hidden md:block fixed top-0 left-0 w-2 h-2 bg-amber-400 rounded-full pointer-events-none z-[9999] will-change-transform mix-blend-difference"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       />
       <div 
@@ -187,7 +187,7 @@ export default function TrapEntertainmentWebsite() {
           href="https://www.instagram.com/trap.entz"
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 backdrop-blur-md text-xs md:text-sm font-bold tracking-wide text-neutral-200 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-emerald-400 hover:border-emerald-400/40 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(16,185,129,0.2)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.7)]"
+          className="pointer-events-auto flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-900/60 border border-neutral-800 backdrop-blur-md text-xs md:text-sm font-bold tracking-wide text-neutral-200 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-amber-400 hover:border-amber-400/40 hover:scale-[1.05] hover:shadow-[0_0_30px_rgba(245,158,11,0.2)] active:scale-95 group shadow-[0_4px_25px_rgba(0,0,0,0.7)]"
         >
           <div className="relative h-4 w-4 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 transition-transform duration-300 group-hover:scale-110">
@@ -196,8 +196,8 @@ export default function TrapEntertainmentWebsite() {
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
             <span className="absolute -top-1 -right-1 flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500"></span>
             </span>
           </div>
           <span>Instagram</span>
@@ -206,8 +206,8 @@ export default function TrapEntertainmentWebsite() {
 
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/15 via-neutral-950 to-neutral-950" />
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-emerald-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-neutral-950 to-neutral-950" />
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
 
         <div 
           className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -217,7 +217,7 @@ export default function TrapEntertainmentWebsite() {
             filter: `blur(${heroBlur}px)`
           }}
         >
-          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-emerald-400 font-bold">
+          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-400 font-bold">
             Trap Entertainment
           </p>
           
@@ -225,24 +225,24 @@ export default function TrapEntertainmentWebsite() {
             src="/logo.png"
             alt="Trap Ent Logo"
             onClick={handleLogoClick}
-            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(16,185,129,0.35)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(16,185,129,0.55)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
+            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.35)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.55)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
           />
           
           <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto">
             Elevating Bangalore's nightlife through
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-yellow-400 to-emerald-500 mt-2">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
               niche, ultra-premium party experiences
             </span>
           </h1>
 
-          <div className="mt-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4 w-full max-w-md mx-auto sm:max-w-none">
+          <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4 w-full max-w-md mx-auto sm:max-w-none">
             <a
               href="#event"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("event")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
               <Ticket className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-12" />
               Explore Showcases
@@ -252,14 +252,14 @@ export default function TrapEntertainmentWebsite() {
       </section>
 
       {/* Upcoming Events Section */}
-      <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-emerald-500/5">
+      <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
           className={`mb-12 md:mb-16 text-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
             eventsHeaderReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-6"
           }`}
         >
-          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-emerald-400 font-bold">
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
             Showcase Schedule
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
@@ -275,40 +275,40 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
             
-            {/* ONLY EVENT LEFT: MADE IN BRASIL */}
-            <div className="relative flex flex-col justify-between rounded-3xl border border-emerald-500/20 bg-neutral-950 min-h-[500px] w-full overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-emerald-500/50 hover:scale-[1.01] transition-all duration-500 group">
+            {/* MADE IN BRASIL - WITH PREMIUM AMBER COLOR ACCENTS */}
+            <div className="relative flex flex-col justify-between rounded-3xl border border-neutral-800 bg-neutral-950 min-h-[500px] w-full overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-amber-500/50 hover:scale-[1.01] transition-all duration-500 group">
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out scale-100 group-hover:scale-105 opacity-50"
                 style={{ backgroundImage: `url('/madeinbrasel.jpg')` }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-emerald-950/40 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-amber-950/20 z-10" />
 
               <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between flex-1">
                 <div>
-                  <span className="inline-block mb-4 rounded-full bg-emerald-500 text-black font-black px-4 py-1 text-[10px] uppercase tracking-wider shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+                  <span className="inline-block mb-4 rounded-full bg-amber-500 text-black font-black px-4 py-1 text-[10px] uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.4)]">
                     MAIN HEADLINER CURATION
                   </span>
 
                   <h3 className="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                    MADE IN <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-yellow-400">BRASIL</span> 🇧🇷
+                    MADE IN <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">BRASIL</span> 🇧🇷
                   </h3>
                   
                   <div className="mt-5 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] text-base">
                     <div className="flex items-center gap-3">
-                      <Calendar className="h-5 w-5 text-emerald-400 shrink-0" />
+                      <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
                       <span>6th June | Saturday • 8:30 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-3">
-                      <MapPin className="h-5 w-5 text-emerald-400 shrink-0" />
+                      <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
                       <span>Kitty Ko, Lalit Ashok</span>
                     </div>
                   </div>
 
                   <div className="mt-8 flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-semibold backdrop-blur-sm shadow-md">
+                    <span className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 font-semibold backdrop-blur-sm shadow-md">
                       Girls: FREE ALL NIGHT
                     </span>
-                    <span className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 font-semibold backdrop-blur-sm shadow-md">
+                    <span className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 font-semibold backdrop-blur-sm shadow-md">
                       Couples: FREE TILL 9:00 PM
                     </span>
                   </div>
@@ -317,7 +317,7 @@ export default function TrapEntertainmentWebsite() {
                 <button 
                   type="button"
                   onClick={() => handleOpenBooking("MADE IN BRASIL 🇧🇷")}
-                  className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-500 to-yellow-500 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(16,185,129,0.4)] text-sm uppercase tracking-wider shadow-lg"
+                  className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(245,158,11,0.4)] text-sm uppercase tracking-wider shadow-lg"
                 >
                   Access Brasil Guestlist
                 </button>
@@ -331,19 +331,19 @@ export default function TrapEntertainmentWebsite() {
       {/* About Section */}
       <section id="about"
         ref={aboutReveal.elementRef}
-        className={`mx-auto max-w-6xl px-6 py-24 border-t border-emerald-500/5 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
+        className={`mx-auto max-w-6xl px-6 py-24 border-t border-amber-500/5 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
           aboutReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
           <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-emerald-500 font-bold">About Us</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">About Us</p>
             <h2 className="text-3xl font-bold md:text-5xl tracking-tight leading-tight text-neutral-100">
               We Design Architecture,
-              <span className="block text-emerald-400 mt-1 font-light">Not Just Bashes.</span>
+              <span className="block text-amber-400 mt-1 font-light">Not Just Bashes.</span>
             </h2>
           </div>
-          <div className="border-t md:border-t-0 md:border-l border-emerald-500/20 pt-6 md:pt-0 pl-0 md:pl-8">
+          <div className="border-t md:border-t-0 md:border-l border-amber-500/20 pt-6 md:pt-0 pl-0 md:pl-8">
             <p className="text-base md:text-lg leading-7 md:leading-8 text-neutral-400 font-light">
               Trap Entertainment is a premium lifestyle collective built exclusively for the modern nightlife enthusiast. We curate global setups, ultra-exclusive signature properties, and high-tier club layouts.
             </p>
@@ -352,7 +352,7 @@ export default function TrapEntertainmentWebsite() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="bg-gradient-to-b from-neutral-950 to-neutral-900/50 px-6 py-24 border-y border-emerald-500/5 overflow-hidden">
+      <section id="services" className="bg-gradient-to-b from-neutral-950 to-neutral-900/50 px-6 py-24 border-y border-amber-500/5 overflow-hidden">
         <div className="mx-auto max-w-6xl">
           <div 
             ref={serviceHeaderReveal.elementRef}
@@ -360,24 +360,24 @@ export default function TrapEntertainmentWebsite() {
               serviceHeaderReveal.isRevealed ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"
             }`}
           >
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-emerald-400 font-bold">What We Do</p>
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">What We Do</p>
             <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">Curated Event Standards</h2>
           </div>
 
           <div ref={servicesGridReveal.elementRef} className="grid gap-6 md:grid-cols-3">
             {[
               {
-                icon: <PartyPopper className="h-6 w-6 text-emerald-400 shrink-0" />,
+                icon: <PartyPopper className="h-6 w-6 text-amber-400 shrink-0" />,
                 title: 'Club Parties',
                 desc: 'A-grade luxury nightlife modules matching exceptional production standards with exclusive partner clubs.',
               },
               {
-                icon: <Users className="h-6 w-6 text-emerald-400 shrink-0" />,
+                icon: <Users className="h-6 w-6 text-amber-400 shrink-0" />,
                 title: 'Signature Curations',
                 desc: 'High-concept premium social properties built strictly around elite lounge and night-club architectures.',
               },
               {
-                icon: <Music className="h-6 w-6 text-emerald-400 shrink-0" />,
+                icon: <Music className="h-6 w-6 text-amber-400 shrink-0" />,
                 title: 'Artist Rosters',
                 desc: 'Bespoke independent lineup design, global production touring blueprints, and strategic booking operations.',
               },
@@ -386,9 +386,9 @@ export default function TrapEntertainmentWebsite() {
                 key={item.title}
                 className={`group rounded-3xl border border-neutral-800 bg-neutral-950/50 p-6 md:p-8 shadow-2xl backdrop-blur transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] transform will-change-transform ${
                   servicesGridReveal.isRevealed ? "opacity-100 translate-x-0 scale-100" : index % 2 === 0 ? "opacity-0 -translate-x-6 scale-[0.96]" : "opacity-0 translate-x-6 scale-[0.96]"
-                } hover:border-emerald-500/35 hover:-translate-y-2`}
+                } hover:border-amber-500/35 hover:-translate-y-2`}
               >
-                <div className="mb-5 inline-block rounded-2xl bg-emerald-950/30 p-4 border border-emerald-500/10 group-hover:bg-emerald-900/20 group-hover:border-emerald-500/30 transition-all duration-300">
+                <div className="mb-5 inline-block rounded-2xl bg-amber-950/30 p-4 border border-amber-500/10 group-hover:bg-amber-900/20 group-hover:border-amber-500/30 transition-all duration-300">
                   {item.icon}
                 </div>
                 <h3 className="mb-3 text-xl md:text-2xl font-bold tracking-tight text-neutral-200">{item.title}</h3>
@@ -400,9 +400,9 @@ export default function TrapEntertainmentWebsite() {
       </section>
 
       {/* Contact Section */}
-      <section className="bg-neutral-950 border-t border-emerald-500/10 relative overflow-hidden px-6 py-24 text-center">
+      <section className="bg-neutral-950 border-t border-amber-500/10 relative overflow-hidden px-6 py-24 text-center">
         <div className="relative z-10 mx-auto max-w-3xl">
-          <h2 className="text-3xl font-black md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-yellow-400 to-emerald-500">
+          <h2 className="text-3xl font-black md:text-6xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500">
             Ready To Party?
           </h2> 
           <p className="mt-4 md:mt-6 text-base md:text-xl text-neutral-400 max-w-xl mx-auto font-light">
@@ -412,7 +412,7 @@ export default function TrapEntertainmentWebsite() {
             <button 
               type="button"
               onClick={() => setActiveModal('contact')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg"
             >
               <Mail className="h-5 w-5 shrink-0" /> Contact Us
             </button>
@@ -433,7 +433,7 @@ export default function TrapEntertainmentWebsite() {
             <button 
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-emerald-400 transition-colors p-2 z-30 bg-black/40 rounded-full"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-30 bg-black/40 rounded-full"
             >
               <X className="h-5 w-5 shrink-0" />
             </button>
@@ -445,7 +445,7 @@ export default function TrapEntertainmentWebsite() {
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-black/40 z-10" />
                   
                   <div className="relative z-20">
-                    <span className="text-[10px] font-black uppercase tracking-widest bg-black border px-2 py-0.5 rounded-md text-emerald-400 border-emerald-500/30">
+                    <span className="text-[10px] font-black uppercase tracking-widest bg-black border px-2 py-0.5 rounded-md text-amber-400 border-amber-500/30">
                       Official Entry Gate
                     </span>
                     <h3 className="text-2xl font-black text-white mt-1.5 tracking-tight">{selectedEvent}</h3>
@@ -461,52 +461,52 @@ export default function TrapEntertainmentWebsite() {
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('couple')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-emerald-500/40 hover:bg-neutral-900/60 border-neutral-800"
+                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
                       >
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-emerald-400">
+                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
                             Couple Entry Ticket Bracket
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
-                            <span className="block">• Entry Before 9:00 PM: <strong className="text-emerald-400">FREE GUESTLIST</strong></span>
+                            <span className="block">• Entry Before 9:00 PM: <strong className="text-amber-400">FREE GUESTLIST</strong></span>
                             <span className="block">• Entry Post 9:00 PM: <strong>1,500</strong> Cover Charge Enforced</span>
                           </span>
                         </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-emerald-400" />
+                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
                       </button>
 
                       {/* Ladies Entry Selector */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('girl')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-emerald-500/40 hover:bg-neutral-900/60 border-neutral-800"
+                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
                       >
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-emerald-400">
+                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
                             Girls Entry Ticket Bracket
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
-                            <span className="block">• Entry Bracket Validation: <strong className="text-emerald-400">FREE ALL NIGHT</strong></span>
+                            <span className="block">• Entry Bracket Validation: <strong className="text-amber-400">FREE ALL NIGHT</strong></span>
                           </span>
                         </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-emerald-400" />
+                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
                       </button>
 
                       {/* Male Stag Selector */}
                       <button 
                         type="button"
                         onClick={() => handleSelectTier('stag-male')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-emerald-500/40 hover:bg-neutral-900/60 border-neutral-800"
+                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
                       >
                         <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-emerald-400">
+                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
                             Male Stag Ticket Bracket 
                           </span>
                           <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
                             <span className="block">• General Door Cover Parameter: <strong>2,000</strong> Cover Charge</span>
                           </span>
                         </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-emerald-400" />
+                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
                       </button>
 
                     </div>
@@ -515,7 +515,7 @@ export default function TrapEntertainmentWebsite() {
                       <button 
                         type="button"
                         onClick={() => setGuestlistStep('tier-select')}
-                        className="text-xs font-bold mb-4 flex items-center gap-1 transition-colors text-emerald-500 hover:text-emerald-400"
+                        className="text-xs font-bold mb-4 flex items-center gap-1 transition-colors text-amber-500 hover:text-amber-400"
                       >
                         ← Back to Entry Categories
                       </button>
@@ -540,7 +540,7 @@ export default function TrapEntertainmentWebsite() {
                           <div className="space-y-4">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                               <div>
-                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-emerald-400">
+                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
                                   Male Full Name
                                 </label>
                                 <input
@@ -548,11 +548,11 @@ export default function TrapEntertainmentWebsite() {
                                   name="male_full_name"
                                   required
                                   placeholder="Legal First & Last Name"
-                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-emerald-500/30 focus:border-emerald-500"
+                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
                                 />
                               </div>
                               <div>
-                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-emerald-400">
+                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
                                   Female Full Name
                                 </label>
                                 <input
@@ -560,7 +560,7 @@ export default function TrapEntertainmentWebsite() {
                                   name="female_full_name"
                                   required
                                   placeholder="Legal First & Last Name"
-                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-emerald-500/30 focus:border-emerald-500"
+                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
                                 />
                               </div>
                             </div>
@@ -605,7 +605,7 @@ export default function TrapEntertainmentWebsite() {
                         {selectedTier === 'girl' && (
                           <div className="space-y-4">
                             <div>
-                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-emerald-400">
+                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
                                 Lead Guest Full Name
                               </label>
                               <input
@@ -613,7 +613,7 @@ export default function TrapEntertainmentWebsite() {
                                 name="ladies_primary_name"
                                 required
                                 placeholder="Legal First & Last Name"
-                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-emerald-500/30 focus:border-emerald-500"
+                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
                               />
                             </div>
                             
@@ -660,7 +660,7 @@ export default function TrapEntertainmentWebsite() {
                         {selectedTier === 'stag-male' && (
                           <div className="space-y-4">
                             <div>
-                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-emerald-400">
+                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
                                 Stag Full Name
                               </label>
                               <input
@@ -668,7 +668,7 @@ export default function TrapEntertainmentWebsite() {
                                 name="stag_primary_name"
                                 required
                                 placeholder="Legal First & Last Name"
-                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-emerald-500/30 focus:border-emerald-500"
+                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
                               />
                             </div>
                             
@@ -695,8 +695,8 @@ export default function TrapEntertainmentWebsite() {
                               </div>
                             </div>
 
-                            <div className="border p-3.5 rounded-xl flex items-start gap-2.5 bg-emerald-950/40 border-emerald-500/20">
-                              <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-emerald-400" />
+                            <div className="border p-3.5 rounded-xl flex items-start gap-2.5 bg-amber-950/40 border-amber-500/20">
+                              <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-amber-400" />
                               <p className="text-[11px] text-neutral-400 leading-normal">
                                 <span>Stag passes for this event require a flat 2,000 cover charge parameter at the entry gates of Kitty Ko.</span>
                               </p>
@@ -711,7 +711,7 @@ export default function TrapEntertainmentWebsite() {
                           </p>
                           <button 
                             type="submit"
-                            className="w-full py-4 rounded-xl font-black text-black uppercase tracking-widest text-sm transition-all duration-300 transform active:scale-95 shadow-lg bg-gradient-to-r from-emerald-500 to-yellow-400 hover:shadow-[0_0_30px_rgba(16,185,129,0.4)]"
+                            className="w-full py-4 rounded-xl font-black text-black uppercase tracking-widest text-sm transition-all duration-300 transform active:scale-95 shadow-lg bg-gradient-to-r from-amber-500 to-yellow-400 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
                           >
                             Complete Request Allocation
                           </button>
@@ -733,17 +733,17 @@ export default function TrapEntertainmentWebsite() {
                   <input type="hidden" name="Context" value="General Business Inquiry" />
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
-                    <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-emerald-400/50" />
+                    <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Email Protocol</label>
-                    <input type="email" name="email" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-emerald-400/50" />
+                    <input type="email" name="email" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Brief Message</label>
-                    <textarea name="message" rows={4} required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-emerald-400/50 resize-none"></textarea>
+                    <textarea name="message" rows={4} required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
                   </div>
-                  <button type="submit" className="w-full py-3.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
+                  <button type="submit" className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
                     Dispatch Briefing
                   </button>
                 </form>
