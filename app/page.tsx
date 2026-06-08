@@ -3,16 +3,12 @@
 import { useEffect, useState, useRef } from "react";
 import React from 'react';
 import { 
-  Ticket, 
   PartyPopper, 
   Music, 
-  Calendar, 
-  MapPin, 
   Users, 
   Mail, 
   X,
-  ChevronRight,
-  ShieldCheck
+  Sparkles
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -55,10 +51,6 @@ export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
-  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
-  
-  const [guestlistStep, setGuestlistStep] = useState<'tier-select' | 'form'>('tier-select');
-  const [selectedTier, setSelectedTier] = useState<'girl' | 'couple' | 'stag-male' | null>(null);
 
   // Refs for zero-lag cursor management
   const dotRef = useRef<HTMLDivElement>(null);
@@ -140,18 +132,6 @@ export default function TrapEntertainmentWebsite() {
   const aboutReveal = useScrollReveal();
   const serviceHeaderReveal = useScrollReveal();
   const servicesGridReveal = useScrollReveal();
-
-  const handleOpenBooking = (eventTitle: string) => {
-    setSelectedEvent(eventTitle);
-    setGuestlistStep('tier-select');
-    setSelectedTier(null);
-    setActiveModal('book');
-  };
-
-  const handleSelectTier = (tier: 'girl' | 'couple' | 'stag-male') => {
-    setSelectedTier(tier);
-    setGuestlistStep('form');
-  };
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -244,14 +224,13 @@ export default function TrapEntertainmentWebsite() {
               }}
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
-              <Ticket className="h-5 w-5 shrink-0 transition-transform duration-500 group-hover:rotate-12" />
-              Explore Showcases
+              Check Future Showcases
             </a>
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
+      {/* Upcoming Events Section (CLEARED / PENDING STATE) */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -263,7 +242,7 @@ export default function TrapEntertainmentWebsite() {
             Showcase Schedule
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
-            Secure Immediate Entry
+            Current Lineup
           </h2>
         </div>
 
@@ -275,52 +254,31 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
             
-            {/* MADE IN BRASIL - WITH PREMIUM AMBER COLOR ACCENTS */}
-            <div className="relative flex flex-col justify-between rounded-3xl border border-neutral-800 bg-neutral-950 min-h-[500px] w-full overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.95)] hover:border-amber-500/50 hover:scale-[1.01] transition-all duration-500 group">
-              <div 
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out scale-100 group-hover:scale-105 opacity-50"
-                style={{ backgroundImage: `url('/madeinbrasel.jpg')` }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-amber-950/20 z-10" />
+            {/* SLEEK PENDING PLACEHOLDER CARD */}
+            <div className="relative flex flex-col items-center justify-center rounded-3xl border border-neutral-900 bg-neutral-950/40 p-10 md:p-16 min-h-[380px] w-full overflow-hidden text-center backdrop-blur-md shadow-[inset_0_0_30px_rgba(245,158,11,0.03)] border-dashed border-neutral-800/80">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-44 w-44 rounded-full bg-amber-500/5 blur-3xl animate-pulse" />
+              
+              <div className="mb-6 p-4 rounded-2xl bg-neutral-900/50 border border-neutral-800 text-amber-400 animate-bounce" style={{ animationDuration: '3s' }}>
+                <Sparkles className="h-8 w-8" />
+              </div>
 
-              <div className="relative z-20 p-6 md:p-8 flex flex-col h-full justify-between flex-1">
-                <div>
-                  <span className="inline-block mb-4 rounded-full bg-amber-500 text-black font-black px-4 py-1 text-[10px] uppercase tracking-wider shadow-[0_0_15px_rgba(245,158,11,0.4)]">
-                    MAIN HEADLINER CURATION
-                  </span>
+              <h3 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-100 uppercase">
+                More Events On The Way
+              </h3>
+              
+              <p className="mt-4 text-sm md:text-base text-neutral-400 font-light max-w-md mx-auto leading-relaxed">
+                Our latest showcases have completely concluded. We are currently architecting the next high-concept, premium modules for Bangalore's elite crowd.
+              </p>
 
-                  <h3 className="text-3xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-                    MADE IN <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-400">BRASIL</span> 🇧🇷
-                  </h3>
-                  
-                  <div className="mt-5 space-y-3 text-neutral-200 font-medium drop-shadow-[0_2px_5px_rgba(0,0,0,0.9)] text-base">
-                    <div className="flex items-center gap-3">
-                      <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
-                      <span>6th June | Saturday • 8:30 PM Onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
-                      <span>Kitty Ko, Lalit Ashok</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-8 flex flex-wrap gap-2.5">
-                    <span className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 font-semibold backdrop-blur-sm shadow-md">
-                      Girls: FREE ALL NIGHT
-                    </span>
-                    <span className="px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 font-semibold backdrop-blur-sm shadow-md">
-                      Couples: FREE TILL 9:00 PM
-                    </span>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => handleOpenBooking("MADE IN BRASIL 🇧🇷")}
-                  className="mt-10 w-full inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-6 py-4 font-black text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_35px_rgba(245,158,11,0.4)] text-sm uppercase tracking-wider shadow-lg"
+              <div className="mt-8">
+                <a 
+                  href="https://www.instagram.com/trap.entz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs font-bold uppercase tracking-wider text-amber-400 hover:border-amber-400/30 transition-all duration-300"
                 >
-                  Access Brasil Guestlist
-                </button>
+                  <span>Follow for Intel Drop</span>
+                </a>
               </div>
             </div>
 
@@ -437,292 +395,6 @@ export default function TrapEntertainmentWebsite() {
             >
               <X className="h-5 w-5 shrink-0" />
             </button>
-
-            {activeModal === 'book' && (
-              <div className="flex flex-col">
-                <div className="relative h-44 md:h-52 overflow-hidden flex flex-col justify-end p-6 z-10">
-                  <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/madeinbrasel.jpg')" }} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/80 to-black/40 z-10" />
-                  
-                  <div className="relative z-20">
-                    <span className="text-[10px] font-black uppercase tracking-widest bg-black border px-2 py-0.5 rounded-md text-amber-400 border-amber-500/30">
-                      Official Entry Gate
-                    </span>
-                    <h3 className="text-2xl font-black text-white mt-1.5 tracking-tight">{selectedEvent}</h3>
-                    <p className="text-xs text-neutral-300 font-light mt-0.5">Select your entry bracket category to sync registration fields</p>
-                  </div>
-                </div>
-
-                <div className="p-6 md:p-8 bg-neutral-950">
-                  {guestlistStep === 'tier-select' ? (
-                    <div className="space-y-3">
-                      
-                      {/* Couple Entry Selector */}
-                      <button 
-                        type="button"
-                        onClick={() => handleSelectTier('couple')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
-                            Couple Entry Ticket Bracket
-                          </span>
-                          <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
-                            <span className="block">• Entry Before 9:00 PM: <strong className="text-amber-400">FREE GUESTLIST</strong></span>
-                            <span className="block">• Entry Post 9:00 PM: <strong>1,500</strong> Cover Charge Enforced</span>
-                          </span>
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
-                      </button>
-
-                      {/* Ladies Entry Selector */}
-                      <button 
-                        type="button"
-                        onClick={() => handleSelectTier('girl')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
-                            Girls Entry Ticket Bracket
-                          </span>
-                          <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
-                            <span className="block">• Entry Bracket Validation: <strong className="text-amber-400">FREE ALL NIGHT</strong></span>
-                          </span>
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
-                      </button>
-
-                      {/* Male Stag Selector */}
-                      <button 
-                        type="button"
-                        onClick={() => handleSelectTier('stag-male')}
-                        className="w-full flex items-center justify-between p-4 rounded-2xl border bg-neutral-900/30 transition-all text-left group hover:border-amber-500/40 hover:bg-neutral-900/60 border-neutral-800"
-                      >
-                        <div className="flex flex-col">
-                          <span className="text-base font-bold text-neutral-100 transition-colors flex items-center gap-1.5 group-hover:text-amber-400">
-                            Male Stag Ticket Bracket 
-                          </span>
-                          <span className="text-xs text-neutral-400 font-light mt-1 space-y-0.5 block">
-                            <span className="block">• General Door Cover Parameter: <strong>2,000</strong> Cover Charge</span>
-                          </span>
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-neutral-600 group-hover:translate-x-0.5 transition-all group-hover:text-amber-400" />
-                      </button>
-
-                    </div>
-                  ) : (
-                    <div>
-                      <button 
-                        type="button"
-                        onClick={() => setGuestlistStep('tier-select')}
-                        className="text-xs font-bold mb-4 flex items-center gap-1 transition-colors text-amber-500 hover:text-amber-400"
-                      >
-                        ← Back to Entry Categories
-                      </button>
-
-                      <form 
-                        action="https://formspree.io/f/xaqzwvae"
-                        method="POST"
-                        className="space-y-4"
-                      >
-                        <input type="hidden" name="Event Title" value={selectedEvent || "SHOWCASE"} />
-                        <input 
-                          type="hidden" 
-                          name="Selected Ticket Bracket" 
-                          value={
-                            selectedTier === 'couple' ? 'Couple Entry Bracket' : 
-                            selectedTier === 'girl' ? 'Ladies Entry Bracket' : 'Male Stag Bracket'
-                          } 
-                        />
-
-                        {/* Form Fields: Couple Branch */}
-                        {selectedTier === 'couple' && (
-                          <div className="space-y-4">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
-                                  Male Full Name
-                                </label>
-                                <input
-                                  type="text"
-                                  name="male_full_name"
-                                  required
-                                  placeholder="Legal First & Last Name"
-                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
-                                  Female Full Name
-                                </label>
-                                <input
-                                  type="text"
-                                  name="female_full_name"
-                                  required
-                                  placeholder="Legal First & Last Name"
-                                  className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Male Insta Handle</label>
-                                <input
-                                  type="text"
-                                  name="male_instagram_handle"
-                                  required
-                                  placeholder="@username"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Female Insta Handle</label>
-                                <input
-                                  type="text"
-                                  name="female_instagram_handle"
-                                  required
-                                  placeholder="@username"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                />
-                              </div>
-                            </div>
-                            
-                            <div>
-                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Contact Phone Number</label>
-                              <input
-                                type="tel"
-                                name="contact_phone"
-                                required
-                                placeholder="Enter 10-digit mobile number"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                              />
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Form Fields: Ladies Branch */}
-                        {selectedTier === 'girl' && (
-                          <div className="space-y-4">
-                            <div>
-                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
-                                Lead Guest Full Name
-                              </label>
-                              <input
-                                type="text"
-                                name="ladies_primary_name"
-                                required
-                                placeholder="Legal First & Last Name"
-                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
-                              />
-                            </div>
-                            
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Instagram Handle</label>
-                                <input
-                                  type="text"
-                                  name="lady_insta_handle"
-                                  required
-                                  placeholder="@username"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Total Girls Attending</label>
-                                <select 
-                                  name="total_ladies_count"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                >
-                                  <option value="1">Just Me (1)</option>
-                                  <option value="2">2 Ladies</option>
-                                  <option value="3">3 Ladies</option>
-                                  <option value="4">4 Ladies</option>
-                                  <option value="5">5+ Ladies Group</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div>
-                              <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Contact Phone Number</label>
-                              <input
-                                type="tel"
-                                name="contact_phone"
-                                required
-                                placeholder="Enter 10-digit mobile number"
-                                className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                              />
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Form Fields: Stag Branch */}
-                        {selectedTier === 'stag-male' && (
-                          <div className="space-y-4">
-                            <div>
-                              <label className="mb-1 block text-xs font-bold uppercase tracking-wider text-amber-400">
-                                Stag Full Name
-                              </label>
-                              <input
-                                type="text"
-                                name="stag_primary_name"
-                                required
-                                placeholder="Legal First & Last Name"
-                                className="w-full rounded-xl border bg-neutral-900 px-4 py-2.5 text-white outline-none text-sm transition-colors border-amber-500/30 focus:border-amber-500"
-                              />
-                            </div>
-                            
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Instagram Handle</label>
-                                <input
-                                  type="text"
-                                  name="stag_insta_handle"
-                                  required
-                                  placeholder="@username"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                />
-                              </div>
-                              <div>
-                                <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase tracking-wider">Contact Phone</label>
-                                <input
-                                  type="tel"
-                                  name="contact_phone"
-                                  required
-                                  placeholder="Mobile Number"
-                                  className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white outline-none focus:border-neutral-500 text-sm"
-                                />
-                              </div>
-                            </div>
-
-                            <div className="border p-3.5 rounded-xl flex items-start gap-2.5 bg-amber-950/40 border-amber-500/20">
-                              <ShieldCheck className="h-4 w-4 shrink-0 mt-0.5 text-amber-400" />
-                              <p className="text-[11px] text-neutral-400 leading-normal">
-                                <span>Stag passes for this event require a flat 2,000 cover charge parameter at the entry gates of Kitty Ko.</span>
-                              </p>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Submission Framework Footer */}
-                        <div className="pt-2">
-                          <p className="text-[10px] text-neutral-500 leading-relaxed mb-4">
-                            ⚠️ Entry policy validation dictates club dress code rules: strictly formal, chic, or fashionable attire. Open footwear/slippers for men will result in categorical rejection at gates.
-                          </p>
-                          <button 
-                            type="submit"
-                            className="w-full py-4 rounded-xl font-black text-black uppercase tracking-widest text-sm transition-all duration-300 transform active:scale-95 shadow-lg bg-gradient-to-r from-amber-500 to-yellow-400 hover:shadow-[0_0_30px_rgba(245,158,11,0.4)]"
-                          >
-                            Complete Request Allocation
-                          </button>
-                        </div>
-
-                      </form>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
 
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
