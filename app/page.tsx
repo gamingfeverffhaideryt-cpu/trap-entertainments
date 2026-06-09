@@ -69,7 +69,7 @@ export default function TrapEntertainmentWebsite() {
       videoRef.current.muted = true;
       videoRef.current.playsInline = true;
       videoRef.current.play().catch((err) => {
-        console.log("Browser blocked initial autoplay, retrying background thread...", err);
+        console.log("Autoplay paused or restricted by device energy settings.", err);
       });
     }
 
@@ -153,6 +153,17 @@ export default function TrapEntertainmentWebsite() {
     }, 450); 
   };
 
+  // Helper toggle to allow manual tap-to-play playback on low power devices
+  const handleVideoTap = () => {
+    if (videoRef.current) {
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch(err => console.log(err));
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  };
+
   return (
     <div className={`min-h-screen bg-neutral-950 text-white font-sans selection:bg-amber-500 selection:text-black transition-opacity duration-1000 ease-out select-none md:cursor-none ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ scrollBehavior: 'smooth' }}>
       
@@ -229,8 +240,9 @@ export default function TrapEntertainmentWebsite() {
             className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.5)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.7)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
           />
           
+          {/* FIXED APOSTROPHE BUG: Safe JSX String encapsulation to eliminate the blue question mark box */}
           <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto drop-shadow-lg">
-            Elevating Bangalore's nightlife through
+            Elevating {"Bangalore's"} nightlife through
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
               niche, ultra-premium party experiences
             </span>
@@ -277,8 +289,11 @@ export default function TrapEntertainmentWebsite() {
             
             <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:border-amber-500/30 overflow-hidden w-full backdrop-blur-sm hover:-translate-y-1">
               
-              {/* Media Container: hotsins.mp4 Video */}
-              <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black">
+              {/* Media Container: Added manual video tap listener to override hard device Low Power Mode blocks */}
+              <div 
+                onClick={handleVideoTap}
+                className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black cursor-pointer clickable-target"
+              >
                 <video 
                   ref={videoRef}
                   src="/hotsins.mp4" 
@@ -293,6 +308,11 @@ export default function TrapEntertainmentWebsite() {
                 <div className="absolute top-4 left-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 text-center shadow-xl">
                   <p className="text-xs font-bold uppercase text-amber-400">June</p>
                   <p className="text-xl font-black text-white">12</p>
+                </div>
+
+                {/* Sub-label informing low power users they can manually activate playback */}
+                <div className="absolute bottom-3 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-2 py-1 text-[10px] text-neutral-400 pointer-events-none md:hidden">
+                  Tap video to Play / Pause
                 </div>
               </div>
 
@@ -459,7 +479,7 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
-            {/* Event Registration Dropdown Module */}
+            {/* Event Registration Module */}
             {activeModal === 'register' && (
               <div className="p-6 md:p-8">
                 <div className="mb-6 border-b border-neutral-800 pb-4">
@@ -470,7 +490,7 @@ export default function TrapEntertainmentWebsite() {
                 <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-5">
                   <input type="hidden" name="Event" value="Hot Sins at Cavore - June 12" />
                   
-                  {/* Entry Type Selection ordered explicitly as requested */}
+                  {/* Category dropdown cleanly ordered exactly as specified */}
                   <div>
                     <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Select Entry Type</label>
                     <div className="relative">
@@ -481,7 +501,7 @@ export default function TrapEntertainmentWebsite() {
                         className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50"
                       >
                         <option value="" disabled className="text-neutral-500">Choose entry category...</option>
-                        <option value="1. Stag Entry (₹6,000 Cover Post 9:30 PM)">1. Male Stag Entry (₹6,000 Cover post 9:30 PM)</option>
+                        <option value="1. Male Stag Entry (₹6,000 Cover Post 9:30 PM)">1. Male Stag Entry (₹6,000 Cover post 9:30 PM)</option>
                         <option value="2. Couple Entry (FREE until 9:30 PM / ₹4,500 Cover post)">2. Couple Entry (FREE until 9:30 PM)</option>
                         <option value="3. Girls Entry (FREE until 9:30 PM / ₹2,000 Cover post)">3. Girls Entry (FREE until 9:30 PM)</option>
                       </select>
