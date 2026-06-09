@@ -8,7 +8,10 @@ import {
   Users, 
   Mail, 
   X,
-  Sparkles
+  Calendar,
+  MapPin,
+  Clock,
+  Ticket
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -184,10 +187,20 @@ export default function TrapEntertainmentWebsite() {
         </a>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section (Poster Background) */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-950/15 via-neutral-950 to-neutral-950" />
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        {/* The Digital Billboard Poster */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/hotsinspic.png" 
+            alt="Hot Sins Poster Banner" 
+            className="h-full w-full object-cover opacity-50 scale-105 animate-[pulse_10s_ease-in-out_infinite]"
+          />
+          {/* Gradient overlays to ensure text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/40 to-neutral-950" />
+        </div>
+
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/10 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
 
         <div 
           className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -197,18 +210,18 @@ export default function TrapEntertainmentWebsite() {
             filter: `blur(${heroBlur}px)`
           }}
         >
-          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-400 font-bold">
-            Trap Entertainment
+          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-400 font-bold drop-shadow-md">
+            Trap Entertainment Presents
           </p>
           
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
             onClick={handleLogoClick}
-            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.35)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.55)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
+            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.5)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.7)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
           />
           
-          <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto drop-shadow-lg">
             Elevating Bangalore's nightlife through
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
               niche, ultra-premium party experiences
@@ -224,13 +237,13 @@ export default function TrapEntertainmentWebsite() {
               }}
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
-              Check Future Showcases
+              Get On The Guestlist
             </a>
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events Section (CLEARED / PENDING STATE) */}
+      {/* Upcoming Events Section (Video Card) */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -239,10 +252,10 @@ export default function TrapEntertainmentWebsite() {
           }`}
         >
           <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold">
-            Showcase Schedule
+            Next Showcase
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100">
-            Current Lineup
+            Hot Sins at Cavore
           </h2>
         </div>
 
@@ -254,31 +267,74 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
             
-            {/* SLEEK PENDING PLACEHOLDER CARD */}
-            <div className="relative flex flex-col items-center justify-center rounded-3xl border border-neutral-900 bg-neutral-950/40 p-10 md:p-16 min-h-[380px] w-full overflow-hidden text-center backdrop-blur-md shadow-[inset_0_0_30px_rgba(245,158,11,0.03)] border-dashed border-neutral-800/80">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-44 w-44 rounded-full bg-amber-500/5 blur-3xl animate-pulse" />
+            {/* The Event Card */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:border-amber-500/30 overflow-hidden w-full backdrop-blur-sm hover:-translate-y-1">
               
-              <div className="mb-6 p-4 rounded-2xl bg-neutral-900/50 border border-neutral-800 text-amber-400 animate-bounce" style={{ animationDuration: '3s' }}>
-                <Sparkles className="h-8 w-8" />
+              {/* Media Section: The Video */}
+              <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black">
+                <video 
+                  src="/hotsins.mp4" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="h-full w-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-90" />
+                
+                {/* Floating Date Badge */}
+                <div className="absolute top-4 left-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 text-center shadow-xl">
+                  <p className="text-xs font-bold uppercase text-amber-400">June</p>
+                  <p className="text-xl font-black text-white">12</p>
+                </div>
               </div>
 
-              <h3 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-100 uppercase">
-                More Events On The Way
-              </h3>
-              
-              <p className="mt-4 text-sm md:text-base text-neutral-400 font-light max-w-md mx-auto leading-relaxed">
-                Our latest showcases have completely concluded. We are currently architecting the next high-concept, premium modules for Bangalore's elite crowd.
-              </p>
+              {/* Event Info Section */}
+              <div className="relative z-10 flex flex-col p-6 sm:p-8">
+                <h3 className="mb-4 text-3xl font-black uppercase tracking-tight text-neutral-100">Hot Sins</h3>
+                
+                <div className="mb-6 grid gap-3 text-sm text-neutral-300">
+                  <div className="flex items-center gap-3">
+                    <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
+                    <span>Friday, 12th June 2026</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
+                    <span><strong>Cavore</strong>, Bangalore</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock className="h-5 w-5 text-amber-400 shrink-0" />
+                    <span>Guestlist strictly open until 9:30 PM</span>
+                  </div>
+                </div>
 
-              <div className="mt-8">
-                <a 
-                  href="https://www.instagram.com/trap.entz" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs font-bold uppercase tracking-wider text-amber-400 hover:border-amber-400/30 transition-all duration-300"
+                {/* Cover Charge Box */}
+                <div className="mb-8 rounded-2xl bg-neutral-950/60 border border-neutral-800 p-4 sm:p-5">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Ticket className="h-4 w-4 text-amber-400" />
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-amber-400">Entry Details</h4>
+                  </div>
+                  
+                  <p className="text-sm font-semibold text-white mb-2 pb-2 border-b border-white/5">
+                    Girls & Couples <span className="text-green-400">FREE ENTRY</span> until 9:30 PM
+                  </p>
+                  
+                  <div className="text-xs text-neutral-400 space-y-1.5 mt-3">
+                    <p className="font-semibold text-neutral-300 uppercase mb-1">General Entry Cover Charges (Post 9:30 PM):</p>
+                    <p>• Couples - <span className="text-white">4.5k</span></p>
+                    <p>• Male Stags - <span className="text-white">6k</span></p>
+                    <p>• Female Stags - <span className="text-white">2k</span></p>
+                    <p className="italic text-neutral-500 mt-2 text-[10px]">* Above cover charges may vary post 10:00 PM.</p>
+                  </div>
+                </div>
+
+                <button 
+                  type="button"
+                  onClick={() => setActiveModal('register')}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 px-6 py-4 text-sm font-bold uppercase tracking-wider text-black transition-all hover:bg-amber-300 active:scale-[0.98] shadow-[0_0_20px_rgba(245,158,11,0.2)]"
                 >
-                  <span>Follow for Intel Drop</span>
-                </a>
+                  Join The Guestlist
+                </button>
               </div>
             </div>
 
@@ -386,7 +442,7 @@ export default function TrapEntertainmentWebsite() {
       {/* Modal Systems */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
-          <div className="relative w-full max-w-xl rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
+          <div className="relative w-full max-w-md rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
             
             <button 
               type="button"
@@ -396,6 +452,66 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
+            {/* Event Registration Modal */}
+            {activeModal === 'register' && (
+              <div className="p-6 md:p-8">
+                <div className="mb-6 border-b border-neutral-800 pb-4">
+                  <h3 className="text-2xl font-black text-neutral-100 uppercase tracking-tight">Guestlist Registry</h3>
+                  <p className="text-sm text-neutral-400 mt-1">Hot Sins @ Cavore • June 12th</p>
+                </div>
+                
+                {/* NEW FORMSPREE LINK */}
+                <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-5">
+                  <input type="hidden" name="Event" value="Hot Sins at Cavore - June 12" />
+                  
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Full Legal Name</label>
+                    <input 
+                      type="text" 
+                      name="name" 
+                      required 
+                      placeholder="As per Government ID"
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50" 
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Where did you hear about us?</label>
+                    <div className="relative">
+                      <select 
+                        name="source" 
+                        required 
+                        defaultValue=""
+                        className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50"
+                      >
+                        <option value="" disabled className="text-neutral-500">Select an option...</option>
+                        <option value="Instagram">Instagram</option>
+                        <option value="Friend suggested">Friend suggested</option>
+                        <option value="Promoters">Promoters</option>
+                        <option value="Others">Others</option>
+                      </select>
+                      {/* Custom dropdown arrow */}
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <button type="submit" className="w-full py-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+                      Confirm Guestlist
+                    </button>
+                    <p className="mt-3 text-center text-[10px] text-neutral-500">
+                      By submitting, you agree to the club's entry rules. Management reserves the right of admission.
+                    </p>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* General Contact Modal (Kept intact from original) */}
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
                 <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
