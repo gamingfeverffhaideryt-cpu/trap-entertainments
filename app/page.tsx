@@ -55,7 +55,7 @@ export default function TrapEntertainmentWebsite() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
 
-  // Refs for zero-lag cursor management and video autoplay override
+  // Refs for custom cursor management and video autoplay override
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -64,7 +64,6 @@ export default function TrapEntertainmentWebsite() {
     window.scrollTo(0, 0);
     setIsLoaded(true);
 
-    // Explicit video playback ignition to bypass aggressive browser autoplay blocks
     if (videoRef.current) {
       videoRef.current.muted = true;
       videoRef.current.playsInline = true;
@@ -153,7 +152,6 @@ export default function TrapEntertainmentWebsite() {
     }, 450); 
   };
 
-  // Helper toggle to allow manual tap-to-play playback on low power devices
   const handleVideoTap = () => {
     if (videoRef.current) {
       if (videoRef.current.paused) {
@@ -208,18 +206,13 @@ export default function TrapEntertainmentWebsite() {
         </a>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero Section - Clean Dark Theme (Poster completely removed from background layer) */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="/hotsinspic.png" 
-            alt="Hot Sins Poster Billboard" 
-            className="h-full w-full object-cover opacity-50 scale-105 animate-[pulse_10s_ease-in-out_infinite]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/40 to-neutral-950" />
+        <div className="absolute inset-0 z-0 bg-neutral-950">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.05)_0%,transparent_70%)]" />
         </div>
 
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/10 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
 
         <div 
           className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -237,10 +230,9 @@ export default function TrapEntertainmentWebsite() {
             src="/logo.png"
             alt="Trap Ent Logo"
             onClick={handleLogoClick}
-            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.5)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.7)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
+            className="mx-auto mb-6 md:mb-8 w-36 md:w-52 drop-shadow-[0_0_35px_rgba(245,158,11,0.3)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:drop-shadow-[0_0_50px_rgba(245,158,11,0.5)] cursor-pointer clickable-target active:scale-95 active:brightness-125"
           />
           
-          {/* FIXED APOSTROPHE BUG: Safe JSX String encapsulation to eliminate the blue question mark box */}
           <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto drop-shadow-lg">
             Elevating {"Bangalore's"} nightlife through
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
@@ -249,15 +241,16 @@ export default function TrapEntertainmentWebsite() {
           </h1>
 
           <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 px-4 w-full max-w-md mx-auto sm:max-w-none">
+            {/* FIXED TEXT: Replaced with highly premium, professional wording */}
             <a
               href="#event"
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById("event")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
+              className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-10 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
-              Get On The Guestlist
+              EXPLORE SHOWCASE
             </a>
           </div>
         </div>
@@ -289,7 +282,6 @@ export default function TrapEntertainmentWebsite() {
             
             <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:border-amber-500/30 overflow-hidden w-full backdrop-blur-sm hover:-translate-y-1">
               
-              {/* Media Container: Added manual video tap listener to override hard device Low Power Mode blocks */}
               <div 
                 onClick={handleVideoTap}
                 className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black cursor-pointer clickable-target"
@@ -310,7 +302,6 @@ export default function TrapEntertainmentWebsite() {
                   <p className="text-xl font-black text-white">12</p>
                 </div>
 
-                {/* Sub-label informing low power users they can manually activate playback */}
                 <div className="absolute bottom-3 right-4 bg-black/50 backdrop-blur-sm rounded-lg px-2 py-1 text-[10px] text-neutral-400 pointer-events-none md:hidden">
                   Tap video to Play / Pause
                 </div>
@@ -474,88 +465,103 @@ export default function TrapEntertainmentWebsite() {
             <button 
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-30 bg-black/40 rounded-full"
+              className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-40 bg-black/60 rounded-full"
             >
               <X className="h-5 w-5 shrink-0" />
             </button>
 
-            {/* Event Registration Module */}
+            {/* FIXED REGISTRATION MODULE: Poster displays perfectly inside behind the inputs */}
             {activeModal === 'register' && (
-              <div className="p-6 md:p-8">
-                <div className="mb-6 border-b border-neutral-800 pb-4">
-                  <h3 className="text-2xl font-black text-neutral-100 uppercase tracking-tight">Guestlist Registry</h3>
-                  <p className="text-sm text-neutral-400 mt-1">Hot Sins @ Cavore • June 12th</p>
-                </div>
+              <div className="relative p-6 md:p-8 overflow-hidden min-h-[550px] flex flex-col justify-between">
                 
-                <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-5">
-                  <input type="hidden" name="Event" value="Hot Sins at Cavore - June 12" />
-                  
-                  {/* Category dropdown cleanly ordered exactly as specified */}
-                  <div>
-                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Select Entry Type</label>
-                    <div className="relative">
-                      <select 
-                        name="entryType" 
-                        required 
-                        defaultValue=""
-                        className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50"
-                      >
-                        <option value="" disabled className="text-neutral-500">Choose entry category...</option>
-                        <option value="1. Male Stag Entry (₹6,000 Cover Post 9:30 PM)">1. Male Stag Entry (₹6,000 Cover post 9:30 PM)</option>
-                        <option value="2. Couple Entry (FREE until 9:30 PM / ₹4,500 Cover post)">2. Couple Entry (FREE until 9:30 PM)</option>
-                        <option value="3. Girls Entry (FREE until 9:30 PM / ₹2,000 Cover post)">3. Girls Entry (FREE until 9:30 PM)</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
-                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+                {/* Background Poster Image Node restricted explicitly inside the modal */}
+                <div className="absolute inset-0 z-0 select-none pointer-events-none">
+                  <img 
+                    src="/hotsinspic.png" 
+                    alt="Hot Sins Showcase Poster Artwork Background" 
+                    className="w-full h-full object-cover opacity-20 scale-105"
+                  />
+                  {/* Luxury black glass gradient to lock in impeccable input element readability */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/95 via-neutral-950/85 to-neutral-950" />
+                </div>
 
-                  <div>
-                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Full Legal Name</label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      required 
-                      placeholder="As per Government ID"
-                      className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50" 
-                    />
+                {/* Form elements wrapped inside a relative layer to stack correctly on top of the poster */}
+                <div className="relative z-10 w-full h-full flex flex-col justify-between space-y-5">
+                  <div className="border-b border-neutral-800 pb-3">
+                    <h3 className="text-2xl font-black text-neutral-100 uppercase tracking-tight">Guestlist Registry</h3>
+                    <p className="text-sm text-amber-400 font-bold mt-0.5">Hot Sins @ Cavore • June 12th</p>
                   </div>
                   
-                  <div>
-                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Where did you hear about us?</label>
-                    <div className="relative">
-                      <select 
-                        name="source" 
-                        required 
-                        defaultValue=""
-                        className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50"
-                      >
-                        <option value="" disabled className="text-neutral-500">Select an option...</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="Friend suggested">Friend suggested</option>
-                        <option value="Promoters">Promoters</option>
-                        <option value="Others">Others</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
-                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                        </svg>
+                  <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-4">
+                    <input type="hidden" name="Event" value="Hot Sins at Cavore - June 12" />
+                    
+                    {/* Category input stacked precisely on top of the asset graphic */}
+                    <div>
+                      <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Select Entry Type</label>
+                      <div className="relative">
+                        <select 
+                          name="entryType" 
+                          required 
+                          defaultValue=""
+                          className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800"
+                        >
+                          <option value="" disabled className="text-neutral-500">Choose entry category...</option>
+                          <option value="1. Stag Entry (₹6,000 Cover Post 9:30 PM)">1. Male Stag Entry (₹6,000 Cover post 9:30 PM)</option>
+                          <option value="2. Couple Entry (FREE until 9:30 PM / ₹4,500 Cover post)">2. Couple Entry (FREE until 9:30 PM)</option>
+                          <option value="3. Girls Entry (FREE until 9:30 PM / ₹2,000 Cover post)">3. Girls Entry (FREE until 9:30 PM)</option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                          <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="pt-2">
-                    <button type="submit" className="w-full py-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg">
-                      Confirm Guestlist
-                    </button>
-                    <p className="mt-3 text-center text-[10px] text-neutral-500">
-                      By submitting, you agree to the club's entry rules. Management reserves the right of admission.
-                    </p>
-                  </div>
-                </form>
+                    <div>
+                      <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Full Legal Name</label>
+                      <input 
+                        type="text" 
+                        name="name" 
+                        required 
+                        placeholder="As per Government ID"
+                        className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800" 
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Where did you hear about us?</label>
+                      <div className="relative">
+                        <select 
+                          name="source" 
+                          required 
+                          defaultValue=""
+                          className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800"
+                        >
+                          <option value="" disabled className="text-neutral-500">Select an option...</option>
+                          <option value="Instagram">Instagram</option>
+                          <option value="Friend suggested">Friend suggested</option>
+                          <option value="Promoters">Promoters</option>
+                          <option value="Others">Others</option>
+                        </select>
+                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                          <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <button type="submit" className="w-full py-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+                        Confirm Guestlist
+                      </button>
+                      <p className="mt-3 text-center text-[10px] text-neutral-500">
+                        By submitting, you agree to the club's entry rules. Management reserves the right of admission.
+                      </p>
+                    </div>
+                  </form>
+                </div>
               </div>
             )}
 
