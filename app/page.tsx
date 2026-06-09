@@ -55,13 +55,23 @@ export default function TrapEntertainmentWebsite() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
 
-  // Refs for zero-lag cursor management
+  // Refs for zero-lag cursor management and video autoplay override
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoaded(true);
+
+    // Explicit video playback ignition to bypass aggressive browser autoplay blocks
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.playsInline = true;
+      videoRef.current.play().catch((err) => {
+        console.log("Browser blocked initial autoplay, retrying background thread...", err);
+      });
+    }
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -187,16 +197,14 @@ export default function TrapEntertainmentWebsite() {
         </a>
       </header>
 
-      {/* Hero Section (Poster Background) */}
+      {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 md:py-0 text-center">
-        {/* The Digital Billboard Poster */}
         <div className="absolute inset-0 z-0">
           <img 
             src="/hotsinspic.png" 
-            alt="Hot Sins Poster Banner" 
+            alt="Hot Sins Poster Billboard" 
             className="h-full w-full object-cover opacity-50 scale-105 animate-[pulse_10s_ease-in-out_infinite]"
           />
-          {/* Gradient overlays to ensure text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/80 via-neutral-950/40 to-neutral-950" />
         </div>
 
@@ -243,7 +251,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Upcoming Events Section (Video Card) */}
+      {/* Upcoming Events Section (Teaser Video Module) */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -267,12 +275,12 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
             
-            {/* The Event Card */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:border-amber-500/30 overflow-hidden w-full backdrop-blur-sm hover:-translate-y-1">
               
-              {/* Media Section: The Video */}
+              {/* Media Container: hotsins.mp4 Video */}
               <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black">
                 <video 
+                  ref={videoRef}
                   src="/hotsins.mp4" 
                   autoPlay 
                   loop 
@@ -282,14 +290,13 @@ export default function TrapEntertainmentWebsite() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-90" />
                 
-                {/* Floating Date Badge */}
                 <div className="absolute top-4 left-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 text-center shadow-xl">
                   <p className="text-xs font-bold uppercase text-amber-400">June</p>
                   <p className="text-xl font-black text-white">12</p>
                 </div>
               </div>
 
-              {/* Event Info Section */}
+              {/* Data Deck */}
               <div className="relative z-10 flex flex-col p-6 sm:p-8">
                 <h3 className="mb-4 text-3xl font-black uppercase tracking-tight text-neutral-100">Hot Sins</h3>
                 
@@ -304,15 +311,15 @@ export default function TrapEntertainmentWebsite() {
                   </div>
                   <div className="flex items-center gap-3">
                     <Clock className="h-5 w-5 text-amber-400 shrink-0" />
-                    <span>Guestlist strictly open until 9:30 PM</span>
+                    <span>Guestlist open from 8:30 PM | Open until 9:30 PM</span>
                   </div>
                 </div>
 
-                {/* Cover Charge Box */}
+                {/* Entry Blueprint Box */}
                 <div className="mb-8 rounded-2xl bg-neutral-950/60 border border-neutral-800 p-4 sm:p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Ticket className="h-4 w-4 text-amber-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-amber-400">Entry Details</h4>
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-amber-400">Entry Matrix</h4>
                   </div>
                   
                   <p className="text-sm font-semibold text-white mb-2 pb-2 border-b border-white/5">
@@ -439,7 +446,7 @@ export default function TrapEntertainmentWebsite() {
         © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
       </footer>
 
-      {/* Modal Systems */}
+      {/* Modal Engine */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
           <div className="relative w-full max-w-md rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
@@ -452,7 +459,7 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
-            {/* Event Registration Modal */}
+            {/* Event Registration Dropdown Module */}
             {activeModal === 'register' && (
               <div className="p-6 md:p-8">
                 <div className="mb-6 border-b border-neutral-800 pb-4">
@@ -460,10 +467,32 @@ export default function TrapEntertainmentWebsite() {
                   <p className="text-sm text-neutral-400 mt-1">Hot Sins @ Cavore • June 12th</p>
                 </div>
                 
-                {/* NEW FORMSPREE LINK */}
                 <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-5">
                   <input type="hidden" name="Event" value="Hot Sins at Cavore - June 12" />
                   
+                  {/* Entry Type Selection ordered explicitly as requested */}
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Select Entry Type</label>
+                    <div className="relative">
+                      <select 
+                        name="entryType" 
+                        required 
+                        defaultValue=""
+                        className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800/50"
+                      >
+                        <option value="" disabled className="text-neutral-500">Choose entry category...</option>
+                        <option value="1. Stag Entry (₹6,000 Cover Post 9:30 PM)">1. Male Stag Entry (₹6,000 Cover post 9:30 PM)</option>
+                        <option value="2. Couple Entry (FREE until 9:30 PM / ₹4,500 Cover post)">2. Couple Entry (FREE until 9:30 PM)</option>
+                        <option value="3. Girls Entry (FREE until 9:30 PM / ₹2,000 Cover post)">3. Girls Entry (FREE until 9:30 PM)</option>
+                      </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
                   <div>
                     <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Full Legal Name</label>
                     <input 
@@ -490,7 +519,6 @@ export default function TrapEntertainmentWebsite() {
                         <option value="Promoters">Promoters</option>
                         <option value="Others">Others</option>
                       </select>
-                      {/* Custom dropdown arrow */}
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
                         <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                           <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
@@ -511,11 +539,11 @@ export default function TrapEntertainmentWebsite() {
               </div>
             )}
 
-            {/* General Contact Modal (Kept intact from original) */}
+            {/* General Contact Modal */}
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
                 <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
-                <p className="text-sm text-neutral-400 font-light mb-6">For brand associations, high-tier table reservations, and sponsorship briefs.</p>
+                <p className="text-sm text-neutral-400 font-light mb-6">For brand associations, table reservations, and sponsorship structures.</p>
                 
                 <form action="https://formspree.io/f/xaqzwvae" method="POST" className="space-y-4">
                   <input type="hidden" name="Context" value="General Business Inquiry" />
