@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Ticket, 
-  Image as ImageIcon, 
   Sparkles, 
   PartyPopper, 
   Music, 
@@ -14,16 +13,33 @@ import {
 } from 'lucide-react';
 
 export default function TrapEntertainmentsWebsite() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  // State for controlling booking modal, selected event context, and pass types
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [passType, setPassType] = useState<string>('couple');
+  
+  // Apple-inspired scroll listener state for dynamic navbar blurring
+  const [scrolled, setScrolled] = useState(false);
 
-  // Structured upcoming events array featuring NAAK & MALIK MUSIC
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      if (window.scrollY > 60) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.reload();
+  };
+
   const upcomingEvents = [
     {
       id: 1,
@@ -31,7 +47,7 @@ export default function TrapEntertainmentsWebsite() {
       day: "Friday Night",
       date: "June 19, 2026",
       venue: "Cavore, Bangalore",
-      bgImage: "/naak.png", // Configured local image path
+      bgImage: "/naak.png",
       tagline: "The sensation NAAK is coming to Cavore for an unforgettable, high-octane premium nightlife takeover.",
       features: [
         "Headlined by the phenomenal DJ NAAK delivering an exclusive high-energy set.",
@@ -52,24 +68,41 @@ export default function TrapEntertainmentsWebsite() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-amber-400 selection:text-black antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-amber-400 selection:text-black antialiased overflow-x-hidden animate-[fadeIn_1.2s_ease-out_both]">
       
-      {/* Header / Navigation Bar */}
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-800 bg-neutral-950/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl h-20 items-center justify-between px-6">
-          <div className="flex items-center gap-3">
+      {/* Global CSS injection for custom keyframes without breaking Tailwind configs */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
+      {/* Header / Navigation Bar with dynamic Apple-style scroll blur */}
+      <header className={`sticky top-0 z-40 w-full border-b transition-all duration-500 ease-out ${
+        scrolled 
+          ? "border-neutral-800 bg-neutral-950/80 backdrop-blur-xl py-2" 
+          : "border-transparent bg-neutral-950/0 backdrop-blur-0 py-4"
+      }`}>
+        <div className="mx-auto flex max-w-7xl h-16 items-center justify-between px-6">
+          <button 
+            type="button"
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 cursor-pointer group focus:outline-none"
+            title="Refresh Page"
+          >
             <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400 shadow-[0_0_10px_#fbbf24]" />
-            <span className="text-xl font-black tracking-widest text-white uppercase">
-              Trap <span className="text-amber-400">Ent.</span>
+            <span className="text-xl font-black tracking-widest text-white uppercase transition-colors group-hover:text-amber-400">
+              Trap <span className="text-amber-400 transition-colors group-hover:text-white">Ent.</span>
             </span>
-          </div>
+          </button>
+          
           <a 
             href="https://instagram.com" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="flex items-center gap-2 rounded-xl border border-neutral-800 bg-neutral-900/50 px-4 py-2 text-sm font-medium text-neutral-300 transition-all hover:border-amber-400/40 hover:text-amber-400"
           >
-            {/* Inline SVG Replacement for Lucide Instagram Icon to clear the TS error */}
             <svg className="h-4 w-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
@@ -82,21 +115,19 @@ export default function TrapEntertainmentsWebsite() {
 
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-[calc(100vh-80px)] flex-col items-center justify-center overflow-hidden px-6 text-center py-12">
-        {/* Ambient Glowing Background Elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-neutral-950 to-neutral-950" />
         <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-500/10 blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 -z-10 h-96 w-96 rounded-full bg-yellow-600/5 blur-[150px]" />
 
         <div className="relative z-10 max-w-4xl">
           <p className="mb-4 flex items-center justify-center gap-2 text-sm uppercase tracking-[0.4em] text-amber-400 font-semibold">
-            <Sparkles className="h-4 w-4" /> Trap Entertainments
+            <Sparkles className="h-4 w-4" /> Trap Entertainment
           </p>
           
-          {/* Logo.png restored exactly with standard styling shadow weights from previous state */}
           <img
             src="/logo.png"
             alt="Trap Ent Logo"
-            className="mx-auto mb-8 w-40 md:w-52 drop-shadow-[0_0_25px_rgba(255,215,0,0.35)]"
+            className="mx-auto mb-8 w-40 md:w-52 drop-shadow-[0_0_25px_rgba(255,215,0,0.35)] transform transition-transform duration-700 hover:scale-[1.03]"
           />
           
           <h1 className="text-5xl font-black leading-tight md:text-7xl tracking-tight uppercase">
@@ -110,7 +141,7 @@ export default function TrapEntertainmentsWebsite() {
             Exclusive nightlife properties, elite artist collaborations, curated college festivals, and uncompromised club experiences for the high-energy crowd.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-10 flex items-center justify-center">
             <a
               href="#event"
               onClick={(e) => {
@@ -119,21 +150,121 @@ export default function TrapEntertainmentsWebsite() {
                   behavior: "smooth",
                 });
               }}
-              className="group flex items-center gap-2 rounded-xl bg-amber-400 px-8 py-4 text-base font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-amber-300 shadow-lg shadow-amber-500/10"
+              className="group flex items-center gap-2 rounded-xl bg-amber-400 px-10 py-4 text-base font-bold text-black transition-all duration-300 hover:scale-[1.02] hover:bg-amber-300 shadow-lg shadow-amber-500/10"
             >
               <Ticket className="h-5 w-5 transition-transform group-hover:rotate-12" />
               Book Events
             </a>
-
-            <button 
-              type="button"
-              onClick={() => alert("Our premium photo archive is launching soon! Follow our Instagram for real-time live recaps.")}
-              className="flex items-center gap-2 rounded-xl border border-neutral-800 bg-neutral-900/40 px-8 py-4 text-base font-semibold backdrop-blur-sm transition-all duration-300 hover:bg-neutral-900 hover:text-white hover:border-neutral-700 hover:scale-[1.02]"
-            >
-              <ImageIcon className="h-5 w-5 text-amber-400" />
-              View Gallery
-            </button>
           </div>
+        </div>
+      </section>
+
+      {/* Upcoming Events Section - MOVED TO THE TOP RIGHT UNDER HERO */}
+      <section id="event" className="mx-auto max-w-6xl px-6 py-24 border-t border-neutral-900/60 scroll-mt-24">
+        <div className="mb-16 text-center">
+          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-semibold">
+            Active Grid
+          </p>
+          <h2 className="text-4xl font-black uppercase md:text-5xl tracking-tight text-white">
+            Catch The Next Wave
+          </h2>
+        </div>
+
+        <div className="max-w-5xl mx-auto">
+          {upcomingEvents.map((event) => (
+            <div
+              key={event.id}
+              className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/40 transition-all duration-300 hover:border-amber-400/30 group shadow-2xl"
+            >
+              {/* Refined visibility background layout for naak.png */}
+              <div 
+                className="absolute inset-0 z-0 bg-no-repeat bg-center bg-cover lg:bg-contain lg:bg-right transition-transform duration-1000 group-hover:scale-102 opacity-75 lg:opacity-100"
+                style={{ backgroundImage: `url(${event.bgImage})` }}
+              />
+              
+              {/* Multilayer linear overlays for flawless contrast masking */}
+              <div className="absolute inset-0 z-10 bg-gradient-to-t from-neutral-950 via-neutral-950/90 to-neutral-950/40 lg:bg-gradient-to-r lg:from-neutral-950 lg:via-neutral-950/85 lg:to-transparent" />
+
+              <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 p-8 md:p-12 gap-8 items-center">
+                
+                {/* Left Typography Block */}
+                <div className="lg:col-span-7 space-y-5">
+                  <div className="flex items-center gap-3">
+                    <span className="inline-block rounded-md bg-amber-400 text-black px-3 py-1 text-xs uppercase font-extrabold tracking-wider">
+                      {event.day}
+                    </span>
+                    <span className="text-xs text-amber-400 font-mono font-bold flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full border border-neutral-800">
+                      <span className="h-2 w-2 rounded-full bg-amber-400 animate-ping inline-block" />
+                      Booking Live
+                    </span>
+                  </div>
+
+                  <h3 className="text-5xl font-black tracking-tight text-white uppercase md:text-6xl drop-shadow-md">
+                    {event.title}
+                  </h3>
+                  
+                  <p className="text-neutral-300 text-base md:text-lg font-medium leading-relaxed max-w-xl">
+                    {event.tagline}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-4 pt-1 text-neutral-300">
+                    <div className="flex items-center gap-2 text-sm bg-neutral-950/90 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl">
+                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span className="font-semibold">{event.date}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm bg-neutral-950/90 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl">
+                      <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span className="font-semibold">{event.venue}</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 pt-2">
+                    {event.features.map((feature, idx) => (
+                      <div key={idx} className="bg-neutral-950/80 backdrop-blur-sm border border-neutral-900/60 rounded-xl p-3.5 text-xs text-neutral-400 max-w-xl leading-relaxed">
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right Reservation Matrix */}
+                <div className="lg:col-span-5 w-full bg-neutral-950/95 backdrop-blur-md border border-neutral-800 p-6 rounded-2xl space-y-5 shadow-2xl transition-all duration-300 hover:border-neutral-700">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-amber-400">Pass Configuration Matrix</p>
+                    <p className="text-[11px] text-neutral-500">Select your preferences at the front security gates.</p>
+                  </div>
+
+                  <div className="text-sm space-y-3 font-medium text-neutral-300">
+                    <div className="flex justify-between border-b border-neutral-900 pb-2.5 items-center">
+                      <span className="text-neutral-400">Couples</span>
+                      <span className="text-white font-bold text-sm bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">{event.pricing.couples}</span>
+                    </div>
+                    <div className="flex justify-between border-b border-neutral-900 pb-2.5 items-center">
+                      <span className="text-neutral-400">Stags</span>
+                      <span className="text-white font-bold text-sm bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">{event.pricing.stags}</span>
+                    </div>
+                    <div className="flex justify-between items-center pt-1">
+                      <span className="text-neutral-400">Girls</span>
+                      <span className="text-emerald-400 font-black uppercase tracking-wider bg-emerald-950/30 px-3 py-1.5 rounded-lg border border-emerald-500/20">{event.pricing.girls}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-[10px] italic text-neutral-500 text-center border-t border-neutral-900 pt-3">
+                    *Disclaimer: Cover charges are subjective to the venue profile context.
+                  </p>
+
+                  <button 
+                    type="button"
+                    onClick={() => handleOpenBooking(event.title)}
+                    className="w-full rounded-xl bg-amber-400 px-6 py-4 font-black text-black transition-all duration-200 hover:bg-amber-300 uppercase tracking-widest text-xs shadow-lg shadow-amber-400/10 hover:scale-[1.01]"
+                  >
+                    Reserve Spot via Guestlist
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -159,7 +290,7 @@ export default function TrapEntertainmentsWebsite() {
       </section>
 
       {/* Services Section */}
-      <section className="bg-neutral-950 px-6 py-24 border-y border-neutral-900">
+      <section className="bg-neutral-950 px-6 py-24 border-t border-neutral-900">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 text-center">
             <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-semibold">
@@ -203,119 +334,9 @@ export default function TrapEntertainmentsWebsite() {
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
-      <section id="event" className="mx-auto max-w-6xl px-6 py-24">
-        <div className="mb-16 text-center">
-          <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-semibold">
-            Active Grid
-          </p>
-          <h2 className="text-4xl font-black uppercase md:text-5xl tracking-tight text-white">
-            Catch The Next Wave
-          </h2>
-        </div>
-
-        <div className="max-w-5xl mx-auto">
-          {upcomingEvents.map((event) => (
-            <div
-              key={event.id}
-              className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/20 transition-all duration-300 hover:border-amber-400/30 group"
-            >
-              {/* Background Cover Image Layer */}
-              <div 
-                className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${event.bgImage})` }}
-              />
-              {/* Complex dark glassmorphism overlays to protect typography contrast layers */}
-              <div className="absolute inset-0 z-10 bg-gradient-to-t from-neutral-950 via-neutral-950/85 to-neutral-900/40 lg:bg-gradient-to-r lg:from-neutral-950 lg:via-neutral-950/90 lg:to-transparent" />
-
-              {/* Foreground Grid Content Structure */}
-              <div className="relative z-20 grid grid-cols-1 lg:grid-cols-12 p-8 md:p-12 gap-8 items-center">
-                
-                {/* Left Information Block column */}
-                <div className="lg:col-span-7 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block rounded-md bg-amber-400 text-black px-3 py-1 text-xs uppercase font-extrabold tracking-wider">
-                      {event.day}
-                    </span>
-                    <span className="text-xs text-amber-400 font-mono font-bold flex items-center gap-1.5 bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full border border-neutral-800">
-                      <span className="h-2 w-2 rounded-full bg-amber-400 animate-ping inline-block" />
-                      Booking Live
-                    </span>
-                  </div>
-
-                  <h3 className="text-5xl font-black tracking-tight text-white uppercase md:text-6xl drop-shadow-md">
-                    {event.title}
-                  </h3>
-                  
-                  <p className="text-neutral-300 text-base md:text-lg font-medium leading-relaxed max-w-xl">
-                    {event.tagline}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-4 pt-2 text-neutral-300">
-                    <div className="flex items-center gap-2 text-sm bg-neutral-950/80 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl">
-                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-semibold">{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm bg-neutral-950/80 backdrop-blur-sm border border-neutral-800 px-4 py-2 rounded-xl">
-                      <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-semibold">{event.venue}</span>
-                    </div>
-                  </div>
-
-                  {/* Feature Lists */}
-                  <div className="space-y-2 pt-2">
-                    {event.features.map((feature, idx) => (
-                      <div key={idx} className="bg-neutral-950/70 backdrop-blur-sm border border-neutral-900/60 rounded-xl p-3.5 text-xs text-neutral-400 max-w-xl leading-relaxed">
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right Interactive Ticket Config column */}
-                <div className="lg:col-span-5 w-full bg-neutral-950/90 backdrop-blur-md border border-neutral-800 p-6 rounded-2xl space-y-5 shadow-2xl">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-amber-400">Pass Configuration Matrix</p>
-                    <p className="text-[11px] text-neutral-500">Select your preferences at the front security gates.</p>
-                  </div>
-
-                  <div className="text-sm space-y-3 font-medium text-neutral-300">
-                    <div className="flex justify-between border-b border-neutral-900 pb-2.5 items-center">
-                      <span className="text-neutral-400">Couples</span>
-                      <span className="text-white font-bold text-sm bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">{event.pricing.couples}</span>
-                    </div>
-                    <div className="flex justify-between border-b border-neutral-900 pb-2.5 items-center">
-                      <span className="text-neutral-400">Stags</span>
-                      <span className="text-white font-bold text-sm bg-neutral-900 px-3 py-1.5 rounded-lg border border-neutral-800">{event.pricing.stags}</span>
-                    </div>
-                    <div className="flex justify-between items-center pt-1">
-                      <span className="text-neutral-400">Girls</span>
-                      <span className="text-emerald-400 font-black uppercase tracking-wider bg-emerald-950/30 px-3 py-1.5 rounded-lg border border-emerald-500/20">{event.pricing.girls}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-[10px] italic text-neutral-500 text-center border-t border-neutral-900 pt-3">
-                    *Disclaimer: Cover charges are subjective to the venue profile context.
-                  </p>
-
-                  <button 
-                    type="button"
-                    onClick={() => handleOpenBooking(event.title)}
-                    className="w-full rounded-xl bg-amber-400 px-6 py-4 font-black text-black transition-all duration-200 hover:bg-amber-300 uppercase tracking-widest text-xs shadow-lg shadow-amber-400/10 hover:scale-[1.01]"
-                  >
-                    Reserve Spot via Guestlist
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Interactive Formspree Booking Modal */}
+      {/* Booking Modal */}
       {activeModal === 'book' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-[fadeIn_0.3s_ease-out_both]">
           <div className="relative w-full max-w-md overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-950 p-6 md:p-8 shadow-2xl">
             
             <button
@@ -333,9 +354,7 @@ export default function TrapEntertainmentsWebsite() {
               <p className="text-xs text-neutral-400 mt-1">Provide authentication details to process gate checklist credentials.</p>
             </div>
 
-            {/* Configured directly with your live Formspree Action ID */}
             <form action="https://formspree.io/f/xnjyydqw" method="POST" className="space-y-4">
-              
               <input type="hidden" name="_subject" value={`Trap Ent. Roster Request: ${selectedEvent}`} />
               <input type="hidden" name="Target Roster Show" value={selectedEvent || 'NAAK Live'} />
 
@@ -387,7 +406,6 @@ export default function TrapEntertainmentsWebsite() {
                 </select>
               </div>
 
-              {/* Conditional Field UI Handling */}
               {passType === 'couple' && (
                 <div className="p-4 rounded-xl border border-dashed border-amber-400/20 bg-amber-400/5 space-y-2">
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-amber-300">Partner's Full Name *</label>
@@ -435,7 +453,7 @@ export default function TrapEntertainmentsWebsite() {
         </div>
       )}
 
-      {/* Premium Footer with Inline SVG Fallback */}
+      {/* Premium Footer */}
       <footer className="border-t border-neutral-900 bg-neutral-950 px-6 py-12 text-center text-sm text-neutral-500">
         <div className="mx-auto max-w-6xl flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="flex items-center gap-2">
