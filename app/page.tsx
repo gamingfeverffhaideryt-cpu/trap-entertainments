@@ -493,7 +493,8 @@ export default function TrapEntertainmentWebsite() {
                     <p className="text-sm text-amber-400 font-bold mt-0.5">NAAK @ Cavore • June 19th</p>
                   </div>
                   
-                  <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-4">
+                  {/* UPDATED FORMSPREE ACTION ENDPOINT HERE */}
+                  <form action="https://formspree.io/f/xnjyydqw" method="POST" className="space-y-4">
                     <input type="hidden" name="Event" value="NAAK at Cavore - June 19" />
                     <input type="hidden" name="TotalGuests" value={guestCount} />
                     
