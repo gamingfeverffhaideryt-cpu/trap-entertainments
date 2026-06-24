@@ -9,7 +9,11 @@ import {
   Mail, 
   X,
   Sparkles,
-  Radio
+  Radio,
+  Calendar,
+  Clock,
+  MapPin,
+  Ticket
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -52,6 +56,11 @@ export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
+  
+  // Cinematic Video States
+  const [isVideoActive, setIsVideoActive] = useState(false);
+  const [showPasses, setShowPasses] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -122,6 +131,41 @@ export default function TrapEntertainmentWebsite() {
       cancelAnimationFrame(animationId);
     };
   }, []);
+
+  // Monitor video progress for smooth transition sequence
+  const handleVideoTimeUpdate = () => {
+    if (!videoRef.current) return;
+    const duration = videoRef.current.duration;
+    const currentTime = videoRef.current.currentTime;
+    
+    // Trigger options 1.5 seconds before video strictly wraps up
+    if (duration && duration - currentTime <= 1.5) {
+      setShowPasses(true);
+    }
+  };
+
+  const startCinematicExperience = () => {
+    setIsVideoActive(true);
+    setShowPasses(false);
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.muted = false;
+        videoRef.current.play().catch(err => console.log("Audio playback context initiated:", err));
+      }
+    }, 100);
+  };
+
+  const closeCinematicExperience = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    setIsVideoActive(false);
+    setShowPasses(false);
+  };
+
+  const skipToGuestlist = () => {
+    setShowPasses(true);
+  };
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
@@ -227,13 +271,13 @@ export default function TrapEntertainmentWebsite() {
               }}
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-10 py-4 text-base md:text-lg font-bold text-black transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform active:scale-95 hover:scale-[1.04] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)]"
             >
-              EXPLORE SHOWCASE
+              EXPLORE ACTIVE SHOWCASE
             </a>
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events Placeholder Section */}
+      {/* Active Curation Showroom Section */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -242,10 +286,10 @@ export default function TrapEntertainmentWebsite() {
           }`}
         >
           <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold tracking-widest">
-            Next Premium Curation
+            Now Live
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            Showcase Blueprint
+            Current Showcase
           </h2>
         </div>
 
@@ -255,58 +299,204 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="flex items-center justify-center max-w-2xl mx-auto w-full">
+          <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
             
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 p-8 md:p-12 shadow-2xl text-center items-center justify-center overflow-hidden w-full backdrop-blur-sm border-dashed border-neutral-800 hover:border-amber-500/20 transition-all duration-500">
+            {/* Immersive Event Showcase Card */}
+            <div className="group relative flex flex-col md:flex-row rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden w-full backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
               
-              {/* Animated Glow Elements */}
-              <div className="absolute -top-24 -left-24 h-48 w-48 rounded-full bg-amber-500/5 blur-3xl group-hover:bg-amber-500/10 transition-colors duration-500" />
-              <div className="absolute -bottom-24 -right-24 h-48 w-48 rounded-full bg-yellow-500/5 blur-3xl group-hover:bg-yellow-500/10 transition-colors duration-500" />
+              {/* Left Side: Dynamic Visual Frame */}
+              <div className="relative w-full md:w-2/5 min-h-[240px] md:min-h-full bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-950/90 z-10" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.15)_0%,transparent_70%)] animate-pulse" />
+                
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
+                  <Radio className="h-3 w-3 animate-pulse" />
+                  <span>Exclusive Booking</span>
+                </div>
 
-              <div className="relative mb-6 inline-flex items-center justify-center rounded-2xl bg-neutral-950/80 p-5 border border-neutral-800 text-amber-400 group-hover:scale-110 transition-transform duration-500 shadow-xl">
-                <Radio className="h-8 w-8 animate-pulse text-amber-400" />
+                <div className="relative z-20 mt-auto">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Featuring</span>
+                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">MALIK</h4>
+                </div>
               </div>
 
-              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neutral-100 mb-3">
-                Curating Next Experience
-              </h3>
-              
-              <p className="text-sm md:text-base text-neutral-400 font-light max-w-md mx-auto leading-relaxed mb-8">
-                Our latest showcase has successfully concluded. The architecture for the next premium nightlife module is currently being finalized.
-              </p>
+              {/* Right Side: Core Metadata Content */}
+              <div className="w-full md:w-3/5 p-8 flex flex-col justify-between relative">
+                <div>
+                  <h3 className="text-3xl font-black uppercase tracking-tight text-neutral-100 mb-2">
+                    ANIMA MARTHA
+                  </h3>
+                  <p className="text-xs text-neutral-400 font-light max-w-md leading-relaxed mb-6">
+                    A premium atmospheric electronic module meticulously mapped for Bangalore's elite crowd layers. Experience top-tier nightlife architecture.
+                  </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 w-full justify-center max-w-sm">
-                <a 
-                  href="https://www.instagram.com/trap.entz"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-amber-400/40 hover:text-amber-400 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-neutral-300 transition-all duration-300 active:scale-95"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                  Follow For Drops
-                </a>
+                  {/* Logistics Metrics */}
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Calendar className="h-4 w-4 text-amber-500/70" />
+                      <span className="font-medium">Friday, 26th June 2026</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Clock className="h-4 w-4 text-amber-500/70" />
+                      <span className="font-medium">9:00 PM onwards</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <MapPin className="h-4 w-4 text-amber-500/70" />
+                      <span className="font-medium">Cavore, Bangalore</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Primary Interactive Trigger Link */}
                 <button 
                   type="button"
-                  onClick={() => setActiveModal('contact')}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_0_25px_rgba(245,158,11,0.15)]"
+                  onClick={startCinematicExperience}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-sm font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_20px_rgba(245,158,11,0.25)] hover:shadow-[0_4px_30px_rgba(245,158,11,0.4)]"
                 >
-                  <Mail className="h-4 w-4" /> Join VIP Waitlist
+                  <Ticket className="h-4 w-4 animate-bounce" /> ENTER EXPERIENCE & REGISTER
                 </button>
               </div>
 
-              <div className="italic text-neutral-600 mt-8 text-[11px] flex items-center gap-1.5 font-medium select-none">
-                <Sparkles className="h-3 w-3 text-amber-500/40" />
-                <span>Signatures properties and secret rosters incoming.</span>
-              </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* Cinematic Full-Screen Video & Post-Video Setup */}
+      {isVideoActive && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black transition-all duration-500 ease-out overflow-y-auto">
+          
+          {/* Active Player Module */}
+          {!showPasses ? (
+            <div className="absolute inset-0 bg-black flex items-center justify-center overflow-hidden">
+              <video
+                ref={videoRef}
+                src="/anima.mp4"
+                onTimeUpdate={handleVideoTimeUpdate}
+                onEnded={skipToGuestlist}
+                className="w-full h-full object-cover select-none pointer-events-none will-change-transform scale-100"
+                playsInline
+                autoPlay
+              />
+              
+              {/* Control Overlays */}
+              <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={skipToGuestlist}
+                  className="px-4 py-2 rounded-xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-xs font-bold text-neutral-300 tracking-wider uppercase transition-all hover:border-amber-400/40 hover:text-amber-400 active:scale-95"
+                >
+                  Skip Preview
+                </button>
+                <button
+                  type="button"
+                  onClick={closeCinematicExperience}
+                  className="p-2.5 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-neutral-400 hover:text-white transition-all active:scale-95"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+          ) : (
+            // Post-Video Premium Access Form and Pricing Module 
+            <div className="relative w-full max-w-4xl px-4 py-12 my-auto mx-auto z-40 animate-in fade-in zoom-in-95 duration-500">
+              <div className="bg-neutral-950/90 border border-neutral-800 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-xl relative">
+                
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={closeCinematicExperience}
+                  className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-amber-400 transition-colors p-2 bg-neutral-900/60 rounded-full z-50"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+
+                <div className="text-center mb-8 max-w-xl mx-auto">
+                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-amber-400 block mb-1">Access Terminal</span>
+                  <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">Guestlist & Passes</h3>
+                  <p className="text-xs text-neutral-400 mt-2 font-light">
+                    Guestlist profile members must arrive <span className="text-amber-400 font-medium">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8 items-start">
+                  
+                  {/* Column 1: Pricing Tier Blueprint Matrices */}
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
+                      <Sparkles className="h-3 w-3 text-amber-400" /> Cover Architecture
+                    </h4>
+                    
+                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                      <div>
+                        <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
+                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
+                      </div>
+                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
+                    </div>
+
+                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                      <div>
+                        <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
+                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
+                      </div>
+                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
+                    </div>
+
+                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                      <div>
+                        <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
+                        <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
+                      </div>
+                      <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
+                    </div>
+                  </div>
+
+                  {/* Column 2: Synchronized Formspree Processing Engine */}
+                  <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
+                    <form action="https://formspree.io/f/xaqzwvae" method="POST" className="space-y-4">
+                      <input type="hidden" name="Event" value="ANIMA MARTHA feat. MALIK @ Cavore (26 June)" />
+                      
+                      <div>
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
+                        <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
+                          <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
+                          <select name="category" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors">
+                            <option value="Ladies">Ladies Pass</option>
+                            <option value="Couple">Couple Pass</option>
+                            <option value="Stag">Stag Pass</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Total Headcount</label>
+                        <input type="number" name="headcount" min="1" max="10" defaultValue="1" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                      </div>
+
+                      <button type="submit" className="w-full py-3.5 mt-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98">
+                        Secure Guestlist Spot
+                      </button>
+                    </form>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          )}
+
+        </div>
+      )}
 
       {/* About Section */}
       <section id="about"
