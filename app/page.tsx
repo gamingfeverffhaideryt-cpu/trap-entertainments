@@ -62,6 +62,9 @@ export default function TrapEntertainmentWebsite() {
   const [showPasses, setShowPasses] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Dynamic Guestlist Selection State
+  const [selectedCategory, setSelectedCategory] = useState("Ladies");
+
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
 
@@ -132,13 +135,12 @@ export default function TrapEntertainmentWebsite() {
     };
   }, []);
 
-  // Monitor video progress for smooth transition sequence
+  // Throttled time tracker to initiate crossfade right before final cut
   const handleVideoTimeUpdate = () => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || showPasses) return;
     const duration = videoRef.current.duration;
     const currentTime = videoRef.current.currentTime;
     
-    // Trigger options 1.5 seconds before video strictly wraps up
     if (duration && duration - currentTime <= 1.5) {
       setShowPasses(true);
     }
@@ -150,9 +152,10 @@ export default function TrapEntertainmentWebsite() {
     setTimeout(() => {
       if (videoRef.current) {
         videoRef.current.muted = false;
-        videoRef.current.play().catch(err => console.log("Audio playback context initiated:", err));
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(err => console.log("Audio cross-context failure bypassed:", err));
       }
-    }, 100);
+    }, 50);
   };
 
   const closeCinematicExperience = () => {
@@ -304,10 +307,15 @@ export default function TrapEntertainmentWebsite() {
             {/* Immersive Event Showcase Card */}
             <div className="group relative flex flex-col md:flex-row rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden w-full backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
               
-              {/* Left Side: Dynamic Visual Frame */}
-              <div className="relative w-full md:w-2/5 min-h-[240px] md:min-h-full bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-950/90 z-10" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.15)_0%,transparent_70%)] animate-pulse" />
+              {/* Left Side: Filled with poster.png as specified in Screenshot 2026-06-24 170904.png */}
+              <div className="relative w-full md:w-2/5 min-h-[280px] md:min-h-full bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+                <img 
+                  src="/poster.png" 
+                  alt="Anima Martha Event Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.1)_0%,transparent_70%)]" />
                 
                 <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
                   <Radio className="h-3 w-3 animate-pulse" />
@@ -365,135 +373,158 @@ export default function TrapEntertainmentWebsite() {
 
       {/* Cinematic Full-Screen Video & Post-Video Setup */}
       {isVideoActive && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black transition-all duration-500 ease-out overflow-y-auto">
+        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-y-auto transform-gpu">
           
-          {/* Active Player Module */}
-          {!showPasses ? (
-            <div className="absolute inset-0 bg-black flex items-center justify-center overflow-hidden">
-              <video
-                ref={videoRef}
-                src="/anima.mp4"
-                onTimeUpdate={handleVideoTimeUpdate}
-                onEnded={skipToGuestlist}
-                className="w-full h-full object-cover select-none pointer-events-none will-change-transform scale-100"
-                playsInline
-                autoPlay
-              />
-              
-              {/* Control Overlays */}
-              <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
-                <button
-                  type="button"
-                  onClick={skipToGuestlist}
-                  className="px-4 py-2 rounded-xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-xs font-bold text-neutral-300 tracking-wider uppercase transition-all hover:border-amber-400/40 hover:text-amber-400 active:scale-95"
-                >
-                  Skip Preview
-                </button>
-                <button
-                  type="button"
-                  onClick={closeCinematicExperience}
-                  className="p-2.5 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-neutral-400 hover:text-white transition-all active:scale-95"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+          {/* Video Container Layer - Smooth Fading Transitions */}
+          <div className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out ${
+            showPasses ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
+          }`}>
+            <video
+              ref={videoRef}
+              src="/anima.mp4"
+              onTimeUpdate={handleVideoTimeUpdate}
+              onEnded={skipToGuestlist}
+              className="w-full h-full object-cover select-none pointer-events-none transform-gpu will-change-transform"
+              playsInline
+              preload="auto"
+            />
+            
+            {/* Control Overlays */}
+            <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
+              <button
+                type="button"
+                onClick={skipToGuestlist}
+                className="px-4 py-2 rounded-xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-xs font-bold text-neutral-300 tracking-wider uppercase transition-all hover:border-amber-400/40 hover:text-amber-400 active:scale-95"
+              >
+                Skip Preview
+              </button>
+              <button
+                type="button"
+                onClick={closeCinematicExperience}
+                className="p-2.5 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-neutral-400 hover:text-white transition-all active:scale-95"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
-          ) : (
-            // Post-Video Premium Access Form and Pricing Module 
-            <div className="relative w-full max-w-4xl px-4 py-12 my-auto mx-auto z-40 animate-in fade-in zoom-in-95 duration-500">
-              <div className="bg-neutral-950/90 border border-neutral-800 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-xl relative">
+          </div>
+
+          {/* Form Container Layer - Smooth Fade-in and Slide-up Terminal Transition */}
+          <div className={`relative w-full max-w-4xl px-4 py-12 my-auto mx-auto z-40 transition-all duration-[1200ms] cubic-bezier(0.16,1,0.3,1) transform-gpu ${
+            showPasses ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-24 scale-95 pointer-events-none"
+          }`}>
+            <div className="bg-neutral-950/95 border border-neutral-800 rounded-3xl p-6 md:p-10 shadow-2xl relative backdrop-blur-xl">
+              
+              {/* Close Button */}
+              <button
+                type="button"
+                onClick={closeCinematicExperience}
+                className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-amber-400 transition-colors p-2 bg-neutral-900/60 rounded-full z-50"
+              >
+                <X className="h-5 w-5" />
+              </button>
+
+              <div className="text-center mb-8 max-w-xl mx-auto">
+                <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-amber-400 block mb-1">Access Terminal</span>
+                <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">Guestlist & Passes</h3>
+                <p className="text-xs text-neutral-400 mt-2 font-light">
+                  Guestlist profile members must arrive <span className="text-amber-400 font-medium">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8 items-start">
                 
-                {/* Close Button */}
-                <button
-                  type="button"
-                  onClick={closeCinematicExperience}
-                  className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-amber-400 transition-colors p-2 bg-neutral-900/60 rounded-full z-50"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-
-                <div className="text-center mb-8 max-w-xl mx-auto">
-                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-amber-400 block mb-1">Access Terminal</span>
-                  <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">Guestlist & Passes</h3>
-                  <p className="text-xs text-neutral-400 mt-2 font-light">
-                    Guestlist profile members must arrive <span className="text-amber-400 font-medium">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.
-                  </p>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-8 items-start">
+                {/* Column 1: Pricing Tier Blueprint Matrices */}
+                <div className="space-y-4">
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
+                    <Sparkles className="h-3 w-3 text-amber-400" /> Cover Architecture
+                  </h4>
                   
-                  {/* Column 1: Pricing Tier Blueprint Matrices */}
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
-                      <Sparkles className="h-3 w-3 text-amber-400" /> Cover Architecture
-                    </h4>
-                    
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
-                      </div>
-                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
+                  <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                    <div>
+                      <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
+                      <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
                     </div>
-
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
-                      </div>
-                      <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
-                    </div>
-
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
-                      </div>
-                      <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
-                    </div>
+                    <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
                   </div>
 
-                  {/* Column 2: Synchronized Formspree Processing Engine */}
-                  <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
-                    <form action="https://formspree.io/f/xaqzwvae" method="POST" className="space-y-4">
-                      <input type="hidden" name="Event" value="ANIMA MARTHA feat. MALIK @ Cavore (26 June)" />
-                      
-                      <div>
+                  <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                    <div>
+                      <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
+                      <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
+                    </div>
+                    <span className="text-xs font-black text-amber-400 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20">FREE</span>
+                  </div>
+
+                  <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
+                    <div>
+                      <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
+                      <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
+                    </div>
+                    <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
+                  </div>
+                </div>
+
+                {/* Column 2: Synchronized Formspree Processing Engine with Adaptive Inputs */}
+                <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
+                  <form action="https://formspree.io/f/xaqzwvae" method="POST" className="space-y-4">
+                    <input type="hidden" name="Event" value="ANIMA MARTHA feat. MALIK @ Cavore (26 June)" />
+                    
+                    <div>
+                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
+                      <select 
+                        name="category" 
+                        required 
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
+                      >
+                        <option value="Ladies">Ladies Pass</option>
+                        <option value="Couple">Couple Pass</option>
+                        <option value="Stag">Stag Pass</option>
+                      </select>
+                    </div>
+
+                    {/* Adaptive Input Matrix Layout */}
+                    {selectedCategory === "Couple" ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                        <div>
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 1 Name</label>
+                          <input type="text" name="partner1_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        </div>
+                        <div>
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 2 Name</label>
+                          <input type="text" name="partner2_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="animate-in fade-in slide-in-from-top-2 duration-300">
                         <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
                         <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
                       </div>
+                    )}
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
-                          <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                        </div>
-                        <div>
-                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
-                          <select name="category" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors">
-                            <option value="Ladies">Ladies Pass</option>
-                            <option value="Couple">Couple Pass</option>
-                            <option value="Stag">Stag Pass</option>
-                          </select>
-                        </div>
-                      </div>
-
+                    <div className="grid grid-cols-1 gap-4">
                       <div>
-                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Total Headcount</label>
-                        <input type="number" name="headcount" min="1" max="10" defaultValue="1" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
+                        <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
                       </div>
+                    </div>
 
-                      <button type="submit" className="w-full py-3.5 mt-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98">
-                        Secure Guestlist Spot
-                      </button>
-                    </form>
-                  </div>
+                    <div>
+                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Total Headcount</label>
+                      <input type="number" name="headcount" min="1" max="10" defaultValue={selectedCategory === "Couple" ? "2" : "1"} required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                    </div>
 
+                    <button type="submit" className="w-full py-3.5 mt-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98">
+                      Secure Guestlist Spot
+                    </button>
+                  </form>
                 </div>
 
               </div>
+
             </div>
-          )}
+          </div>
 
         </div>
       )}
