@@ -8,11 +8,8 @@ import {
   Users, 
   Mail, 
   X,
-  Calendar,
-  MapPin,
-  Clock,
-  Ticket,
-  Sparkles
+  Sparkles,
+  Radio
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -55,10 +52,6 @@ export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
-  
-  // Dynamic form state for custom group entries
-  const [entryType, setEntryType] = useState<string>("");
-  const [guestCount, setGuestCount] = useState<number>(1);
 
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -129,15 +122,6 @@ export default function TrapEntertainmentWebsite() {
       cancelAnimationFrame(animationId);
     };
   }, []);
-
-  const handleEntryTypeChange = (value: string) => {
-    setEntryType(value);
-    if (value === "couple") {
-      setGuestCount(2);
-    } else {
-      setGuestCount(1);
-    }
-  };
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
   const heroOpacity = Math.max(0, 1 - scrollY / 700);
@@ -249,7 +233,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Upcoming Events Section - Configured for NAAK */}
+      {/* Upcoming Events Placeholder Section */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -258,10 +242,10 @@ export default function TrapEntertainmentWebsite() {
           }`}
         >
           <p className="mb-3 text-xs uppercase tracking-[0.3em] text-amber-400 font-bold tracking-widest">
-            Next Premium Showcase
+            Next Premium Curation
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            NAAK at Cavore
+            Showcase Blueprint
           </h2>
         </div>
 
@@ -271,91 +255,52 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="flex items-center justify-center max-w-3xl mx-auto w-full">
+          <div className="flex items-center justify-center max-w-2xl mx-auto w-full">
             
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/50 shadow-2xl transition-all duration-500 hover:border-amber-500/30 overflow-hidden w-full backdrop-blur-sm hover:-translate-y-1">
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 p-8 md:p-12 shadow-2xl text-center items-center justify-center overflow-hidden w-full backdrop-blur-sm border-dashed border-neutral-800 hover:border-amber-500/20 transition-all duration-500">
               
-              {/* Event Poster Frame */}
-              <div className="relative aspect-[4/3] sm:aspect-[16/9] w-full overflow-hidden bg-black">
-                <img 
-                  src="/naak.png" 
-                  alt="NAAK Showcase Poster Layout" 
-                  className="h-full w-full object-cover opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-transparent opacity-90" />
-                
-                <div className="absolute top-4 left-4 rounded-xl bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 text-center shadow-xl">
-                  <p className="text-xs font-bold uppercase text-amber-400">June</p>
-                  <p className="text-xl font-black text-white">19</p>
-                </div>
+              {/* Animated Glow Elements */}
+              <div className="absolute -top-24 -left-24 h-48 w-48 rounded-full bg-amber-500/5 blur-3xl group-hover:bg-amber-500/10 transition-colors duration-500" />
+              <div className="absolute -bottom-24 -right-24 h-48 w-48 rounded-full bg-yellow-500/5 blur-3xl group-hover:bg-yellow-500/10 transition-colors duration-500" />
+
+              <div className="relative mb-6 inline-flex items-center justify-center rounded-2xl bg-neutral-950/80 p-5 border border-neutral-800 text-amber-400 group-hover:scale-110 transition-transform duration-500 shadow-xl">
+                <Radio className="h-8 w-8 animate-pulse text-amber-400" />
               </div>
 
-              {/* Data Deck */}
-              <div className="relative z-10 flex flex-col p-6 sm:p-8">
-                <div className="flex flex-wrap items-center gap-2 mb-2">
-                  <span className="px-2.5 py-0.5 rounded-md text-[10px] uppercase font-extrabold tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    Headliner
-                  </span>
-                  <span className="text-xs text-neutral-400 font-medium">Featuring Malik Music</span>
-                </div>
-                <h3 className="mb-4 text-4xl font-black uppercase tracking-tight text-neutral-100">NAAK</h3>
-                
-                <div className="mb-6 grid gap-3 text-sm text-neutral-300">
-                  <div className="flex items-center gap-3">
-                    <Calendar className="h-5 w-5 text-amber-400 shrink-0" />
-                    <span>Friday, 19th June 2026</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <MapPin className="h-5 w-5 text-amber-400 shrink-0" />
-                    <span><strong>Cavore</strong>, Bangalore</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Clock className="h-5 w-5 text-amber-400 shrink-0" />
-                    <span>Guestlist Open from 8:30 PM Onwards</span>
-                  </div>
-                </div>
+              <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-neutral-100 mb-3">
+                Curating Next Experience
+              </h3>
+              
+              <p className="text-sm md:text-base text-neutral-400 font-light max-w-md mx-auto leading-relaxed mb-8">
+                Our latest showcase has successfully concluded. The architecture for the next premium nightlife module is currently being finalized.
+              </p>
 
-                {/* Entry Blueprint Box */}
-                <div className="mb-8 rounded-2xl bg-neutral-950/60 border border-neutral-800 p-4 sm:p-5">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Ticket className="h-4 w-4 text-amber-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-amber-400">Entry Matrix</h4>
-                  </div>
-                  
-                  <div className="text-sm font-semibold text-white space-y-2 border-b border-white/5 pb-3">
-                    <p className="flex justify-between">
-                      <span>Girls:</span> 
-                      <span className="text-green-400 uppercase font-black">Walk in Free All Night</span>
-                    </p>
-                    <p className="flex justify-between">
-                      <span>Couples:</span> 
-                      <span className="text-neutral-200">FREE until 10:30 PM</span>
-                    </p>
-                  </div>
-                  
-                  <div className="text-xs text-neutral-400 space-y-2 mt-3">
-                    <p className="font-semibold text-neutral-300 uppercase mb-1">Cover Charges Setup:</p>
-                    <p className="flex justify-between">• Couples (Post 10:30 PM) <span className="text-white font-bold">₹3,500</span></p>
-                    <p className="flex justify-between">• Stags <span className="text-white font-bold">₹4,000 All Night</span></p>
-                    
-                    <p className="italic text-amber-500/80 mt-4 text-[10px] pt-2 border-t border-white/5 flex items-start gap-1">
-                      <Sparkles className="h-3 w-3 shrink-0 mt-0.5" />
-                      <span>Disclaimer: Cover charges are subjective to the situation.</span>
-                    </p>
-                  </div>
-                </div>
-
+              <div className="flex flex-col sm:flex-row gap-3 w-full justify-center max-w-sm">
+                <a 
+                  href="https://www.instagram.com/trap.entz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-amber-400/40 hover:text-amber-400 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-neutral-300 transition-all duration-300 active:scale-95"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  Follow For Drops
+                </a>
                 <button 
                   type="button"
-                  onClick={() => {
-                    setEntryType("");
-                    setGuestCount(1);
-                    setActiveModal('register');
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 px-6 py-4 text-sm font-bold uppercase tracking-wider text-black transition-all hover:bg-amber-300 active:scale-[0.98] shadow-[0_0_20px_rgba(245,158,11,0.2)]"
+                  onClick={() => setActiveModal('contact')}
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-400 hover:bg-amber-300 px-5 py-3.5 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_0_25px_rgba(245,158,11,0.15)]"
                 >
-                  Join The Guestlist
+                  <Mail className="h-4 w-4" /> Join VIP Waitlist
                 </button>
+              </div>
+
+              <div className="italic text-neutral-600 mt-8 text-[11px] flex items-center gap-1.5 font-medium select-none">
+                <Sparkles className="h-3 w-3 text-amber-500/40" />
+                <span>Signatures properties and secret rosters incoming.</span>
               </div>
             </div>
 
@@ -473,158 +418,28 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
-            {/* Dynamic Registration Module */}
-            {activeModal === 'register' && (
-              <div className="relative p-6 md:p-8 overflow-hidden min-h-[550px] flex flex-col justify-between">
-                
-                {/* Visual Backdrop Asset specific to NAAK event */}
-                <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                  <img 
-                    src="/naak.png" 
-                    alt="NAAK Event Backdrop" 
-                    className="w-full h-full object-cover opacity-15 scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/95 via-neutral-950/85 to-neutral-950" />
-                </div>
-
-                <div className="relative z-10 w-full h-full flex flex-col justify-between space-y-5">
-                  <div className="border-b border-neutral-800 pb-3">
-                    <h3 className="text-2xl font-black text-neutral-100 uppercase tracking-tight">Guestlist Registry</h3>
-                    <p className="text-sm text-amber-400 font-bold mt-0.5">NAAK @ Cavore • June 19th</p>
-                  </div>
-                  
-                  <form action="https://formspree.io/f/xzdqgkoa" method="POST" className="space-y-4">
-                    <input type="hidden" name="Event" value="NAAK at Cavore - June 19" />
-                    <input type="hidden" name="TotalGuests" value={guestCount} />
-                    
-                    {/* Entry Category Select */}
-                    <div>
-                      <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Select Entry Type</label>
-                      <div className="relative">
-                        <select 
-                          name="entryType" 
-                          required 
-                          value={entryType}
-                          onChange={(e) => handleEntryTypeChange(e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800"
-                        >
-                          <option value="" disabled className="text-neutral-500">Choose entry category...</option>
-                          <option value="stag">Male Stag Entry (₹4,000 Cover All Night)</option>
-                          <option value="couple">Couple Entry (FREE until 10:30 PM / ₹3,500 Post)</option>
-                          <option value="girls">Girls Entry (Walk in Free All Night)</option>
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
-                          <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Dynamic Capacity Option for Girls Section */}
-                    {entryType === "girls" && (
-                      <div className="animate-in slide-in-from-top-2 duration-300">
-                        <label className="mb-1.5 block text-xs font-bold text-amber-400 uppercase tracking-wide">Number of Girls Attending</label>
-                        <div className="relative">
-                          <select 
-                            value={guestCount}
-                            onChange={(e) => setGuestCount(Number(e.target.value))}
-                            className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800"
-                          >
-                            {[1, 2, 3, 4, 5, 6].map((num) => (
-                              <option key={num} value={num}>{num} {num === 1 ? 'Girl' : 'Girls'}</option>
-                            ))}
-                          </select>
-                          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
-                            <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Dynamic Legal Name Registration Fields */}
-                    {entryType && (
-                      <div className="space-y-3 max-h-[180px] overflow-y-auto pr-1 custom-scrollbar animate-in fade-in duration-300">
-                        {Array.from({ length: guestCount }).map((_, i) => (
-                          <div key={i} className="animate-in fade-in slide-in-from-top-1 duration-200">
-                            <label className="mb-1 block text-[11px] font-bold text-neutral-400 uppercase tracking-wide">
-                              {entryType === "couple" 
-                                ? (i === 0 ? "Partner 1 Name (As per Govt ID)" : "Partner 2 Name (As per Govt ID)")
-                                : (guestCount > 1 ? `Girl #${i + 1} Legal Name` : "Full Legal Name")
-                              }
-                            </label>
-                            <input 
-                              type="text" 
-                              name={`guest_name_${i + 1}`} 
-                              required 
-                              placeholder="First & Last Name"
-                              className="w-full rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-2.5 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800" 
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div>
-                      <label className="mb-1.5 block text-xs font-bold text-neutral-400 uppercase tracking-wide">Where did you hear about us?</label>
-                      <div className="relative">
-                        <select 
-                          name="source" 
-                          required 
-                          defaultValue=""
-                          className="w-full appearance-none rounded-xl border border-neutral-800 bg-neutral-900/90 backdrop-blur-sm px-4 py-3 text-white text-sm outline-none transition-colors focus:border-amber-400/50 focus:bg-neutral-800"
-                        >
-                          <option value="" disabled className="text-neutral-500">Select an option...</option>
-                          <option value="Instagram">Instagram</option>
-                          <option value="Friend suggested">Friend suggested</option>
-                          <option value="Promoters">Promoters</option>
-                          <option value="Others">Others</option>
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
-                          <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="pt-2">
-                      <button type="submit" className="w-full py-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] shadow-lg">
-                        Confirm Guestlist
-                      </button>
-                      <p className="mt-3 text-center text-[10px] text-neutral-500 font-medium">
-                        * Cover charges are subjective to the situation. Management reserves right of admission.
-                      </p>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            )}
-
-            {/* General Contact Modal */}
+            {/* Waitlist and Contact Modal Module */}
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
                 <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
-                <p className="text-sm text-neutral-400 font-light mb-6">For brand associations, table reservations, and sponsorship structures.</p>
+                <p className="text-sm text-neutral-400 font-light mb-6">Drop your information below to sign up for next-event priority access notification hooks or business proposals.</p>
                 
                 <form action="https://formspree.io/f/xaqzwvae" method="POST" className="space-y-4">
-                  <input type="hidden" name="Context" value="General Business Inquiry" />
+                  <input type="hidden" name="Context" value="VIP Waitlist & Business Hub Setup" />
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
                     <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
-                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Email Protocol</label>
-                    <input type="email" name="email" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Contact Email / Phone</label>
+                    <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
-                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Brief Message</label>
-                    <textarea name="message" rows={4} required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
+                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Message / Special Requests</label>
+                    <textarea name="message" rows={3} placeholder="Let us know if you're joining the early waitlist or reaching out for business." className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
                   </div>
                   <button type="submit" className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
-                    Dispatch Briefing
+                    Submit Request
                   </button>
                 </form>
               </div>
