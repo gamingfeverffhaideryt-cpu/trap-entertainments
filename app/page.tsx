@@ -135,16 +135,26 @@ export default function TrapEntertainmentWebsite() {
     };
   }, []);
 
-  // Precise timing mechanics to kickstart crossfade exactly 1.5 seconds before final cutoff
-  const handleVideoTimeUpdate = () => {
-    if (!videoRef.current || showPasses) return;
-    const duration = videoRef.current.duration;
-    const currentTime = videoRef.current.currentTime;
-    
-    if (duration && duration - currentTime <= 1.5) {
-      setShowPasses(true);
-    }
-  };
+  // Performance Optimization Engine: Offloads time checking directly to native browser thread
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !isVideoActive) return;
+
+    const checkTime = () => {
+      const duration = video.duration;
+      const currentTime = video.currentTime;
+      
+      if (duration && duration - currentTime <= 1.5) {
+        setShowPasses(true);
+        video.removeEventListener("timeupdate", checkTime);
+      }
+    };
+
+    video.addEventListener("timeupdate", checkTime);
+    return () => {
+      video.removeEventListener("timeupdate", checkTime);
+    };
+  }, [isVideoActive]);
 
   const startCinematicExperience = () => {
     setIsVideoActive(true);
@@ -153,7 +163,7 @@ export default function TrapEntertainmentWebsite() {
       if (videoRef.current) {
         videoRef.current.muted = false;
         videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(err => console.log("Audio pipeline exception handled:", err));
+        videoRef.current.play().catch(err => console.log("Hardware video playback initialization:", err));
       }
     }, 50);
   };
@@ -259,7 +269,7 @@ export default function TrapEntertainmentWebsite() {
           />
           
           <h1 className="text-4xl font-black leading-tight md:text-6xl tracking-tight text-neutral-100 max-w-3xl mx-auto drop-shadow-lg">
-            Elevating {"Bangalore's"} nightlife through
+            Elevating Bangalore's nightlife through
             <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 mt-2">
               niche, ultra-premium party experiences
             </span>
@@ -312,7 +322,7 @@ export default function TrapEntertainmentWebsite() {
                 <img 
                   src="/lilu.png" 
                   alt="Techno and Chill - Liilu Event Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform animate-fade-in"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.1)_0%,transparent_70%)]" />
@@ -376,14 +386,13 @@ export default function TrapEntertainmentWebsite() {
       {isVideoActive && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-y-auto transform-gpu">
           
-          {/* Video Layer Container - lilu.mp4 */}
+          {/* Hardware-Accelerated Video Container Layer - lilu.mp4 */}
           <div className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out ${
             showPasses ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
           }`}>
             <video
               ref={videoRef}
               src="/lilu.mp4"
-              onTimeUpdate={handleVideoTimeUpdate}
               onEnded={skipToGuestlist}
               className="w-full h-full object-cover select-none pointer-events-none transform-gpu will-change-transform"
               playsInline
@@ -511,12 +520,7 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Total Headcount</label>
-                      <input type="number" name="headcount" min="1" max="10" defaultValue={selectedCategory === "Couple" ? "2" : "1"} required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                    </div>
-
-                    <button type="submit" className="w-full py-3.5 mt-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98">
+                    <button type="submit" className="w-full py-3.5 mt-4 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98">
                       Secure Guestlist Spot
                     </button>
                   </form>
