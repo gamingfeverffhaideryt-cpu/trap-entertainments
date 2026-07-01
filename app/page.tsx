@@ -412,7 +412,7 @@ export default function TrapEntertainmentWebsite() {
                     A premium atmospheric showcase presenting City Rush. Not every invitation is accepted. Mapped out for Bangalore's luxury purists.
                   </p>
                   <p className="text-[10px] text-red-400/90 font-semibold mb-6 flex items-center gap-1.5">
-                    <Sparkles className="h-3 w-3 shrink-0" /> Featuring City Rush Lineup.
+                    <Sparkles className="h-3 w-3 shrink-0" /> Free entry for ladies & couples all night long.
                   </p>
 
                   <div className="space-y-3 mb-8">
@@ -509,7 +509,11 @@ export default function TrapEntertainmentWebsite() {
                   </h3>
                   
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.
+                    {activeEvent === "noir" ? (
+                      <span>Guestlist verification rules apply. Ladies & Couples register for total free access.</span>
+                    ) : (
+                      <span>Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.</span>
+                    )}
                   </p>
                 </div>
 
@@ -524,7 +528,9 @@ export default function TrapEntertainmentWebsite() {
                     <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
                       <div>
                         <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
+                        <span className="text-[11px] text-neutral-500 font-light">
+                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 8:30 PM threshold"}
+                        </span>
                       </div>
                       <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
                         activeEvent === "noir" ? "text-red-400 border-red-500/20" : "text-amber-400 border-amber-500/20"
@@ -534,7 +540,9 @@ export default function TrapEntertainmentWebsite() {
                     <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
                       <div>
                         <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Free entry before 8:30 PM threshold</span>
+                        <span className="text-[11px] text-neutral-500 font-light">
+                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 8:30 PM threshold"}
+                        </span>
                       </div>
                       <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
                         activeEvent === "noir" ? "text-red-400 border-red-500/20" : "text-amber-400 border-amber-500/20"
@@ -732,6 +740,7 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5 shrink-0" />
             </button>
 
+            {/* Contact Modal Module */}
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
                 <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
