@@ -382,11 +382,11 @@ export default function TrapEntertainmentWebsite() {
               </div>
             </div>
 
-            {/* Event 2: NOIR MANSION (Saturday - Using heyo.png) */}
+            {/* Event 2: NOIR MANSION (Saturday - Using Heyou.png) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30">
               <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/heyo.png" 
+                  src="/Heyou.png" 
                   alt="Noir Mansion Event Poster" 
                   className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
