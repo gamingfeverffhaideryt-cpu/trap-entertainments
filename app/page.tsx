@@ -60,7 +60,7 @@ export default function TrapEntertainmentWebsite() {
   // Cinematic & Booking Flow States
   const [isVideoActive, setIsVideoActive] = useState(false);
   const [showPasses, setShowPasses] = useState(false);
-  const [activeEvent, setActiveEvent] = useState<"lilu" | "noir" | null>(null);
+  const [activeEvent, setActiveEvent] = useState<"vidojean" | "noir" | null>(null);
   
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -158,9 +158,9 @@ export default function TrapEntertainmentWebsite() {
     };
   }, [isVideoActive]);
 
-  // Handler for LIILU (With Video Flow)
-  const startLiluExperience = () => {
-    setActiveEvent("lilu");
+  // Handler for VIDO JEAN (With Video Flow)
+  const startVidoJeanExperience = () => {
+    setActiveEvent("vidojean");
     setIsVideoActive(true);
     setShowPasses(false);
     setTimeout(() => {
@@ -326,23 +326,23 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
             
-            {/* Event 1: LIILU (Friday) */}
+            {/* Event 1: VIDO JEAN (Friday) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
               <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/lilu.png" 
-                  alt="Techno and Chill - Liilu Event Poster" 
+                  src="/vidojean.png" 
+                  alt="Vido Jean Showcase Poster" 
                   className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
                 
                 <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
                   <Radio className="h-3 w-3 animate-pulse" />
-                  <span>Techno & Chill</span>
+                  <span>Sourberry & Infight presents</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Featuring</span>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Supporting Act</span>
                   <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">MALIK</h4>
                 </div>
               </div>
@@ -350,16 +350,16 @@ export default function TrapEntertainmentWebsite() {
               <div className="p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    LIILU
+                    VIDO JEAN
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A high-end atmospheric techno configuration optimized exclusively for Bangalore's elite crowd layers.
+                    A world-class luxury social module featuring a heavy-hitting headline setup crafted for Bangalore's absolute elite purists.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Calendar className="h-4 w-4 text-amber-500/70" />
-                      <span className="font-medium">Friday, 3rd July 2026</span>
+                      <span className="font-medium">Friday, 10th July 2026</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Clock className="h-4 w-4 text-amber-500/70" />
@@ -374,7 +374,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={startLiluExperience}
+                  onClick={startVidoJeanExperience}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)]"
                 >
                   <Ticket className="h-4 w-4 animate-bounce" /> ENTER VIDEO EXPERIENCE
@@ -382,7 +382,7 @@ export default function TrapEntertainmentWebsite() {
               </div>
             </div>
 
-            {/* Event 2: NOIR MANSION (Saturday - Using Heyou.png) */}
+            {/* Event 2: NOIR MANSION (Saturday) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30">
               <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
@@ -449,14 +449,14 @@ export default function TrapEntertainmentWebsite() {
       {(isVideoActive || showPasses) && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-y-auto transform-gpu">
           
-          {/* LIILU VIDEO PLAYBACK CONTAINER OVERLAY */}
+          {/* VIDEO PLAYBACK CONTAINER OVERLAY */}
           {isVideoActive && !showPasses && (
             <div className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out ${
               showPasses ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
             }`}>
               <video
                 ref={videoRef}
-                src="/lilu.mp4"
+                src="/vidojean.mp4"
                 onEnded={skipToGuestlist}
                 className="w-full h-full object-cover select-none pointer-events-none transform-gpu will-change-transform"
                 playsInline
@@ -505,14 +505,14 @@ export default function TrapEntertainmentWebsite() {
                   }`}>Access Terminal</span>
                   
                   <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
-                    {activeEvent === "noir" ? "NOIR MANSION GUESTLIST" : "LIILU GUESTLIST"}
+                    {activeEvent === "noir" ? "NOIR MANSION GUESTLIST" : "VIDO JEAN GUESTLIST"}
                   </h3>
                   
                   <p className="text-xs text-neutral-400 mt-2 font-light">
                     {activeEvent === "noir" ? (
                       <span>Guestlist verification rules apply. Ladies & Couples register for total free access.</span>
                     ) : (
-                      <span>Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 7:00 PM and strictly before 8:30 PM</span> to claim valid entry perks.</span>
+                      <span>Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 8:00 PM and strictly before 9:30 PM</span> to claim valid entry perks.</span>
                     )}
                   </p>
                 </div>
@@ -529,7 +529,7 @@ export default function TrapEntertainmentWebsite() {
                       <div>
                         <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
                         <span className="text-[11px] text-neutral-500 font-light">
-                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 8:30 PM threshold"}
+                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 9:30 PM threshold"}
                         </span>
                       </div>
                       <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
@@ -541,7 +541,7 @@ export default function TrapEntertainmentWebsite() {
                       <div>
                         <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
                         <span className="text-[11px] text-neutral-500 font-light">
-                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 8:30 PM threshold"}
+                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 9:30 PM threshold"}
                         </span>
                       </div>
                       <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
@@ -565,7 +565,7 @@ export default function TrapEntertainmentWebsite() {
                       <input 
                         type="hidden" 
                         name="Event" 
-                        value={activeEvent === "noir" ? "NOIR MANSION (CRONIC) @ Heyou (4th July)" : "LIILU (MALIK) @ Cavore (3rd July)"} 
+                        value={activeEvent === "noir" ? "NOIR MANSION (CRONIC) @ Heyou (4th July)" : "VIDO JEAN (MALIK) @ Cavore (10th July)"} 
                       />
                       
                       <div>
