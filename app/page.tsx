@@ -56,15 +56,7 @@ export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
-  
-  // Cinematic & Booking Flow States
-  const [isVideoActive, setIsVideoActive] = useState(false);
   const [showPasses, setShowPasses] = useState(false);
-  const [activeEvent, setActiveEvent] = useState<"vidojean" | "noir" | null>(null);
-  
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Dynamic Guestlist Selection State
   const [selectedCategory, setSelectedCategory] = useState("Ladies");
 
   const dotRef = useRef<HTMLDivElement>(null);
@@ -137,59 +129,12 @@ export default function TrapEntertainmentWebsite() {
     };
   }, []);
 
-  // Performance Engine: Video Timeline checking on isolated thread
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !isVideoActive) return;
-
-    const checkTime = () => {
-      const duration = video.duration;
-      const currentTime = video.currentTime;
-      
-      if (duration && duration - currentTime <= 1.5) {
-        setShowPasses(true);
-        video.removeEventListener("timeupdate", checkTime);
-      }
-    };
-
-    video.addEventListener("timeupdate", checkTime);
-    return () => {
-      video.removeEventListener("timeupdate", checkTime);
-    };
-  }, [isVideoActive]);
-
-  // Handler for VIDO JEAN (With Video Flow)
-  const startVidoJeanExperience = () => {
-    setActiveEvent("vidojean");
-    setIsVideoActive(true);
-    setShowPasses(false);
-    setTimeout(() => {
-      if (videoRef.current) {
-        videoRef.current.muted = false;
-        videoRef.current.currentTime = 0;
-        videoRef.current.play().catch(err => console.log("Video playback caught:", err));
-      }
-    }, 50);
-  };
-
-  // Handler for Noir Mansion (Direct Guestlist Flow)
-  const startNoirExperience = () => {
-    setActiveEvent("noir");
-    setIsVideoActive(false);
+  const openBookingModal = () => {
     setShowPasses(true);
   };
 
   const closeBookingModal = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-    setIsVideoActive(false);
     setShowPasses(false);
-    setActiveEvent(null);
-  };
-
-  const skipToGuestlist = () => {
-    setShowPasses(true);
   };
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
@@ -302,7 +247,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Active Curation Showroom Grid Section */}
+      {/* Active Curation Showcase Grid Section */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -324,11 +269,11 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
+          <div className="max-w-xl mx-auto w-full">
             
-            {/* Event 1: VIDO JEAN (Friday) */}
+            {/* Event: VIDO JEAN */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
-              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+              <div className="relative min-h-[340px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
                   src="/vidojean.png" 
                   alt="Vido Jean Showcase Poster" 
@@ -374,69 +319,10 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={startVidoJeanExperience}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)]"
+                  onClick={openBookingModal}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
                 >
-                  <Ticket className="h-4 w-4 animate-bounce" /> ENTER VIDEO EXPERIENCE
-                </button>
-              </div>
-            </div>
-
-            {/* Event 2: NOIR MANSION (Saturday) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30">
-              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/Heyou.png" 
-                  alt="Noir Mansion Event Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit animate-pulse">
-                  <Radio className="h-3 w-3" />
-                  <span>HEYOU - MG Road</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-400 block mb-1">Featuring</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-red-400 transition-colors duration-300">CRONIC</h4>
-                </div>
-              </div>
-
-              <div className="p-8 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    NOIR MANSION
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-3">
-                    A premium atmospheric showcase presenting City Rush. Not every invitation is accepted. Mapped out for Bangalore's luxury purists.
-                  </p>
-                  <p className="text-[10px] text-red-400/90 font-semibold mb-6 flex items-center gap-1.5">
-                    <Sparkles className="h-3 w-3 shrink-0" /> Free entry for ladies & couples all night long.
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">Saturday, 4th July 2026</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">8:30 PM onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">HEYOU - MG Road, Bangalore</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={startNoirExperience}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(239,68,68,0.2)] hover:shadow-[0_4px_25px_rgba(239,68,68,0.35)]"
-                >
-                  <Ticket className="h-4 w-4 animate-pulse" /> SECURE DIRECT GUESTLIST
+                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
                 </button>
               </div>
             </div>
@@ -445,188 +331,124 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Booking Modal & Cinematic Player Hub */}
-      {(isVideoActive || showPasses) && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black overflow-y-auto transform-gpu">
-          
-          {/* VIDEO PLAYBACK CONTAINER OVERLAY */}
-          {isVideoActive && !showPasses && (
-            <div className={`absolute inset-0 bg-black flex items-center justify-center overflow-hidden transition-all duration-1000 ease-in-out ${
-              showPasses ? "opacity-0 pointer-events-none scale-95" : "opacity-100 scale-100"
-            }`}>
-              <video
-                ref={videoRef}
-                src="/vidojean.mp4"
-                onEnded={skipToGuestlist}
-                className="w-full h-full object-cover select-none pointer-events-none transform-gpu will-change-transform"
-                playsInline
-                preload="auto"
-              />
+      {/* Guestlist Form Overlay Terminal Modal */}
+      {showPasses && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/95 overflow-y-auto animate-in fade-in duration-300 backdrop-blur-md">
+          <div className="relative w-full max-w-4xl my-auto mx-auto border rounded-3xl p-6 md:p-10 shadow-2xl bg-neutral-950/95 border-neutral-800 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 ease-out">
+            
+            <button
+              type="button"
+              onClick={closeBookingModal}
+              className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-amber-400 transition-colors p-2 bg-neutral-900/60 rounded-full z-50"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="text-center mb-8 max-w-xl mx-auto">
+              <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
+              <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
+                VIDO JEAN GUESTLIST
+              </h3>
+              <p className="text-xs text-neutral-400 mt-2 font-light">
+                Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 8:00 PM and strictly before 9:30 PM</span> to claim valid entry perks.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
               
-              <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
-                <button
-                  type="button"
-                  onClick={skipToGuestlist}
-                  className="px-4 py-2 rounded-xl bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-xs font-bold text-neutral-300 tracking-wider uppercase transition-all hover:border-amber-400/40 hover:text-amber-400 active:scale-95"
-                >
-                  Skip Preview
-                </button>
-                <button
-                  type="button"
-                  onClick={closeBookingModal}
-                  className="p-2.5 rounded-full bg-neutral-900/80 border border-neutral-800 backdrop-blur-md text-neutral-400 hover:text-white transition-all active:scale-95"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* GUESTLIST TERMINAL FORM */}
-          {showPasses && activeEvent && (
-            <div className="relative w-full max-w-4xl px-4 py-12 my-auto mx-auto z-40 transition-all duration-[1200ms] cubic-bezier(0.16,1,0.3,1) transform-gpu opacity-100 translate-y-0 scale-100">
-              <div className={`border rounded-3xl p-6 md:p-10 shadow-2xl relative backdrop-blur-xl ${
-                activeEvent === "noir" 
-                  ? "bg-neutral-950/95 border-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.1)]" 
-                  : "bg-neutral-950/95 border-neutral-800"
-              }`}>
+              {/* Column 1: Pricing Tier Architecture */}
+              <div className="space-y-4">
+                <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
+                  <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
+                </h4>
                 
-                <button
-                  type="button"
-                  onClick={closeBookingModal}
-                  className="absolute top-4 right-4 md:top-6 md:right-6 text-neutral-500 hover:text-amber-400 transition-colors p-2 bg-neutral-900/60 rounded-full z-50"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-
-                <div className="text-center mb-8 max-w-xl mx-auto">
-                  <span className={`text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 ${
-                    activeEvent === "noir" ? "text-red-400" : "text-amber-400"
-                  }`}>Access Terminal</span>
-                  
-                  <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
-                    {activeEvent === "noir" ? "NOIR MANSION GUESTLIST" : "VIDO JEAN GUESTLIST"}
-                  </h3>
-                  
-                  <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {activeEvent === "noir" ? (
-                      <span>Guestlist verification rules apply. Ladies & Couples register for total free access.</span>
-                    ) : (
-                      <span>Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 8:00 PM and strictly before 9:30 PM</span> to claim valid entry perks.</span>
-                    )}
-                  </p>
+                <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
+                  <div>
+                    <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Free entry before 9:30 PM threshold</span>
+                  </div>
+                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 items-start">
-                  
-                  {/* Column 1: Pricing Tier Blueprint Matrices */}
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
-                      <Sparkles className={`h-3 w-3 ${activeEvent === "noir" ? "text-red-400" : "text-amber-400"}`} /> Cover Architecture
-                    </h4>
-                    
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
-                        <span className="text-[11px] text-neutral-500 font-light">
-                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 9:30 PM threshold"}
-                        </span>
-                      </div>
-                      <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
-                        activeEvent === "noir" ? "text-red-400 border-red-500/20" : "text-amber-400 border-amber-500/20"
-                      }`}>FREE</span>
-                    </div>
-
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
-                        <span className="text-[11px] text-neutral-500 font-light">
-                          {activeEvent === "noir" ? "Free entry all night long" : "Free entry before 9:30 PM threshold"}
-                        </span>
-                      </div>
-                      <span className={`text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border ${
-                        activeEvent === "noir" ? "text-red-400 border-red-500/20" : "text-amber-400 border-amber-500/20"
-                      }`}>FREE</span>
-                    </div>
-
-                    <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center transition-all hover:border-neutral-800">
-                      <div>
-                        <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
-                        <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
-                      </div>
-                      <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
-                    </div>
+                <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
+                  <div>
+                    <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Free entry before 9:30 PM threshold</span>
                   </div>
-
-                  {/* Column 2: Adaptive Form Engine */}
-                  <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
-                    <form action="https://formspree.io/f/xlgylpaz" method="POST" className="space-y-4">
-                      
-                      <input 
-                        type="hidden" 
-                        name="Event" 
-                        value={activeEvent === "noir" ? "NOIR MANSION (CRONIC) @ Heyou (4th July)" : "VIDO JEAN (MALIK) @ Cavore (10th July)"} 
-                      />
-                      
-                      <div>
-                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
-                        <select 
-                          name="category" 
-                          required 
-                          value={selectedCategory}
-                          onChange={(e) => setSelectedCategory(e.target.value)}
-                          className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
-                        >
-                          <option value="Ladies">Ladies Pass</option>
-                          <option value="Couple">Couple Pass</option>
-                          <option value="Stag">Stag Pass</option>
-                        </select>
-                      </div>
-
-                      {selectedCategory === "Couple" ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                          <div>
-                            <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 1 Name</label>
-                            <input type="text" name="partner1_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                          </div>
-                          <div>
-                            <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 2 Name</label>
-                            <input type="text" name="partner2_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
-                          <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                        </div>
-                      )}
-
-                      <div className="grid grid-cols-1 gap-4">
-                        <div>
-                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
-                          <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                        </div>
-                      </div>
-
-                      <button 
-                        type="submit" 
-                        className={`w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 ${
-                          activeEvent === "noir" 
-                            ? "bg-red-500 hover:bg-red-400" 
-                            : "bg-amber-400 hover:bg-amber-300"
-                        }`}
-                      >
-                        Secure Guestlist Spot
-                      </button>
-                    </form>
-                  </div>
-
+                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
                 </div>
 
+                <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
+                  <div>
+                    <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
+                  </div>
+                  <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
+                </div>
               </div>
-            </div>
-          )}
 
+              {/* Column 2: Form Engine */}
+              <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
+                <form action="https://formspree.io/f/xlgylpaz" method="POST" className="space-y-4">
+                  
+                  <input 
+                    type="hidden" 
+                    name="Event" 
+                    value="VIDO JEAN (MALIK) @ Cavore (10th July)" 
+                  />
+                  
+                  <div>
+                    <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
+                    <select 
+                      name="category" 
+                      required 
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
+                    >
+                      <option value="Ladies">Ladies Pass</option>
+                      <option value="Couple">Couple Pass</option>
+                      <option value="Stag">Stag Pass</option>
+                    </select>
+                  </div>
+
+                  {selectedCategory === "Couple" ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                      <div>
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 1 Name</label>
+                        <input type="text" name="partner1_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 2 Name</label>
+                        <input type="text" name="partner2_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
+                      <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 gap-4">
+                    <div>
+                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
+                      <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                    </div>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 bg-amber-400 hover:bg-amber-300"
+                  >
+                    Secure Guestlist Spot
+                  </button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
         </div>
       )}
 
