@@ -13,7 +13,8 @@ import {
   Calendar,
   Clock,
   MapPin,
-  Ticket
+  Ticket,
+  Flame
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -58,6 +59,7 @@ export default function TrapEntertainmentWebsite() {
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [showPasses, setShowPasses] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Ladies");
+  const [selectedEvent, setSelectedEvent] = useState({ title: "", subtitle: "", formValue: "" });
 
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -129,7 +131,8 @@ export default function TrapEntertainmentWebsite() {
     };
   }, []);
 
-  const openBookingModal = () => {
+  const openBookingModal = (eventTitle: string, subtitle: string, formValue: string) => {
+    setSelectedEvent({ title: eventTitle, subtitle: subtitle, formValue: formValue });
     setShowPasses(true);
   };
 
@@ -269,11 +272,11 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="max-w-xl mx-auto w-full">
+          <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto w-full">
             
-            {/* Event: VIDO JEAN */}
+            {/* Event 1: VIDO JEAN */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
-              <div className="relative min-h-[340px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
                   src="/vidojean.png" 
                   alt="Vido Jean Showcase Poster" 
@@ -292,7 +295,7 @@ export default function TrapEntertainmentWebsite() {
                 </div>
               </div>
 
-              <div className="p-8 flex flex-col justify-between flex-grow">
+              <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
                     VIDO JEAN
@@ -319,8 +322,66 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={openBookingModal}
+                  onClick={() => openBookingModal("VIDO JEAN GUESTLIST", "Friday entry window profile", "VIDO JEAN (MALIK) @ Cavore (10th July)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
+                >
+                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
+                </button>
+              </div>
+            </div>
+
+            {/* Event 2: ALL NIGHTER (HEYOU) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30">
+              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+                <img 
+                  src="/allnighter.png" 
+                  alt="All Nighter Showcase Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+                
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
+                  <Flame className="h-3 w-3 text-red-500 animate-pulse" />
+                  <span>HEYOU Presents</span>
+                </div>
+
+                <div className="relative z-20 mt-auto">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-400 block mb-1">Featuring Lineup</span>
+                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-red-400 transition-colors duration-300 leading-tight">
+                    MANISHA D'SOUZA <span className="text-neutral-400 text-lg block font-medium mt-1">MANNERS &bull; CITY RUSH</span>
+                  </h4>
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2 flex items-center gap-2">
+                    ALL NIGHTER
+                  </h3>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                    Designed strictly for those who never leave early. An untamed sonic experience shifting high gears all night on MG Road.
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Calendar className="h-4 w-4 text-red-500/70" />
+                      <span className="font-medium">Saturday, 11th July 2026</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Clock className="h-4 w-4 text-red-500/70" />
+                      <span className="font-medium">8:30 PM onwards</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <MapPin className="h-4 w-4 text-red-500/70" />
+                      <span className="font-medium">HEYOU - MG Road, Bangalore</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="button"
+                  onClick={() => openBookingModal("ALL NIGHTER GUESTLIST", "Saturday entry window profile", "ALL NIGHTER @ HEYOU MG Road (11th July)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.4)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
                 </button>
@@ -347,10 +408,10 @@ export default function TrapEntertainmentWebsite() {
             <div className="text-center mb-8 max-w-xl mx-auto">
               <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
               <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
-                VIDO JEAN GUESTLIST
+                {selectedEvent.title}
               </h3>
               <p className="text-xs text-neutral-400 mt-2 font-light">
-                Guestlist profile members must arrive <span className="font-semibold text-neutral-200">after 8:00 PM and strictly before 9:30 PM</span> to claim valid entry perks.
+                {selectedEvent.subtitle}. Guestlist profile members must arrive <span className="font-semibold text-neutral-200">strictly before the standard venue threshold cuts</span> to claim entry perks.
               </p>
             </div>
 
@@ -365,7 +426,7 @@ export default function TrapEntertainmentWebsite() {
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
                   <div>
                     <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
-                    <span className="text-[11px] text-neutral-500 font-light">Free entry before 9:30 PM threshold</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Free entry cut-off thresholds apply</span>
                   </div>
                   <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
                 </div>
@@ -373,7 +434,7 @@ export default function TrapEntertainmentWebsite() {
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
                   <div>
                     <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
-                    <span className="text-[11px] text-neutral-500 font-light">Free entry before 9:30 PM threshold</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Free entry cut-off thresholds apply</span>
                   </div>
                   <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
                 </div>
@@ -381,7 +442,7 @@ export default function TrapEntertainmentWebsite() {
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
                   <div>
                     <span className="text-xs font-bold uppercase text-neutral-200 block">Stag Allocation</span>
-                    <span className="text-[11px] text-neutral-500 font-light">Cover charges applicable at counter</span>
+                    <span className="text-[11px] text-neutral-500 font-light">Cover charges completely down to desk rules</span>
                   </div>
                   <span className="text-xs font-bold text-neutral-400 bg-neutral-800 px-2.5 py-1 rounded-lg">COVER</span>
                 </div>
@@ -394,7 +455,7 @@ export default function TrapEntertainmentWebsite() {
                   <input 
                     type="hidden" 
                     name="Event" 
-                    value="VIDO JEAN (MALIK) @ Cavore (10th July)" 
+                    value={selectedEvent.formValue} 
                   />
                   
                   <div>
@@ -576,7 +637,7 @@ export default function TrapEntertainmentWebsite() {
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Contact Email / Phone</label>
-                    <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                    <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                   </div>
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Message / Special Requests</label>
