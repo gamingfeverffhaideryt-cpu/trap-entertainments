@@ -272,49 +272,50 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto w-full">
+          <div className="max-w-xl mx-auto w-full">
             
-            {/* Event 1: VIDO JEAN */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/30">
-              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            {/* Event Block: GOOM GUM */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30 hover:shadow-[0_0_35px_rgba(239,68,68,0.15)]">
+              <div className="relative min-h-[380px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/vidojean.png" 
-                  alt="Vido Jean Showcase Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                  src="/goomgum.png" 
+                  alt="Goom Gum Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
-                  <Radio className="h-3 w-3 animate-pulse" />
-                  <span>Sourberry & Infight presents</span>
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
+                  <Radio className="h-3 w-3 animate-pulse text-red-500" />
+                  <span>Sourberry presents</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Supporting Act</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">MALIK</h4>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-yellow-400 block mb-1">TECHTALES FEATURING</span>
+                  <h4 className="text-4xl font-black text-white tracking-tight uppercase group-hover:text-yellow-400 transition-colors duration-300">GOOM GUM</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">Supported by MALIK</p>
                 </div>
               </div>
 
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    VIDO JEAN
+                    TECHTALES ARCHITECTURE
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A world-class luxury social module featuring a heavy-hitting headline setup crafted for Bangalore's absolute elite purists.
+                    An ultra-exclusive showcase framing world-class sonic design. Engineered for absolute musical purists in a high-tier layout.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-amber-500/70" />
-                      <span className="font-medium">Friday, 10th July 2026</span>
+                      <Calendar className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">Friday, 17th July 2026</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-amber-500/70" />
+                      <Clock className="h-4 w-4 text-red-500" />
                       <span className="font-medium">8:00 PM onwards</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-amber-500/70" />
+                      <MapPin className="h-4 w-4 text-red-500" />
                       <span className="font-medium">Cavore, Bangalore</span>
                     </div>
                   </div>
@@ -322,66 +323,8 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("VIDO JEAN GUESTLIST", "Friday entry window profile", "VIDO JEAN (MALIK) @ Cavore (10th July)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
-                >
-                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
-                </button>
-              </div>
-            </div>
-
-            {/* Event 2: ALL NIGHTER (HEYOU) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/30">
-              <div className="relative min-h-[300px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/allnighter.png" 
-                  alt="All Nighter Showcase Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
-                  <Flame className="h-3 w-3 text-red-500 animate-pulse" />
-                  <span>HEYOU Presents</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-400 block mb-1">Featuring Lineup</span>
-                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-red-400 transition-colors duration-300 leading-tight">
-                    MANISHA D'SOUZA <span className="text-neutral-400 text-lg block font-medium mt-1">MANNERS &bull; CITY RUSH</span>
-                  </h4>
-                </div>
-              </div>
-
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2 flex items-center gap-2">
-                    ALL NIGHTER
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    Designed strictly for those who never leave early. An untamed sonic experience shifting high gears all night on MG Road.
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">Saturday, 11th July 2026</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">8:30 PM onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-red-500/70" />
-                      <span className="font-medium">HEYOU - MG Road, Bangalore</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => openBookingModal("ALL NIGHTER GUESTLIST", "Saturday entry window profile", "ALL NIGHTER @ HEYOU MG Road (11th July)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.4)]"
+                  onClick={() => openBookingModal("GOOM GUM GUESTLIST", "Techtales Friday allocation windows", "GOOM GUM (MALIK) @ Cavore (17th July)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
                 </button>
@@ -406,7 +349,7 @@ export default function TrapEntertainmentWebsite() {
             </button>
 
             <div className="text-center mb-8 max-w-xl mx-auto">
-              <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
+              <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-yellow-400">Access Terminal</span>
               <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
                 {selectedEvent.title}
               </h3>
@@ -420,7 +363,7 @@ export default function TrapEntertainmentWebsite() {
               {/* Column 1: Pricing Tier Architecture */}
               <div className="space-y-4">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
-                  <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
+                  <Sparkles className="text-yellow-400 h-3 w-3" /> Cover Architecture
                 </h4>
                 
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
@@ -428,7 +371,7 @@ export default function TrapEntertainmentWebsite() {
                     <span className="text-xs font-bold uppercase text-neutral-200 block">Ladies Pass</span>
                     <span className="text-[11px] text-neutral-500 font-light">Free entry cut-off thresholds apply</span>
                   </div>
-                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
+                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-yellow-400 border-red-500/20">FREE</span>
                 </div>
 
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
@@ -436,7 +379,7 @@ export default function TrapEntertainmentWebsite() {
                     <span className="text-xs font-bold uppercase text-neutral-200 block">Couples Profile</span>
                     <span className="text-[11px] text-neutral-500 font-light">Free entry cut-off thresholds apply</span>
                   </div>
-                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-amber-400 border-amber-500/20">FREE</span>
+                  <span className="text-xs font-black bg-neutral-950/80 px-3 py-1 rounded-lg border text-yellow-400 border-red-500/20">FREE</span>
                 </div>
 
                 <div className="rounded-2xl border border-neutral-900 bg-neutral-900/30 p-4 flex justify-between items-center">
@@ -450,7 +393,7 @@ export default function TrapEntertainmentWebsite() {
 
               {/* Column 2: Form Engine */}
               <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
-                <form action="https://formspree.io/f/xlgylpaz" method="POST" className="space-y-4">
+                <form action="https://formspree.io/f/xdaqodeb" method="POST" className="space-y-4">
                   
                   <input 
                     type="hidden" 
@@ -629,7 +572,7 @@ export default function TrapEntertainmentWebsite() {
                 <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
                 <p className="text-sm text-neutral-400 font-light mb-6">Drop your information below to sign up for next-event priority access notification hooks or business proposals.</p>
                 
-                <form action="https://formspree.io/f/xlgylpaz" method="POST" className="space-y-4">
+                <form action="https://formspree.io/f/xdaqodeb" method="POST" className="space-y-4">
                   <input type="hidden" name="Context" value="VIP Waitlist & Business Hub Setup" />
                   <div>
                     <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
