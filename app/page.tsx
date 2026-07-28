@@ -15,7 +15,8 @@ import {
   MapPin,
   Ticket,
   Flame,
-  Shirt
+  Shirt,
+  CheckCircle2
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -60,7 +61,10 @@ export default function TrapEntertainmentWebsite() {
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [showPasses, setShowPasses] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Girls");
-  const [selectedEvent, setSelectedEvent] = useState({ title: "", subtitle: "", formValue: "" });
+  const [selectedEvent, setSelectedEvent] = useState({ id: "", title: "", subtitle: "", formValue: "" });
+  
+  // Submission Success State
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -132,13 +136,39 @@ export default function TrapEntertainmentWebsite() {
     };
   }, []);
 
-  const openBookingModal = (eventTitle: string, subtitle: string, formValue: string) => {
-    setSelectedEvent({ title: eventTitle, subtitle: subtitle, formValue: formValue });
+  const openBookingModal = (id: string, eventTitle: string, subtitle: string, formValue: string) => {
+    setSelectedEvent({ id: id, title: eventTitle, subtitle: subtitle, formValue: formValue });
+    setIsSubmitted(false);
     setShowPasses(true);
   };
 
   const closeBookingModal = () => {
     setShowPasses(false);
+    setIsSubmitted(false);
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/mykropbw", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        alert("There was an issue submitting your request. Please try again.");
+      }
+    } catch (error) {
+      alert("There was an issue submitting your request. Please try again.");
+    }
   };
 
   const heroScale = Math.max(0.88, 1 - scrollY / 2500);
@@ -324,7 +354,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("BIANCA LIF GUESTLIST", "Techtales Friday allocation windows", "BIANCA LIF @ Cavore (31st July)")}
+                  onClick={() => openBookingModal("cavore", "BIANCA LIF GUESTLIST", "Techtales Friday allocation windows", "BIANCA LIF @ Cavore (31st July)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-yellow-500 via-amber-500 to-red-500 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(234,179,8,0.2)] hover:shadow-[0_4px_25px_rgba(234,179,8,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
@@ -385,7 +415,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("HOUSE OF BLACK GUESTLIST", "Saturday night entry profile", "HOUSE OF BLACK @ HEYOU MG Road (1st August)")}
+                  onClick={() => openBookingModal("heeyou", "HOUSE OF BLACK GUESTLIST", "Saturday night entry profile", "HOUSE OF BLACK @ HEYOU MG Road (1st August)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-neutral-100 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 hover:bg-neutral-200 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
@@ -410,123 +440,172 @@ export default function TrapEntertainmentWebsite() {
               <X className="h-5 w-5" />
             </button>
 
-            <div className="text-center mb-8 max-w-xl mx-auto">
-              <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
-              <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
-                {selectedEvent.title}
-              </h3>
-              <p className="text-xs text-neutral-400 mt-2 font-light">
-                {selectedEvent.subtitle}. Full cover charges applied upon door entry.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-              
-              {/* Column 1: Pricing Tier Architecture */}
-              <div className="space-y-4">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
-                  <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
-                </h4>
-                
-                {/* Till 9:00 PM */}
-                <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
-                    Till 9:00 PM Threshold
-                  </span>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Couples</span>
-                    <span className="font-bold text-amber-400">₹4,500 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Girls</span>
-                    <span className="font-bold text-amber-400">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Stags</span>
-                    <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                  </div>
+            {!isSubmitted ? (
+              <>
+                <div className="text-center mb-8 max-w-xl mx-auto">
+                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
+                  <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
+                    {selectedEvent.title}
+                  </h3>
+                  <p className="text-xs text-neutral-400 mt-2 font-light">
+                    {selectedEvent.subtitle}. Please complete your reservation details below.
+                  </p>
                 </div>
 
-                {/* Post 10:00 PM */}
-                <div className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 space-y-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-red-400 block border-b border-red-500/10 pb-1">
-                    Post 10:00 PM Threshold
-                  </span>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Couples</span>
-                    <span className="font-bold text-white">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                <div className="grid md:grid-cols-2 gap-8 items-start">
+                  
+                  {/* Column 1: Pricing Tier Architecture */}
+                  <div className="space-y-4">
+                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
+                      <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
+                    </h4>
+                    
+                    {selectedEvent.id === "heeyou" ? (
+                      /* HEYOU Specific Pricing */
+                      <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-5 space-y-3">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1.5">
+                          HEYOU Exclusive Guestlist Rules
+                        </span>
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-neutral-300">Girls</span>
+                          <span className="font-bold text-emerald-400 uppercase tracking-wider">FREE ENTRY</span>
+                        </div>
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-neutral-300">Couples</span>
+                          <span className="font-bold text-emerald-400 uppercase tracking-wider">FREE ENTRY</span>
+                        </div>
+                        <div className="flex justify-between items-center text-xs">
+                          <span className="text-neutral-300">Stags</span>
+                          <span className="font-bold text-amber-400">₹3,000 / head <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Cavore Pricing Architecture */
+                      <>
+                        <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
+                            Till 9:00 PM Threshold
+                          </span>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Couples</span>
+                            <span className="font-bold text-amber-400">₹4,500 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Girls</span>
+                            <span className="font-bold text-amber-400">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Stags</span>
+                            <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                        </div>
+
+                        <div className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 space-y-2">
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-red-400 block border-b border-red-500/10 pb-1">
+                            Post 10:00 PM Threshold
+                          </span>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Couples</span>
+                            <span className="font-bold text-white">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Girls</span>
+                            <span className="font-bold text-white">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                          <div className="flex justify-between items-center text-xs">
+                            <span className="text-neutral-300">Stags</span>
+                            <span className="font-bold text-white">₹8,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Girls</span>
-                    <span className="font-bold text-white">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+
+                  {/* Column 2: Form Engine */}
+                  <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      
+                      <input 
+                        type="hidden" 
+                        name="Event" 
+                        value={selectedEvent.formValue} 
+                      />
+                      
+                      <div>
+                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
+                        <select 
+                          name="category" 
+                          required 
+                          value={selectedCategory}
+                          onChange={(e) => setSelectedCategory(e.target.value)}
+                          className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
+                        >
+                          <option value="Girls">Girls Pass</option>
+                          <option value="Couple">Couple Pass</option>
+                          <option value="Stag">Stag Pass</option>
+                        </select>
+                      </div>
+
+                      {selectedCategory === "Couple" ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                          <div>
+                            <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 1 Name</label>
+                            <input type="text" name="partner1_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                          </div>
+                          <div>
+                            <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 2 Name</label>
+                            <input type="text" name="partner2_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
+                          <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 gap-4">
+                        <div>
+                          <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
+                          <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
+                        </div>
+                      </div>
+
+                      <button 
+                        type="submit" 
+                        className="w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 bg-amber-400 hover:bg-amber-300"
+                      >
+                        Secure Guestlist Spot
+                      </button>
+                    </form>
                   </div>
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="text-neutral-300">Stags</span>
-                    <span className="font-bold text-white">₹8,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                  </div>
+
                 </div>
+              </>
+            ) : (
+              /* Submission Confirmation Screen */
+              <div className="text-center py-12 px-4 space-y-6 max-w-lg mx-auto animate-in fade-in zoom-in-95 duration-300">
+                <CheckCircle2 className="h-16 w-16 text-amber-400 mx-auto animate-bounce" />
+                <h3 className="text-3xl font-black uppercase text-white tracking-tight">
+                  Guestlist Confirmed!
+                </h3>
+                <div className="bg-neutral-900 border border-amber-500/30 rounded-2xl p-6 space-y-3 text-neutral-300">
+                  <p className="text-sm font-medium">
+                    Your entry is reserved at the box office.
+                  </p>
+                  <p className="text-base md:text-lg font-bold text-amber-400 bg-black/60 py-3 px-4 rounded-xl border border-amber-500/20">
+                    Please say <span className="text-white font-black underline decoration-amber-400">"Trap Guestlist"</span> and enter.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeBookingModal}
+                  className="px-8 py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-bold text-xs uppercase tracking-wider transition-all"
+                >
+                  Close Window
+                </button>
               </div>
-
-              {/* Column 2: Form Engine (NEW FORMSPREE LINK APPLIED HERE) */}
-              <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
-                <form action="https://formspree.io/f/mykropbw" method="POST" className="space-y-4">
-                  
-                  <input 
-                    type="hidden" 
-                    name="Event" 
-                    value={selectedEvent.formValue} 
-                  />
-                  
-                  <div>
-                    <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
-                    <select 
-                      name="category" 
-                      required 
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
-                    >
-                      <option value="Girls">Girls Pass</option>
-                      <option value="Couple">Couple Pass</option>
-                      <option value="Stag">Stag Pass</option>
-                    </select>
-                  </div>
-
-                  {selectedCategory === "Couple" ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
-                      <div>
-                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 1 Name</label>
-                        <input type="text" name="partner1_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                      </div>
-                      <div>
-                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Partner 2 Name</label>
-                        <input type="text" name="partner2_name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Your Full Name</label>
-                      <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 gap-4">
-                    <div>
-                      <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Contact Info</label>
-                      <input type="text" name="contact" required placeholder="Phone / Email" className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors" />
-                    </div>
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    className="w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 bg-amber-400 hover:bg-amber-300"
-                  >
-                    Secure Guestlist Spot
-                  </button>
-                </form>
-              </div>
-
-            </div>
+            )}
 
           </div>
         </div>
@@ -615,7 +694,10 @@ export default function TrapEntertainmentWebsite() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4 px-4">
             <button 
               type="button"
-              onClick={() => setActiveModal('contact')}
+              onClick={() => {
+                setActiveModal('contact');
+                setIsSubmitted(false);
+              }}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 px-8 py-4 text-base md:text-lg font-bold text-black transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-lg"
             >
               <Mail className="h-5 w-5 shrink-0" /> Contact Us
@@ -629,14 +711,17 @@ export default function TrapEntertainmentWebsite() {
         © 2026 Trap Entertainment. All rights reserved. Curated for the elite crowd in Bangalore, India.
       </footer>
 
-      {/* Modal Engine (NEW FORMSPREE LINK APPLIED HERE TOO) */}
+      {/* Contact Modal Engine */}
       {activeModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/90 transition-all duration-300 overflow-y-auto">
           <div className="relative w-full max-w-md rounded-3xl border border-neutral-800 bg-neutral-950 shadow-2xl my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-300 ease-out">
             
             <button 
               type="button"
-              onClick={() => setActiveModal(null)}
+              onClick={() => {
+                setActiveModal(null);
+                setIsSubmitted(false);
+              }}
               className="absolute top-4 right-4 text-neutral-400 hover:text-amber-400 transition-colors p-2 z-40 bg-black/60 rounded-full"
             >
               <X className="h-5 w-5 shrink-0" />
@@ -645,27 +730,49 @@ export default function TrapEntertainmentWebsite() {
             {/* Contact Modal Module */}
             {activeModal === 'contact' && (
               <div className="p-6 md:p-8">
-                <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
-                <p className="text-sm text-neutral-400 font-light mb-6">Drop your information below to sign up for next-event priority access notification hooks or business proposals.</p>
-                
-                <form action="https://formspree.io/f/mykropbw" method="POST" className="space-y-4">
-                  <input type="hidden" name="Context" value="VIP Waitlist & Business Hub Setup" />
-                  <div>
-                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
-                    <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                {!isSubmitted ? (
+                  <>
+                    <h3 className="text-2xl font-black text-neutral-100 mb-2">Connect with Trap Management</h3>
+                    <p className="text-sm text-neutral-400 font-light mb-6">Drop your information below to sign up for next-event priority access notification hooks or business proposals.</p>
+                    
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      <input type="hidden" name="Context" value="VIP Waitlist & Business Hub Setup" />
+                      <div>
+                        <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Your Name</label>
+                        <input type="text" name="name" required className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Contact Email / Phone</label>
+                        <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                      </div>
+                      <div>
+                        <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Message / Special Requests</label>
+                        <textarea name="message" rows={3} placeholder="Let us know if you're joining the early waitlist or reaching out for business." className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
+                      </div>
+                      <button type="submit" className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
+                        Submit Request
+                      </button>
+                    </form>
+                  </>
+                ) : (
+                  <div className="text-center py-6 space-y-4">
+                    <CheckCircle2 className="h-12 w-12 text-amber-400 mx-auto" />
+                    <h4 className="text-xl font-bold text-white uppercase">Request Received</h4>
+                    <p className="text-xs text-neutral-400">
+                      Your entry is reserved at the box office please say <span className="text-amber-400 font-bold">"Trap Guestlist"</span> and enter.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActiveModal(null);
+                        setIsSubmitted(false);
+                      }}
+                      className="mt-4 px-6 py-2.5 rounded-xl bg-neutral-800 text-white font-bold text-xs uppercase"
+                    >
+                      Close
+                    </button>
                   </div>
-                  <div>
-                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Contact Email / Phone</label>
-                    <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Message / Special Requests</label>
-                    <textarea name="message" rows={3} placeholder="Let us know if you're joining the early waitlist or reaching out for business." className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 resize-none"></textarea>
-                  </div>
-                  <button type="submit" className="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs tracking-wider transition-all">
-                    Submit Request
-                  </button>
-                </form>
+                )}
               </div>
             )}
 
