@@ -14,8 +14,6 @@ import {
   Clock,
   MapPin,
   Ticket,
-  Flame,
-  Shirt,
   CheckCircle2
 } from 'lucide-react';
 
@@ -63,7 +61,6 @@ export default function TrapEntertainmentWebsite() {
   const [selectedCategory, setSelectedCategory] = useState("Girls");
   const [selectedEvent, setSelectedEvent] = useState({ id: "", title: "", subtitle: "", formValue: "" });
   
-  // Submission Success State
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const dotRef = useRef<HTMLDivElement>(null);
@@ -281,7 +278,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Active Curation Showcase Grid Section */}
+      {/* Active Curation Showcase Section */}
       <section id="event" className="mx-auto max-w-7xl px-6 py-24 border-t border-amber-500/5">
         <div 
           ref={eventsHeaderReveal.elementRef}
@@ -293,7 +290,7 @@ export default function TrapEntertainmentWebsite() {
             Now Live
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            Active Showcases
+            Active Showcase
           </h2>
         </div>
 
@@ -303,120 +300,59 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="grid md:grid-cols-2 gap-8 items-stretch max-w-5xl mx-auto w-full">
+          <div className="max-w-3xl mx-auto w-full">
             
-            {/* Event 1: BIANCA LIF */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-yellow-500/40 hover:shadow-[0_0_35px_rgba(234,179,8,0.15)]">
-              <div className="relative min-h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            {/* TECHTALES: MELODIC */}
+            <div className="group relative flex flex-col md:flex-row rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_35px_rgba(239,68,68,0.15)]">
+              <div className="relative w-full md:w-1/2 min-h-[380px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/biancalif.png" 
-                  alt="Bianca Lif Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                  src="/7 AUG FRIDAY.png" 
+                  alt="Techtales Featuring Melodic Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-yellow-400 w-fit">
-                  <Radio className="h-3 w-3 animate-pulse text-yellow-400" />
-                  <span>Sourberry & Papi Dinero present</span>
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
+                  <Radio className="h-3 w-3 animate-pulse text-red-400" />
+                  <span>Sourberry & Cavore Present</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
                   <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Techtales Showcase</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-yellow-400 transition-colors duration-300">BIANCA LIF</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">Supporting Act: MALIK</p>
+                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-red-400 transition-colors duration-300">MELODIC</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">Also Featuring: MALIK</p>
                 </div>
               </div>
 
-              <div className="p-6 flex flex-col justify-between flex-grow">
+              <div className="p-6 md:p-8 flex flex-col justify-between w-full md:w-1/2">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    BIANCA LIF @ CAVORE
+                    TECHTALES @ CAVORE
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    Argentine DJ, producer, & percussionist delivering driving tech-house grooves with high-energy Latin percussion influences.
+                    A underground melodic experience presented by Sourberry and Cavore, powered by Surge, Xzoro, Ignite, Yore, WE Entertainment, Scenes, and Trap Entertainment.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-yellow-500" />
-                      <span className="font-medium">Friday, 31st July 2026</span>
+                      <Calendar className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">Friday, 7th August</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-yellow-500" />
-                      <span className="font-medium">8:00 PM onwards</span>
+                      <Clock className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">8:00 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-yellow-500" />
-                      <span className="font-medium">Cavore, Residency Road, BLR</span>
+                      <MapPin className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">Cavore, Bangalore</span>
                     </div>
                   </div>
                 </div>
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("cavore", "BIANCA LIF GUESTLIST", "Techtales Friday allocation windows", "BIANCA LIF @ Cavore (31st July)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-yellow-500 via-amber-500 to-red-500 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(234,179,8,0.2)] hover:shadow-[0_4px_25px_rgba(234,179,8,0.35)]"
-                >
-                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
-                </button>
-              </div>
-            </div>
-
-            {/* Event 2: HOUSE OF BLACK */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-neutral-700 hover:shadow-[0_0_35px_rgba(255,255,255,0.05)]">
-              <div className="relative min-h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/houseofblack.png" 
-                  alt="House Of Black Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-screen transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-neutral-800/80 border border-neutral-700 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-neutral-300 w-fit">
-                  <Flame className="h-3 w-3 text-red-500 animate-pulse" />
-                  <span>HEYOU Presents</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-neutral-400 block mb-1">Featuring Lineup</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">HOUSE OF BLACK</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">MARTIN DSOUZA &bull; AMITH SULEGAI</p>
-                </div>
-              </div>
-
-              <div className="p-6 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    HOUSE OF BLACK
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-4">
-                    The night your group chat finally steps out. A world inside the club with zero compromises.
-                  </p>
-
-                  <div className="space-y-3 mb-6">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-neutral-400" />
-                      <span className="font-medium">Saturday, 1st August 2026</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-neutral-400" />
-                      <span className="font-medium">8:30 PM onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-neutral-400" />
-                      <span className="font-medium">HEYOU - MG Road, Bangalore</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-xs font-bold text-amber-400 bg-neutral-900/80 px-3 py-1.5 rounded-xl border border-neutral-800 w-fit">
-                      <Shirt className="h-3.5 w-3.5" />
-                      <span>DRESS CODE: ALL BLACK</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => openBookingModal("heeyou", "HOUSE OF BLACK GUESTLIST", "Saturday night entry profile", "HOUSE OF BLACK @ HEYOU MG Road (1st August)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-neutral-100 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 hover:bg-neutral-200 shadow-[0_4px_15px_rgba(255,255,255,0.1)]"
+                  onClick={() => openBookingModal("cavore", "TECHTALES: MELODIC GUESTLIST", " Cavore Friday night allocation", "TECHTALES: MELODIC @ Cavore (7 Aug)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
                 </button>
@@ -460,65 +396,41 @@ export default function TrapEntertainmentWebsite() {
                       <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
                     </h4>
                     
-                    {selectedEvent.id === "heeyou" ? (
-                      /* HEYOU Specific Pricing */
-                      <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-5 space-y-3">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1.5">
-                          HEYOU Exclusive Guestlist Rules
-                        </span>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-neutral-300">Girls</span>
-                          <span className="font-bold text-emerald-400 uppercase tracking-wider">FREE ENTRY</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-neutral-300">Couples</span>
-                          <span className="font-bold text-emerald-400 uppercase tracking-wider">FREE ENTRY</span>
-                        </div>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-neutral-300">Stags</span>
-                          <span className="font-bold text-amber-400">₹3,000 / head <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                        </div>
+                    <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
+                        Till 9:00 PM Threshold
+                      </span>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Couples</span>
+                        <span className="font-bold text-amber-400">₹4,500 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
                       </div>
-                    ) : (
-                      /* Cavore Pricing Architecture */
-                      <>
-                        <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
-                            Till 9:00 PM Threshold
-                          </span>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Couples</span>
-                            <span className="font-bold text-amber-400">₹4,500 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Girls</span>
-                            <span className="font-bold text-amber-400">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Stags</span>
-                            <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                        </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Girls</span>
+                        <span className="font-bold text-amber-400">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Stags</span>
+                        <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                      </div>
+                    </div>
 
-                        <div className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 space-y-2">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-red-400 block border-b border-red-500/10 pb-1">
-                            Post 10:00 PM Threshold
-                          </span>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Couples</span>
-                            <span className="font-bold text-white">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Girls</span>
-                            <span className="font-bold text-white">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                          <div className="flex justify-between items-center text-xs">
-                            <span className="text-neutral-300">Stags</span>
-                            <span className="font-bold text-white">₹8,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                          </div>
-                        </div>
-                      </>
-                    )}
+                    <div className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 space-y-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-red-400 block border-b border-red-500/10 pb-1">
+                        Post 10:00 PM Threshold
+                      </span>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Couples</span>
+                        <span className="font-bold text-white">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Girls</span>
+                        <span className="font-bold text-white">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                      </div>
+                      <div className="flex justify-between items-center text-xs">
+                        <span className="text-neutral-300">Stags</span>
+                        <span className="font-bold text-white">₹8,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Column 2: Form Engine */}
