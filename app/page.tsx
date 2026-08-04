@@ -351,7 +351,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("cavore", "TECHTALES: MELODIC GUESTLIST", " Cavore Friday night allocation", "TECHTALES: MELODIC @ Cavore (7 Aug)")}
+                  onClick={() => openBookingModal("cavore", "TECHTALES: MELODIC GUESTLIST", "Cavore Friday night allocation", "TECHTALES: MELODIC @ Cavore (7 Aug)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
@@ -398,37 +398,19 @@ export default function TrapEntertainmentWebsite() {
                     
                     <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
                       <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
-                        Till 9:00 PM Threshold
+                        Guestlist Pricing
                       </span>
                       <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Couples</span>
-                        <span className="font-bold text-amber-400">₹4,500 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                        <span className="text-neutral-300">Girls</span>
+                        <span className="font-bold text-emerald-400">FREE via GL</span>
                       </div>
                       <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Girls</span>
-                        <span className="font-bold text-amber-400">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                        <span className="text-neutral-300">Couples</span>
+                        <span className="font-bold text-emerald-400">FREE via GL</span>
                       </div>
                       <div className="flex justify-between items-center text-xs">
                         <span className="text-neutral-300">Stags</span>
                         <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                      </div>
-                    </div>
-
-                    <div className="rounded-2xl border border-red-500/20 bg-red-950/10 p-4 space-y-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-red-400 block border-b border-red-500/10 pb-1">
-                        Post 10:00 PM Threshold
-                      </span>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Couples</span>
-                        <span className="font-bold text-white">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                      </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Girls</span>
-                        <span className="font-bold text-white">₹2,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
-                      </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Stags</span>
-                        <span className="font-bold text-white">₹8,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
                       </div>
                     </div>
                   </div>
@@ -452,9 +434,9 @@ export default function TrapEntertainmentWebsite() {
                           onChange={(e) => setSelectedCategory(e.target.value)}
                           className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
                         >
-                          <option value="Girls">Girls Pass</option>
-                          <option value="Couple">Couple Pass</option>
-                          <option value="Stag">Stag Pass</option>
+                          <option value="Girls">Girls Pass (Free)</option>
+                          <option value="Couple">Couple Pass (Free)</option>
+                          <option value="Stag">Stag Pass (₹6k)</option>
                         </select>
                       </div>
 
