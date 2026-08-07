@@ -363,7 +363,7 @@ export default function TrapEntertainmentWebsite() {
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_35px_rgba(220,38,38,0.2)]">
               <div className="relative w-full h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/8 AUG SATURDAY.png" 
+                  src="/8-aug-saturday.png" 
                   alt="Code Red Featuring i AM FELIX Poster" 
                   className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
