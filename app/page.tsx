@@ -290,7 +290,7 @@ export default function TrapEntertainmentWebsite() {
             Now Live
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            Active Showcase
+            Active Showcases
           </h2>
         </div>
 
@@ -300,11 +300,11 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="max-w-3xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
             
-            {/* TECHTALES: MELODIC */}
-            <div className="group relative flex flex-col md:flex-row rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_35px_rgba(239,68,68,0.15)]">
-              <div className="relative w-full md:w-1/2 min-h-[380px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            {/* EVENT 1: TECHTALES @ CAVORE (7 AUG FRIDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_35px_rgba(239,68,68,0.15)]">
+              <div className="relative w-full h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
                   src="/7 AUG FRIDAY.png" 
                   alt="Techtales Featuring Melodic Poster" 
@@ -324,13 +324,13 @@ export default function TrapEntertainmentWebsite() {
                 </div>
               </div>
 
-              <div className="p-6 md:p-8 flex flex-col justify-between w-full md:w-1/2">
+              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
                     TECHTALES @ CAVORE
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A underground melodic experience presented by Sourberry and Cavore, powered by Surge, Xzoro, Ignite, Yore, WE Entertainment, Scenes, and Trap Entertainment.
+                    An underground melodic experience presented by Sourberry and Cavore, powered by Surge, Xzoro, Ignite, Yore, WE Entertainment, Scenes, and Trap Entertainment.
                   </p>
 
                   <div className="space-y-3 mb-8">
@@ -352,6 +352,63 @@ export default function TrapEntertainmentWebsite() {
                 <button 
                   type="button"
                   onClick={() => openBookingModal("cavore", "TECHTALES: MELODIC GUESTLIST", "Cavore Friday night allocation", "TECHTALES: MELODIC @ Cavore (7 Aug)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
+                >
+                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
+                </button>
+              </div>
+            </div>
+
+            {/* EVENT 2: CODE RED @ HEYOU (8 AUG SATURDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_35px_rgba(220,38,38,0.2)]">
+              <div className="relative w-full h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+                <img 
+                  src="/8 AUG SATURDAY.png" 
+                  alt="Code Red Featuring i AM FELIX Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
+                
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-600/20 border border-red-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
+                  <Radio className="h-3 w-3 animate-pulse text-red-500" />
+                  <span>The City's Hottest Alert</span>
+                </div>
+
+                <div className="relative z-20 mt-auto">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Saturday Night Special</span>
+                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-red-500 transition-colors duration-300">CODE RED</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEATURING: i AM FELIX</p>
+                </div>
+              </div>
+
+              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
+                    CODE RED @ HEYOU
+                  </h3>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                    Prepare for the ultimate Saturday alert on MG Road. High-energy beats, premier production, and unmatched vibes featuring i AM FELIX.
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Calendar className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">Saturday, 8th August</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Clock className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">9:00 PM Onwards</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <MapPin className="h-4 w-4 text-red-500" />
+                      <span className="font-medium">Heyou, MG Road, Bangalore</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="button"
+                  onClick={() => openBookingModal("heyou", "CODE RED GUESTLIST", "Heyou Saturday night allocation", "CODE RED @ Heyou MG Road (8 Aug)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
