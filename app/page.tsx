@@ -412,23 +412,32 @@ export default function TrapEntertainmentWebsite() {
                     </div>
 
                     {/* Option 2: Couple */}
-                    <div 
-                      onClick={() => setSelectedCategory("Couple")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
-                    >
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Couple [Free Entry]</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">RSVP</span>
-                        </div>
-                        <p className="text-xs text-neutral-400 mt-1">Permits Free Entry To One Couple Till 9:30pm Only. Post 9:30pm A Mandatory Cover Charge Will Be Applicable As Per Club Rules.</p>
-                      </div>
-                      <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
-                        </div>
-                      </div>
-                    </div>
+<div 
+  onClick={() => setSelectedCategory("Couple")}
+  className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+>
+  <div>
+    <div className="flex items-center gap-2">
+      <span className="font-bold text-white text-sm">Couple [Free Entry]</span>
+      <div className="flex flex-col items-start">
+        <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+          Free
+        </span>
+        <span className="text-[9px] text-emerald-400/80 font-medium tracking-tight mt-0.5 pl-0.5">
+          Till 9:30 PM only
+        </span>
+      </div>
+    </div>
+    <p className="text-xs text-neutral-400 mt-1">
+      Permits Free Entry To One Couple Till 9:30pm Only. Post 9:30pm A Mandatory Cover Charge Will Be Applicable As Per Club Rules.
+    </p>
+  </div>
+  <div className="shrink-0 ml-4">
+    <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+      {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
+    </div>
+  </div>
+</div>
 
                     {/* Option 3: Stags */}
                     <div 
