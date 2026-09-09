@@ -150,7 +150,7 @@ export default function TrapEntertainmentWebsite() {
     const data = new FormData(form);
 
     try {
-      const response = await fetch("https://formspree.io/f/mykropbw", {
+      const response = await fetch("https://formspree.io/f/meaqvjke", {
         method: "POST",
         body: data,
         headers: {
@@ -300,100 +300,43 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
+          <div className="grid grid-cols-1 max-w-2xl mx-auto w-full">
             
-            {/* EVENT 1: TECHTALES @ CAVORE (7 AUG FRIDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-500/40 hover:shadow-[0_0_35px_rgba(239,68,68,0.15)]">
-              <div className="relative w-full h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/7 AUG FRIDAY.png" 
-                  alt="Techtales Featuring Melodic Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-500/10 border border-red-500/30 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
-                  <Radio className="h-3 w-3 animate-pulse text-red-400" />
-                  <span>Sourberry & Cavore Present</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Techtales Showcase</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-red-400 transition-colors duration-300">MELODIC</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">Also Featuring: MALIK</p>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    TECHTALES @ CAVORE
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    An underground melodic experience presented by Sourberry and Cavore, powered by Surge, Xzoro, Ignite, Yore, WE Entertainment, Scenes, and Trap Entertainment.
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">Friday, 7th August</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">8:00 PM Onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">Cavore, Bangalore</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => openBookingModal("cavore", "TECHTALES: MELODIC GUESTLIST", "Cavore Friday night allocation", "TECHTALES: MELODIC @ Cavore (7 Aug)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
-                >
-                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
-                </button>
-              </div>
-            </div>
-
-            {/* EVENT 2: CODE RED @ HEYOU (8 AUG SATURDAY) */}
+            {/* EVENT: BADDEST IN THE ROOM @ HEYOU (12 SEP SATURDAY) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_35px_rgba(220,38,38,0.2)]">
-              <div className="relative w-full h-[320px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+              <div className="relative w-full h-[360px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/8-aug-saturday.png" 
-                  alt="Code Red Featuring i AM FELIX Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                  src="/12-sep-saturday.png" 
+                  alt="Baddest In The Room Featuring Jonas Monteiro & Cris Poster" 
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
                 
                 <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-600/20 border border-red-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
                   <Radio className="h-3 w-3 animate-pulse text-red-500" />
-                  <span>The City's Hottest Alert</span>
+                  <span>For The Ones Who Own The Room • 21+ Only</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Saturday Night Special</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-red-500 transition-colors duration-300">CODE RED</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEATURING: i AM FELIX</p>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Saturday Night Showcase</span>
+                  <h4 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase group-hover:text-red-500 transition-colors duration-300">BADDEST IN THE ROOM</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEATURING: JONAS MONTEIRO • CRIS</p>
                 </div>
               </div>
 
               <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    CODE RED @ HEYOU
+                    BADDEST IN THE ROOM @ HEYOU
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    Prepare for the ultimate Saturday alert on MG Road. High-energy beats, premier production, and unmatched vibes featuring i AM FELIX.
+                    A premier Saturday night curation on MG Road featuring Jonas Monteiro and Cris. Exclusively for the ones who own the room.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Calendar className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">Saturday, 8th August</span>
+                      <span className="font-medium">Saturday, 12th September</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Clock className="h-4 w-4 text-red-500" />
@@ -408,10 +351,10 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("heyou", "CODE RED GUESTLIST", "Heyou Saturday night allocation", "CODE RED @ Heyou MG Road (8 Aug)")}
+                  onClick={() => openBookingModal("heyou", "BADDEST IN THE ROOM GUESTLIST", "Heyou Saturday night allocation", "BADDEST IN THE ROOM @ Heyou MG Road (12 Sep)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
                 >
-                  <Ticket className="h-4 w-4" /> SECURE GUESTLIST SPOT
+                  <Ticket className="h-4 w-4" /> SELECT TICKETS / RSVP
                 </button>
               </div>
             </div>
@@ -423,7 +366,7 @@ export default function TrapEntertainmentWebsite() {
       {/* Guestlist Form Overlay Terminal Modal */}
       {showPasses && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/95 overflow-y-auto animate-in fade-in duration-300 backdrop-blur-md">
-          <div className="relative w-full max-w-4xl my-auto mx-auto border rounded-3xl p-6 md:p-10 shadow-2xl bg-neutral-950/95 border-neutral-800 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 ease-out">
+          <div className="relative w-full max-w-3xl my-auto mx-auto border rounded-3xl p-6 md:p-10 shadow-2xl bg-neutral-950/95 border-neutral-800 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 ease-out">
             
             <button
               type="button"
@@ -436,43 +379,78 @@ export default function TrapEntertainmentWebsite() {
             {!isSubmitted ? (
               <>
                 <div className="text-center mb-8 max-w-xl mx-auto">
-                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Access Terminal</span>
+                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Select Tickets</span>
                   <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
                     {selectedEvent.title}
                   </h3>
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {selectedEvent.subtitle}. Please complete your reservation details below.
+                    {selectedEvent.subtitle}. Complete your pass selection below.
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 items-start">
+                <div className="space-y-6">
                   
-                  {/* Column 1: Pricing Tier Architecture */}
-                  <div className="space-y-4">
-                    <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-2 flex items-center gap-2">
-                      <Sparkles className="text-amber-400 h-3 w-3" /> Cover Architecture
-                    </h4>
-                    
-                    <div className="rounded-2xl border border-amber-500/20 bg-amber-950/10 p-4 space-y-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-amber-400 block border-b border-amber-500/10 pb-1">
-                        Guestlist Pricing
-                      </span>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Girls</span>
-                        <span className="font-bold text-emerald-400">FREE via GL</span>
+                  {/* Ticket Options Grid */}
+                  <div className="space-y-3">
+                    {/* Option 1: Single Lady */}
+                    <div 
+                      onClick={() => setSelectedCategory("Single Lady")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Single Lady" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Rsvp - Single Lady [Free Entry]</span>
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Permits Free Entry For One Single Lady All Night Long.</p>
                       </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Couples</span>
-                        <span className="font-bold text-emerald-400">FREE via GL</span>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Single Lady" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Single Lady" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
                       </div>
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="text-neutral-300">Stags</span>
-                        <span className="font-bold text-amber-400">₹6,000 <span className="text-[10px] text-neutral-400 font-normal">(Full Cover)</span></span>
+                    </div>
+
+                    {/* Option 2: Couple */}
+                    <div 
+                      onClick={() => setSelectedCategory("Couple")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Couple [Free Entry]</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">RSVP</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Permits Free Entry To One Couple Till 9:30pm Only. Post 9:30pm A Mandatory Cover Charge Will Be Applicable As Per Club Rules.</p>
+                      </div>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Option 3: Stags */}
+                    <div 
+                      onClick={() => setSelectedCategory("Stag")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Rsvp - Stags [Mandatory Cover]</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">RSVP</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Mandatory Cover Charges Will Be Applicable As Per Club Rules And Regulations.</p>
+                      </div>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Column 2: Form Engine */}
+                  {/* Form Submission */}
                   <div className="bg-neutral-900/40 border border-neutral-900 rounded-2xl p-6">
                     <form onSubmit={handleFormSubmit} className="space-y-4">
                       
@@ -481,21 +459,11 @@ export default function TrapEntertainmentWebsite() {
                         name="Event" 
                         value={selectedEvent.formValue} 
                       />
-                      
-                      <div>
-                        <label className="mb-1 block text-[10px] font-bold text-neutral-400 uppercase tracking-wider">Pass Category</label>
-                        <select 
-                          name="category" 
-                          required 
-                          value={selectedCategory}
-                          onChange={(e) => setSelectedCategory(e.target.value)}
-                          className="w-full rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50 transition-colors"
-                        >
-                          <option value="Girls">Girls Pass (Free)</option>
-                          <option value="Couple">Couple Pass (Free)</option>
-                          <option value="Stag">Stag Pass (₹6k)</option>
-                        </select>
-                      </div>
+                      <input 
+                        type="hidden" 
+                        name="Category" 
+                        value={selectedCategory} 
+                      />
 
                       {selectedCategory === "Couple" ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
@@ -526,7 +494,7 @@ export default function TrapEntertainmentWebsite() {
                         type="submit" 
                         className="w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 bg-amber-400 hover:bg-amber-300"
                       >
-                        Secure Guestlist Spot
+                        Confirm Booking ({selectedCategory})
                       </button>
                     </form>
                   </div>
