@@ -303,15 +303,15 @@ export default function TrapEntertainmentWebsite() {
             
             {/* EVENT: CATZ 'N DOGZ @ CAVORE (18 SEP FRIDAY) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-              <div className="relative w-full h-[360px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+              <div className="relative w-full h-[480px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
                   src="/18-sep-friday.png" 
                   alt="Inflight Catz 'N Dogz featuring Malik Poster" 
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
+                  className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit backdrop-blur-md">
                   <Radio className="h-3 w-3 animate-pulse text-amber-400" />
                   <span>Guest List Closes At 10:00 PM • 21+ Only</span>
                 </div>
