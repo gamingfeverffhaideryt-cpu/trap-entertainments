@@ -57,7 +57,7 @@ export default function TrapEntertainmentWebsite() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [showPasses, setShowPasses] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Stag");
+  const [selectedCategory, setSelectedCategory] = useState("Female Stag");
   const [selectedEvent, setSelectedEvent] = useState({ id: "", title: "", subtitle: "", formValue: "" });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -311,9 +311,9 @@ export default function TrapEntertainmentWebsite() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit backdrop-blur-md">
-                  <Radio className="h-3 w-3 animate-pulse text-amber-400" />
-                  <span>Free Entry Till 10:00 PM • 21+ Only</span>
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md">
+                  <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
+                  <span>Free Guestlist Open • 21+ Only</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
@@ -383,7 +383,7 @@ export default function TrapEntertainmentWebsite() {
                     {selectedEvent.title}
                   </h3>
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {selectedEvent.subtitle}. Free entry for Couples and Female Stags before 10:00 PM.
+                    {selectedEvent.subtitle}. Free entry for Girls and Couples on the guestlist.
                   </p>
                 </div>
 
@@ -392,45 +392,7 @@ export default function TrapEntertainmentWebsite() {
                   {/* Ticket Options Grid */}
                   <div className="space-y-3">
                     
-                    {/* Option 1: Male Stag (Paid Cover) */}
-                    <div 
-                      onClick={() => setSelectedCategory("Stag")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
-                    >
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Stag (Male) - Mandatory Cover</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Chargeable</span>
-                        </div>
-                        <p className="text-xs text-neutral-400 mt-1">Cover charges applicable at entry. Redeemable on food & beverages inside.</p>
-                      </div>
-                      <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Option 2: Couple (Free Till 10PM) */}
-                    <div 
-                      onClick={() => setSelectedCategory("Couple")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
-                    >
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Couple Pass</span>
-                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free Till 10 PM</span>
-                        </div>
-                        <p className="text-xs text-neutral-400 mt-1">Free entry till 10:00 PM. Venue cover charges apply post 10:00 PM.</p>
-                      </div>
-                      <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Option 3: Female Stag (Free Till 10PM) */}
+                    {/* Option 1: Female Stag (Free) */}
                     <div 
                       onClick={() => setSelectedCategory("Female Stag")}
                       className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
@@ -438,9 +400,9 @@ export default function TrapEntertainmentWebsite() {
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-white text-sm">Female Stag</span>
-                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free Till 10 PM</span>
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">Free Entry</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Free entry till 10:00 PM. Venue cover charges apply post 10:00 PM.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Complimentary entry via Trap Guestlist.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -449,11 +411,49 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                     </div>
 
+                    {/* Option 2: Couple (Free) */}
+                    <div 
+                      onClick={() => setSelectedCategory("Couple")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Couple Pass</span>
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">Free Entry</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Complimentary entry for couples via Trap Guestlist.</p>
+                      </div>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Option 3: Male Stag (Paid) */}
+                    <div 
+                      onClick={() => setSelectedCategory("Stag")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Stag (Male)</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2.5 py-0.5 rounded-full">Paid Cover</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Mandatory venue cover charges applicable at door. Redeemable inside.</p>
+                      </div>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
 
                   {/* Disclaimer Notice */}
                   <div className="text-[11px] text-amber-400/80 bg-amber-950/20 border border-amber-500/20 rounded-xl p-3 text-center font-medium">
-                    <p>⚠️ Couples and Female Stags enter free before 10:00 PM. Post 10:00 PM cover charges apply at club discretion. Male Stags must pay mandatory cover charges at venue door.</p>
+                    <p>⚠️ Entry subject to venue discretion. Girls and Couples enter free on guestlist, while Male Stags pay cover charge at entry.</p>
                   </div>
 
                   {/* Form Submission */}
