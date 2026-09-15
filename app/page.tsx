@@ -313,7 +313,7 @@ export default function TrapEntertainmentWebsite() {
                 
                 <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit backdrop-blur-md">
                   <Radio className="h-3 w-3 animate-pulse text-amber-400" />
-                  <span>Guest List Closes At 10:00 PM • 21+ Only</span>
+                  <span>Free Entry Till 10:00 PM • 21+ Only</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
@@ -350,10 +350,10 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ TICKETS / COVER", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
+                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ TICKETS / GUESTLIST", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
                 >
-                  <Ticket className="h-4 w-4" /> BOOK PASSES / FULL COVER
+                  <Ticket className="h-4 w-4" /> BOOK PASSES / GUESTLIST
                 </button>
               </div>
             </div>
@@ -383,7 +383,7 @@ export default function TrapEntertainmentWebsite() {
                     {selectedEvent.title}
                   </h3>
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {selectedEvent.subtitle}. Strict cover charge applicable at venue entry.
+                    {selectedEvent.subtitle}. Free entry for Couples and Female Stags before 10:00 PM.
                   </p>
                 </div>
 
@@ -392,17 +392,17 @@ export default function TrapEntertainmentWebsite() {
                   {/* Ticket Options Grid */}
                   <div className="space-y-3">
                     
-                    {/* Option 1: Male Stag (Chargeable) */}
+                    {/* Option 1: Male Stag (Paid Cover) */}
                     <div 
                       onClick={() => setSelectedCategory("Stag")}
                       className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Stag (Male) - ₹6,000 Cover</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Fully Chargeable Cover</span>
+                          <span className="font-bold text-white text-sm">Stag (Male) - Mandatory Cover</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Chargeable</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">₹6,000 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Cover charges applicable at entry. Redeemable on food & beverages inside.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -411,17 +411,17 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                     </div>
 
-                    {/* Option 2: Couple */}
+                    {/* Option 2: Couple (Free Till 10PM) */}
                     <div 
                       onClick={() => setSelectedCategory("Couple")}
                       className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Couple - ₹4,500 Full Cover</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
+                          <span className="font-bold text-white text-sm">Couple Pass</span>
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free Till 10 PM</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">₹4,500 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Free entry till 10:00 PM. Venue cover charges apply post 10:00 PM.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -430,17 +430,17 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                     </div>
 
-                    {/* Option 3: Female Stag */}
+                    {/* Option 3: Female Stag (Free Till 10PM) */}
                     <div 
                       onClick={() => setSelectedCategory("Female Stag")}
                       className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Female Stag - ₹2,000 Full Cover</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
+                          <span className="font-bold text-white text-sm">Female Stag</span>
+                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free Till 10 PM</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">₹2,000 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Free entry till 10:00 PM. Venue cover charges apply post 10:00 PM.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -453,7 +453,7 @@ export default function TrapEntertainmentWebsite() {
 
                   {/* Disclaimer Notice */}
                   <div className="text-[11px] text-amber-400/80 bg-amber-950/20 border border-amber-500/20 rounded-xl p-3 text-center font-medium">
-                    <p>⚠️ All entry passes require mandatory cover charges at venue door. Guest list entries close at 10:00 PM; post 10:00 PM rates subject to club discretion.</p>
+                    <p>⚠️ Couples and Female Stags enter free before 10:00 PM. Post 10:00 PM cover charges apply at club discretion. Male Stags must pay mandatory cover charges at venue door.</p>
                   </div>
 
                   {/* Form Submission */}
@@ -519,7 +519,7 @@ export default function TrapEntertainmentWebsite() {
                     Your pass reservation has been recorded.
                   </p>
                   <p className="text-base md:text-lg font-bold text-amber-400 bg-black/60 py-3 px-4 rounded-xl border border-amber-500/20">
-                    Pay cover charge at box office under <span className="text-white font-black underline decoration-amber-400">"Trap Guestlist"</span>.
+                    Mention <span className="text-white font-black underline decoration-amber-400">"Trap Guestlist"</span> at entry.
                   </p>
                 </div>
                 <button
