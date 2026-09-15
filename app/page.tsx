@@ -8,7 +8,6 @@ import {
   Users, 
   Mail, 
   X,
-  Sparkles,
   Radio,
   Calendar,
   Clock,
@@ -58,7 +57,7 @@ export default function TrapEntertainmentWebsite() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [showPasses, setShowPasses] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Girls");
+  const [selectedCategory, setSelectedCategory] = useState("Female Stag");
   const [selectedEvent, setSelectedEvent] = useState({ id: "", title: "", subtitle: "", formValue: "" });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -302,57 +301,57 @@ export default function TrapEntertainmentWebsite() {
         >
           <div className="grid grid-cols-1 max-w-2xl mx-auto w-full">
             
-            {/* EVENT: BADDEST IN THE ROOM @ HEYOU (12 SEP SATURDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-red-600/40 hover:shadow-[0_0_35px_rgba(220,38,38,0.2)]">
+            {/* EVENT: CATZ 'N DOGZ @ CAVORE (18 SEP FRIDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
               <div className="relative w-full h-[360px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/12-sep-saturday.png" 
-                  alt="Baddest In The Room Featuring Jonas Monteiro & Cris Poster" 
+                  src="/18-sep-friday.png" 
+                  alt="Inflight Catz 'N Dogz featuring Malik Poster" 
                   className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-lighten transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] pointer-events-none will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/30 via-transparent to-neutral-950/95 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-red-600/20 border border-red-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-red-400 w-fit">
-                  <Radio className="h-3 w-3 animate-pulse text-red-500" />
-                  <span>For The Ones Who Own The Room • 21+ Only</span>
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-amber-500/20 border border-amber-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-amber-400 w-fit">
+                  <Radio className="h-3 w-3 animate-pulse text-amber-400" />
+                  <span>Guest List Closes At 10:00 PM • 21+ Only</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1">Saturday Night Showcase</span>
-                  <h4 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase group-hover:text-red-500 transition-colors duration-300">BADDEST IN THE ROOM</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEATURING: JONAS MONTEIRO • CRIS</p>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Friday Night Showcase</span>
+                  <h4 className="text-3xl md:text-4xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">INFLIGHT PRESENTS CATZ 'N DOGZ</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">ALSO FEATURING: MALIK</p>
                 </div>
               </div>
 
               <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    BADDEST IN THE ROOM @ HEYOU
+                    CATZ 'N DOGZ @ CAVORE
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A premier Saturday night curation on MG Road featuring Jonas Monteiro and Cris. Exclusively for the ones who own the room.
+                    A premier Friday night showcase presented by Sourberry and Cavore featuring Catz 'N Dogz along with Malik. High-energy house and underground beats.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">Saturday, 12th September</span>
+                      <Calendar className="h-4 w-4 text-amber-400" />
+                      <span className="font-medium">Friday, 18th September</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">9:00 PM Onwards</span>
+                      <Clock className="h-4 w-4 text-amber-400" />
+                      <span className="font-medium">8:00 PM Onwards</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-red-500" />
-                      <span className="font-medium">Heyou, MG Road, Bangalore</span>
+                      <MapPin className="h-4 w-4 text-amber-400" />
+                      <span className="font-medium">Cavore, Bangalore</span>
                     </div>
                   </div>
                 </div>
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("heyou", "BADDEST IN THE ROOM GUESTLIST", "Heyou Saturday night allocation", "BADDEST IN THE ROOM @ Heyou MG Road (12 Sep)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-red-600 via-red-500 to-amber-500 py-4 text-xs font-bold uppercase tracking-wider text-white transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(220,38,38,0.2)] hover:shadow-[0_4px_25px_rgba(220,38,38,0.35)]"
+                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ GUESTLIST", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> SELECT TICKETS / RSVP
                 </button>
@@ -384,7 +383,7 @@ export default function TrapEntertainmentWebsite() {
                     {selectedEvent.title}
                   </h3>
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {selectedEvent.subtitle}. Complete your pass selection below.
+                    {selectedEvent.subtitle}. Guest list closes at 10:00 PM.
                   </p>
                 </div>
 
@@ -392,64 +391,56 @@ export default function TrapEntertainmentWebsite() {
                   
                   {/* Ticket Options Grid */}
                   <div className="space-y-3">
-                    {/* Option 1: Single Lady */}
+                    
+                    {/* Option 1: Female Stag */}
                     <div 
-                      onClick={() => setSelectedCategory("Single Lady")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Single Lady" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                      onClick={() => setSelectedCategory("Female Stag")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Rsvp - Single Lady [Free Entry]</span>
-                          <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">Free</span>
+                          <span className="font-bold text-white text-sm">Female Stag - ₹2,000 Full Cover</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Permits Free Entry For One Single Lady All Night Long.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Includes ₹2,000 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
                       </div>
                       <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Single Lady" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Single Lady" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Female Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
                         </div>
                       </div>
                     </div>
 
                     {/* Option 2: Couple */}
-<div 
-  onClick={() => setSelectedCategory("Couple")}
-  className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
->
-  <div>
-    <div className="flex items-center gap-2">
-      <span className="font-bold text-white text-sm">Couple [Free Entry]</span>
-      <div className="flex flex-col items-start">
-        <span className="text-[10px] font-bold text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-full">
-          Free
-        </span>
-        <span className="text-[9px] text-emerald-400/80 font-medium tracking-tight mt-0.5 pl-0.5">
-          Till 9:30 PM only
-        </span>
-      </div>
-    </div>
-    <p className="text-xs text-neutral-400 mt-1">
-      Permits Free Entry To One Couple Till 9:30pm Only. Post 9:30pm A Mandatory Cover Charge Will Be Applicable As Per Club Rules.
-    </p>
-  </div>
-  <div className="shrink-0 ml-4">
-    <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-      {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
-    </div>
-  </div>
-</div>
+                    <div 
+                      onClick={() => setSelectedCategory("Couple")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-white text-sm">Couple - ₹4,500 Full Cover</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
+                        </div>
+                        <p className="text-xs text-neutral-400 mt-1">Includes ₹4,500 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
+                      </div>
+                      <div className="shrink-0 ml-4">
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Couple" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        </div>
+                      </div>
+                    </div>
 
-                    {/* Option 3: Stags */}
+                    {/* Option 3: Stag */}
                     <div 
                       onClick={() => setSelectedCategory("Stag")}
                       className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Rsvp - Stags [Mandatory Cover]</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">RSVP</span>
+                          <span className="font-bold text-white text-sm">Stag - ₹6,000 Full Cover</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Mandatory Cover Charges Will Be Applicable As Per Club Rules And Regulations.</p>
+                        <p className="text-xs text-neutral-400 mt-1">Includes ₹6,000 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -457,6 +448,12 @@ export default function TrapEntertainmentWebsite() {
                         </div>
                       </div>
                     </div>
+
+                  </div>
+
+                  {/* Disclaimer Notice */}
+                  <div className="text-[11px] text-amber-400/80 bg-amber-950/20 border border-amber-500/20 rounded-xl p-3 text-center font-medium">
+                    <p>⚠️ Guest list closes strictly at 10:00 PM. Post 10:00 PM cover charges will increase. Cover charges are subjective to venue rules and club situation.</p>
                   </div>
 
                   {/* Form Submission */}
@@ -671,7 +668,7 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                       <div>
                         <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Contact Email / Phone</label>
-                        <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
+                        <input type="text" name="contact_info" required placeholder="name@domain.com or phone" className="w-full rounded-xl border border-neutral-800 bg-neutral-900 px-4 py-2.5 text-white text-sm outline-none focus:border-amber-400/50" />
                       </div>
                       <div>
                         <label className="mb-1 block text-xs font-bold text-neutral-400 uppercase">Message / Special Requests</label>
