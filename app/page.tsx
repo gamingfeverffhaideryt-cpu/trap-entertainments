@@ -57,7 +57,7 @@ export default function TrapEntertainmentWebsite() {
   const [scrollY, setScrollY] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null); 
   const [showPasses, setShowPasses] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Female Stag");
+  const [selectedCategory, setSelectedCategory] = useState("Stag");
   const [selectedEvent, setSelectedEvent] = useState({ id: "", title: "", subtitle: "", formValue: "" });
   
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -350,10 +350,10 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ GUESTLIST", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
+                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ TICKETS / COVER", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
                 >
-                  <Ticket className="h-4 w-4" /> SELECT TICKETS / RSVP
+                  <Ticket className="h-4 w-4" /> BOOK PASSES / FULL COVER
                 </button>
               </div>
             </div>
@@ -362,7 +362,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </section>
 
-      {/* Guestlist Form Overlay Terminal Modal */}
+      {/* Booking Form Overlay Terminal Modal */}
       {showPasses && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/95 overflow-y-auto animate-in fade-in duration-300 backdrop-blur-md">
           <div className="relative w-full max-w-3xl my-auto mx-auto border rounded-3xl p-6 md:p-10 shadow-2xl bg-neutral-950/95 border-neutral-800 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 ease-out">
@@ -378,12 +378,12 @@ export default function TrapEntertainmentWebsite() {
             {!isSubmitted ? (
               <>
                 <div className="text-center mb-8 max-w-xl mx-auto">
-                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Select Tickets</span>
+                  <span className="text-[10px] uppercase font-bold tracking-[0.3em] block mb-1 text-amber-400">Select Pass Type</span>
                   <h3 className="text-2xl md:text-3xl font-black uppercase text-neutral-100">
                     {selectedEvent.title}
                   </h3>
                   <p className="text-xs text-neutral-400 mt-2 font-light">
-                    {selectedEvent.subtitle}. Guest list closes at 10:00 PM.
+                    {selectedEvent.subtitle}. Strict cover charge applicable at venue entry.
                   </p>
                 </div>
 
@@ -392,21 +392,21 @@ export default function TrapEntertainmentWebsite() {
                   {/* Ticket Options Grid */}
                   <div className="space-y-3">
                     
-                    {/* Option 1: Female Stag */}
+                    {/* Option 1: Male Stag (Chargeable) */}
                     <div 
-                      onClick={() => setSelectedCategory("Female Stag")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                      onClick={() => setSelectedCategory("Stag")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Female Stag - ₹2,000 Full Cover</span>
-                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
+                          <span className="font-bold text-white text-sm">Stag (Male) - ₹6,000 Cover</span>
+                          <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Fully Chargeable Cover</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Includes ₹2,000 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
+                        <p className="text-xs text-neutral-400 mt-1">₹6,000 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
                       </div>
                       <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Female Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
                         </div>
                       </div>
                     </div>
@@ -421,7 +421,7 @@ export default function TrapEntertainmentWebsite() {
                           <span className="font-bold text-white text-sm">Couple - ₹4,500 Full Cover</span>
                           <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Includes ₹4,500 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
+                        <p className="text-xs text-neutral-400 mt-1">₹4,500 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
                       </div>
                       <div className="shrink-0 ml-4">
                         <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Couple" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
@@ -430,21 +430,21 @@ export default function TrapEntertainmentWebsite() {
                       </div>
                     </div>
 
-                    {/* Option 3: Stag */}
+                    {/* Option 3: Female Stag */}
                     <div 
-                      onClick={() => setSelectedCategory("Stag")}
-                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
+                      onClick={() => setSelectedCategory("Female Stag")}
+                      className={`cursor-pointer rounded-2xl border p-4 transition-all duration-300 flex justify-between items-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.15)]" : "border-neutral-800 bg-neutral-900/40 hover:border-neutral-700"}`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-white text-sm">Stag - ₹6,000 Full Cover</span>
+                          <span className="font-bold text-white text-sm">Female Stag - ₹2,000 Full Cover</span>
                           <span className="text-[10px] font-bold text-amber-400 uppercase bg-amber-950/50 border border-amber-500/30 px-2 py-0.5 rounded-full">Full Cover</span>
                         </div>
-                        <p className="text-xs text-neutral-400 mt-1">Includes ₹6,000 redeemable cover charge. Post 10:00 PM cover charges will increase.</p>
+                        <p className="text-xs text-neutral-400 mt-1">₹2,000 cover charge payable at entry. Fully redeemable on food & beverages inside.</p>
                       </div>
                       <div className="shrink-0 ml-4">
-                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
-                          {selectedCategory === "Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
+                        <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${selectedCategory === "Female Stag" ? "border-amber-400 bg-amber-400 text-black" : "border-neutral-600"}`}>
+                          {selectedCategory === "Female Stag" && <div className="w-2 h-2 rounded-full bg-black" />}
                         </div>
                       </div>
                     </div>
@@ -453,7 +453,7 @@ export default function TrapEntertainmentWebsite() {
 
                   {/* Disclaimer Notice */}
                   <div className="text-[11px] text-amber-400/80 bg-amber-950/20 border border-amber-500/20 rounded-xl p-3 text-center font-medium">
-                    <p>⚠️ Guest list closes strictly at 10:00 PM. Post 10:00 PM cover charges will increase. Cover charges are subjective to venue rules and club situation.</p>
+                    <p>⚠️ All entry passes require mandatory cover charges at venue door. Guest list entries close at 10:00 PM; post 10:00 PM rates subject to club discretion.</p>
                   </div>
 
                   {/* Form Submission */}
@@ -500,7 +500,7 @@ export default function TrapEntertainmentWebsite() {
                         type="submit" 
                         className="w-full py-3.5 mt-4 rounded-xl text-black font-bold uppercase text-xs tracking-wider transition-all shadow-lg active:scale-98 bg-amber-400 hover:bg-amber-300"
                       >
-                        Confirm Booking ({selectedCategory})
+                        Reserve Pass ({selectedCategory})
                       </button>
                     </form>
                   </div>
@@ -512,14 +512,14 @@ export default function TrapEntertainmentWebsite() {
               <div className="text-center py-12 px-4 space-y-6 max-w-lg mx-auto animate-in fade-in zoom-in-95 duration-300">
                 <CheckCircle2 className="h-16 w-16 text-amber-400 mx-auto animate-bounce" />
                 <h3 className="text-3xl font-black uppercase text-white tracking-tight">
-                  Guestlist Confirmed!
+                  Pass Reserved!
                 </h3>
                 <div className="bg-neutral-900 border border-amber-500/30 rounded-2xl p-6 space-y-3 text-neutral-300">
                   <p className="text-sm font-medium">
-                    Your entry is reserved at the box office.
+                    Your pass reservation has been recorded.
                   </p>
                   <p className="text-base md:text-lg font-bold text-amber-400 bg-black/60 py-3 px-4 rounded-xl border border-amber-500/20">
-                    Please say <span className="text-white font-black underline decoration-amber-400">"Trap Guestlist"</span> and enter.
+                    Pay cover charge at box office under <span className="text-white font-black underline decoration-amber-400">"Trap Guestlist"</span>.
                   </p>
                 </div>
                 <button
