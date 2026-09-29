@@ -107,16 +107,17 @@ export default function TrapEntertainmentWebsite() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Updated to max-w-5xl and 2 columns max for better card sizing */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* EVENT 1 */}
           <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-            <div className="relative w-full h-[460px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            <div className="relative w-full h-[520px] bg-neutral-950 overflow-hidden">
               <img
                 src="/saturday-edit.png"
                 alt="The Saturday Edit Poster"
-                className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
+                className="w-full h-full object-cover object-top transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-950/80 z-10" />
             </div>
             <div className="p-6 flex flex-col gap-2">
               <span className="text-amber-500 text-xs font-semibold uppercase tracking-widest">
@@ -133,13 +134,13 @@ export default function TrapEntertainmentWebsite() {
 
           {/* EVENT 2 */}
           <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-            <div className="relative w-full h-[460px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            <div className="relative w-full h-[520px] bg-neutral-950 overflow-hidden">
               <img
                 src="/room101.png"
                 alt="Room 101 Poster"
-                className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
+                className="w-full h-full object-cover object-top transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-950/80 z-10" />
             </div>
             <div className="p-6 flex flex-col gap-2">
               <span className="text-amber-500 text-xs font-semibold uppercase tracking-widest">
