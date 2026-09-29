@@ -65,28 +65,32 @@ export default function TrapEntertainmentWebsite() {
       {/* Hero Section */}
       <section id="home" className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4">
         <div className="absolute inset-0 z-0 bg-neutral-950">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.05)_0%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(245,158,11,0.08)_0%,transparent_70%)]" />
         </div>
 
-        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/5 blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 -z-10 h-72 w-72 rounded-full bg-amber-600/10 blur-3xl" />
 
         <div
-          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-300 text-center"
+          className="relative z-10 max-w-4xl w-full will-change-transform transform transition-all duration-300 text-center flex flex-col items-center justify-center"
           style={{
             transform: `scale(${heroScale}) translateY(${scrollY * 0.05}px)`,
             opacity: heroOpacity,
             filter: `blur(${heroBlur}px)`
           }}
         >
-          <p className="mb-4 flex items-center justify-center gap-2 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-500">
+          <p className="mb-6 text-xs md:text-sm uppercase tracking-[0.5em] text-amber-500 font-semibold">
             Trap Entertainment Presents
           </p>
 
           <img
             src="/logo.png"
             alt="Trap Entertainment"
-            className="mx-auto h-auto max-w-[280px] md:max-w-md drop-shadow-[0_0_35px_rgba(245,158,11,0.2)]"
+            className="mx-auto h-auto max-w-[280px] md:max-w-md drop-shadow-[0_0_45px_rgba(245,158,11,0.35)]"
           />
+
+          <p className="mt-8 text-neutral-400 text-xs md:text-sm tracking-[0.2em] uppercase max-w-md">
+            Nightlife • Soundscapes • Curated Events
+          </p>
         </div>
       </section>
 
@@ -100,20 +104,19 @@ export default function TrapEntertainmentWebsite() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* EVENT 1: ROOM 101 */}
-          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-            <div className="relative w-full h-[460px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+            <div className="relative w-full h-[540px] bg-neutral-950 overflow-hidden">
               <img
                 src="/room101.png"
                 alt="Room 101 Poster"
-                className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
+                className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
             </div>
-            <div className="p-6 flex flex-col gap-2">
-              <span className="text-amber-500 text-xs font-semibold uppercase tracking-widest">
+            <div className="p-6 flex flex-col gap-2 bg-neutral-950 border-t border-neutral-900">
+              <span className="text-amber-500 text-xs font-bold uppercase tracking-widest">
                 Saturday - October 3rd
               </span>
-              <h3 className="text-xl font-bold uppercase tracking-wider text-neutral-100">
+              <h3 className="text-2xl font-black uppercase tracking-wider text-neutral-100">
                 ROOM 101
               </h3>
               <p className="text-xs text-neutral-400">
@@ -123,20 +126,19 @@ export default function TrapEntertainmentWebsite() {
           </div>
 
           {/* EVENT 2: THE SATURDAY EDIT */}
-          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-            <div className="relative w-full h-[460px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+            <div className="relative w-full h-[540px] bg-neutral-950 overflow-hidden">
               <img
                 src="/saturday-edit.png"
                 alt="The Saturday Edit Poster"
-                className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
+                className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
             </div>
-            <div className="p-6 flex flex-col gap-2">
-              <span className="text-amber-500 text-xs font-semibold uppercase tracking-widest">
+            <div className="p-6 flex flex-col gap-2 bg-neutral-950 border-t border-neutral-900">
+              <span className="text-amber-500 text-xs font-bold uppercase tracking-widest">
                 19 Sep Saturday
               </span>
-              <h3 className="text-xl font-bold uppercase tracking-wider text-neutral-100">
+              <h3 className="text-2xl font-black uppercase tracking-wider text-neutral-100">
                 The Saturday Edit @ Heyou
               </h3>
               <p className="text-xs text-neutral-400">
