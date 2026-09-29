@@ -17,6 +17,11 @@ export default function TrapEntertainmentWebsite() {
   const heroOpacity = Math.max(0, 1 - scrollY * 0.002);
   const heroBlur = Math.min(12, scrollY * 0.02);
 
+  const handleEventClick = (eventName: string) => {
+    // Replace this alert with your guestlist modal or booking redirect URL
+    alert(`Guestlist opening for ${eventName}`);
+  };
+
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 font-sans selection:bg-amber-500 selection:text-black">
       {/* Header */}
@@ -104,7 +109,10 @@ export default function TrapEntertainmentWebsite() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* EVENT 1: ROOM 101 */}
-          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+          <div 
+            onClick={() => handleEventClick("ROOM 101")}
+            className="group relative cursor-pointer flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+          >
             <div className="relative w-full h-[540px] bg-neutral-950 overflow-hidden">
               <img
                 src="/room101.png"
@@ -122,11 +130,17 @@ export default function TrapEntertainmentWebsite() {
               <p className="text-xs text-neutral-400">
                 Featuring CRONIC, CRIS, ANSH. City&apos;s best kept secret.
               </p>
+              <button className="mt-4 w-full rounded-xl bg-amber-500/10 border border-amber-500/30 py-3 text-xs font-bold text-amber-500 uppercase tracking-widest transition-all group-hover:bg-amber-500 group-hover:text-black">
+                Request Guestlist
+              </button>
             </div>
           </div>
 
           {/* EVENT 2: THE SATURDAY EDIT */}
-          <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+          <div 
+            onClick={() => handleEventClick("The Saturday Edit")}
+            className="group relative cursor-pointer flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)] hover:-translate-y-1"
+          >
             <div className="relative w-full h-[540px] bg-neutral-950 overflow-hidden">
               <img
                 src="/saturday-edit.png"
@@ -144,6 +158,9 @@ export default function TrapEntertainmentWebsite() {
               <p className="text-xs text-neutral-400">
                 Exclusive live sets, premium atmosphere, and bass-heavy lineups.
               </p>
+              <button className="mt-4 w-full rounded-xl bg-amber-500/10 border border-amber-500/30 py-3 text-xs font-bold text-amber-500 uppercase tracking-widest transition-all group-hover:bg-amber-500 group-hover:text-black">
+                Request Guestlist
+              </button>
             </div>
           </div>
         </div>
