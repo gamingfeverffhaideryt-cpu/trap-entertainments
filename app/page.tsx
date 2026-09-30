@@ -3,19 +3,13 @@
 import { useEffect, useState, useRef } from "react";
 import React from 'react';
 import { 
-  PartyPopper, 
-  Music, 
-  Users, 
-  Mail, 
-  X,
   Radio,
   Calendar,
   Clock,
   MapPin,
   Ticket,
   CheckCircle2,
-  Sparkles,
-  ChevronRight
+  X
 } from 'lucide-react';
 
 function useScrollReveal() {
@@ -176,8 +170,6 @@ export default function TrapEntertainmentWebsite() {
   const eventsHeaderReveal = useScrollReveal();
   const eventsGridReveal = useScrollReveal();
   const aboutReveal = useScrollReveal();
-  const serviceHeaderReveal = useScrollReveal();
-  const servicesGridReveal = useScrollReveal();
 
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -291,7 +283,7 @@ export default function TrapEntertainmentWebsite() {
             Now Live
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            Active Showcases
+            Active Showcase
           </h2>
         </div>
 
@@ -301,145 +293,34 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          {/* Responsive Grid Container */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto w-full">
+          {/* Centered Single Event Container */}
+          <div className="max-w-md mx-auto w-full">
             
-            {/* EVENT 1: CATZ 'N DOGZ @ CAVORE (18 SEP FRIDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-              <div className="relative w-full h-[420px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+            {/* EVENT: ROOM 101 @ HEYOU (OCTOBER 3RD SATURDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+              
+              {/* Poster Image Container */}
+              <div className="relative w-full aspect-[4/5] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/18-sep-friday.png" 
-                  alt="Inflight Catz 'N Dogz featuring Malik Poster" 
-                  className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md">
-                  <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
-                  <span>Free Guestlist Open • 21+ Only</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Friday Night Showcase</span>
-                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">INFLIGHT PRESENTS CATZ 'N DOGZ</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">ALSO FEATURING: MALIK</p>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    CATZ 'N DOGZ @ CAVORE
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A premier Friday night showcase presented by Sourberry and Cavore featuring Catz 'N Dogz along with Malik. High-energy house and underground beats.
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">Friday, 18th September</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">8:00 PM Onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">Cavore, Bangalore</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => openBookingModal("cavore", "CATZ 'N DOGZ GUESTLIST", "Cavore Friday night allocation", "CATZ 'N DOGZ @ Cavore Bangalore (18 Sep)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
-                >
-                  <Ticket className="h-4 w-4" /> BOOK PASSES / GUESTLIST
-                </button>
-              </div>
-            </div>
-
-            {/* EVENT 2: THE SATURDAY EDIT @ HEYOU (19 SEP SATURDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-              <div className="relative w-full h-[420px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/The Saturday Edit - Story Sep 19th.png" 
-                  alt="The Saturday Edit Poster" 
-                  className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
-                
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md">
-                  <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
-                  <span>Free Guestlist Open • 21+ Only</span>
-                </div>
-
-                <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">Saturday Night Showcase</span>
-                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">THE SATURDAY EDIT</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEAT. AMITH SULEGAI • ERYTH TUVIANA • CRIS • ANSH</p>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
-                <div>
-                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    THE SATURDAY EDIT @ HEYOU
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    A signature Saturday showcase at Heyou MG Road. Featuring top-tier local artist lineups with Heineken 0.0 experience.
-                  </p>
-
-                  <div className="space-y-3 mb-8">
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">Saturday, 19th September</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <Clock className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">8:30 PM Onwards</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm text-neutral-300">
-                      <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">Heyou, MG Road, Bangalore</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button 
-                  type="button"
-                  onClick={() => openBookingModal("heyou", "THE SATURDAY EDIT GUESTLIST", "Heyou Saturday night allocation", "THE SATURDAY EDIT @ Heyou MG Road (19 Sep)")}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
-                >
-                  <Ticket className="h-4 w-4" /> BOOK PASSES / GUESTLIST
-                </button>
-              </div>
-            </div>
-
-            {/* EVENT 3: ROOM 101 @ HEYOU (OCTOBER 3RD SATURDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-900 bg-neutral-900/20 shadow-2xl overflow-hidden backdrop-blur-sm transition-all duration-500 hover:border-amber-500/40 hover:shadow-[0_0_35px_rgba(245,158,11,0.2)]">
-              <div className="relative w-full h-[420px] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
-                <img 
-                  src="/IMG_9706.JPG.jpeg" 
+                  src="/room-101.jpg" 
                   alt="Room 101 Event Poster" 
-                  className="absolute inset-0 w-full h-full object-contain object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] pointer-events-none will-change-transform"
+                  className="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/40 via-transparent to-neutral-950/95 z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-transparent to-neutral-950/90 z-10" />
                 
-                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md">
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md shadow-lg">
                   <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
                   <span>Free Guestlist Open • 21+ Only</span>
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1">City's Best Kept Secret</span>
-                  <h4 className="text-2xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300">ROOM 101</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider">FEAT. CRONIC • CRIS • ANSH</p>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1 drop-shadow">City's Best Kept Secret</span>
+                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300 drop-shadow-md">ROOM 101</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider drop-shadow">FEAT. CRONIC • CRIS • ANSH</p>
                 </div>
               </div>
 
+              {/* Event Details & Booking Button */}
               <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
@@ -523,7 +404,7 @@ export default function TrapEntertainmentWebsite() {
         </div>
       </footer>
 
-      {/* Booking Form Overlay Terminal Modal */}
+      {/* Booking Form Overlay Modal */}
       {showPasses && (
         <div className="fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/95 overflow-y-auto animate-in fade-in duration-300 backdrop-blur-md">
           <div className="relative w-full max-w-lg my-auto mx-auto border rounded-3xl p-6 md:p-8 shadow-2xl bg-[#0d0d0d] border-neutral-800/80 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500 ease-out">
