@@ -283,7 +283,7 @@ export default function TrapEntertainmentWebsite() {
             Now Live
           </p>
           <h2 className="text-3xl font-bold md:text-5xl tracking-tight text-neutral-100 uppercase">
-            Active Showcase
+            Active Showcases
           </h2>
         </div>
 
@@ -293,10 +293,70 @@ export default function TrapEntertainmentWebsite() {
             eventsGridReveal.isRevealed ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.97] translate-y-12"
           }`}
         >
-          {/* Centered Single Event Container */}
-          <div className="max-w-md mx-auto w-full">
+          {/* Side-by-Side Events Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto w-full">
             
-            {/* EVENT: CODE RED @ HEYOU (OCTOBER 10TH SATURDAY) */}
+            {/* EVENT 1: SON OF SON @ CAVORE (09 OCT FRIDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+              
+              {/* Poster Image Container */}
+              <div className="relative w-full aspect-[4/5] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
+                <img 
+                  src="/son-of-son.png" 
+                  alt="Son of Son Event Poster" 
+                  className="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] will-change-transform"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-transparent to-neutral-950/90 z-10" />
+                
+                <div className="relative z-20 flex items-center gap-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-[10px] uppercase font-bold tracking-widest text-emerald-400 w-fit backdrop-blur-md shadow-lg">
+                  <Radio className="h-3 w-3 animate-pulse text-emerald-400" />
+                  <span>Free Guestlist Open • 21+ Only</span>
+                </div>
+
+                <div className="relative z-20 mt-auto">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1 drop-shadow">PRODUCED BY SOURBERRY & PARADOX</span>
+                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300 drop-shadow-md">SON OF SON</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider drop-shadow">LIVE AT CAVORE BANGALORE</p>
+                </div>
+              </div>
+
+              {/* Event Details & Booking Button */}
+              <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
+                <div>
+                  <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
+                    SON OF SON @ CAVORE
+                  </h3>
+                  <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                    A stellar Friday night showcasing Son of Son live at Cavore, Bangalore. Produced by Sourberry & Paradox in partnership with Trap Ent.
+                  </p>
+
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span className="font-medium">Friday, 09th October</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <Clock className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span className="font-medium">8:00 PM Onwards</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-neutral-300">
+                      <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
+                      <span className="font-medium">Cavore, Bangalore</span>
+                    </div>
+                  </div>
+                </div>
+
+                <button 
+                  type="button"
+                  onClick={() => openBookingModal("sonofson", "SON OF SON GUESTLIST", "Cavore Friday night allocation", "SON OF SON @ Cavore (09 Oct)")}
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
+                >
+                  <Ticket className="h-4 w-4" /> BOOK PASSES / GUESTLIST
+                </button>
+              </div>
+            </div>
+
+            {/* EVENT 2: CODE RED @ HEYOU (10 OCT SATURDAY) */}
             <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-red-500/50 hover:shadow-[0_0_40px_rgba(239,68,68,0.25)]">
               
               {/* Poster Image Container */}
@@ -395,10 +455,10 @@ export default function TrapEntertainmentWebsite() {
               Instagram
             </a>
             <a 
-              href="tel:08047250000" 
+              href="tel:+916361711779" 
               className="hover:text-amber-400 transition-colors"
             >
-              Reservations: 08047250000
+              Reservations: +91 63617 11779
             </a>
           </div>
         </div>
