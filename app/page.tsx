@@ -296,14 +296,14 @@ export default function TrapEntertainmentWebsite() {
           {/* Centered Single Event Container */}
           <div className="max-w-md mx-auto w-full">
             
-            {/* EVENT: ROOM 101 @ HEYOU (OCTOBER 3RD SATURDAY) */}
-            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-amber-500/50 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]">
+            {/* EVENT: CODE RED @ HEYOU (OCTOBER 10TH SATURDAY) */}
+            <div className="group relative flex flex-col rounded-3xl border border-neutral-800 bg-neutral-900/30 shadow-2xl overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-red-500/50 hover:shadow-[0_0_40px_rgba(239,68,68,0.25)]">
               
               {/* Poster Image Container */}
               <div className="relative w-full aspect-[4/5] bg-neutral-950 flex flex-col justify-between p-6 overflow-hidden">
                 <img 
-                  src="/room-101.jpg" 
-                  alt="Room 101 Event Poster" 
+                  src="/code-red.png" 
+                  alt="Code Red Event Poster" 
                   className="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/60 via-transparent to-neutral-950/90 z-10" />
@@ -314,9 +314,9 @@ export default function TrapEntertainmentWebsite() {
                 </div>
 
                 <div className="relative z-20 mt-auto">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-amber-400 block mb-1 drop-shadow">City's Best Kept Secret</span>
-                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300 drop-shadow-md">ROOM 101</h4>
-                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider drop-shadow">FEAT. CRONIC • CRIS • ANSH</p>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-red-500 block mb-1 drop-shadow">UK Punjabi • Commercial • Hip/Hop</span>
+                  <h4 className="text-3xl font-black text-white tracking-tight uppercase group-hover:text-amber-400 transition-colors duration-300 drop-shadow-md">CODE RED</h4>
+                  <p className="text-xs text-neutral-300 font-medium mt-1 uppercase tracking-wider drop-shadow">FEAT. I AM FELIX • CRIS</p>
                 </div>
               </div>
 
@@ -324,16 +324,16 @@ export default function TrapEntertainmentWebsite() {
               <div className="p-6 md:p-8 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-2xl font-black uppercase tracking-tight text-neutral-100 mb-2">
-                    ROOM 101 @ HEYOU
+                    CODE RED @ HEYOU
                   </h3>
                   <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
-                    City's best kept secret Saturday night experience presented by Trap Ent, Heyou & Heineken 0.0. Featuring Cronic, Cris, and Ansh.
+                    A high-octane UK Punjabi, Commercial & Hip-Hop Saturday night presented by Heyou & Heineken 0.0. Featuring i AM FELIX and CRIS.
                   </p>
 
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Calendar className="h-4 w-4 text-amber-400 shrink-0" />
-                      <span className="font-medium">Saturday, 3rd October</span>
+                      <span className="font-medium">Saturday, 10th October</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-neutral-300">
                       <Clock className="h-4 w-4 text-amber-400 shrink-0" />
@@ -348,7 +348,7 @@ export default function TrapEntertainmentWebsite() {
 
                 <button 
                   type="button"
-                  onClick={() => openBookingModal("room101", "ROOM 101 GUESTLIST", "Heyou Saturday night allocation", "ROOM 101 @ Heyou MG Road (03 Oct)")}
+                  onClick={() => openBookingModal("codered", "CODE RED GUESTLIST", "Heyou Saturday night allocation", "CODE RED @ Heyou MG Road (10 Oct)")}
                   className="w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 py-4 text-xs font-bold uppercase tracking-wider text-black transition-all duration-300 active:scale-95 shadow-[0_4px_15px_rgba(245,158,11,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.35)]"
                 >
                   <Ticket className="h-4 w-4" /> BOOK PASSES / GUESTLIST
