@@ -48,6 +48,11 @@ function useScrollReveal() {
   return { elementRef, isRevealed };
 }
 
+// -------------------------------------------------------------
+// 🔴 REPLACE THIS WITH YOUR NEW FORMSPREE FORM ID OR FULL URL 🔴
+// -------------------------------------------------------------
+const FORMSPREE_FORM_ID = "https://formspree.io/f/mdeaadyn"; // e.g., "xabcd123" or full URL "https://formspree.io/f/xabcd123"
+
 export default function TrapEntertainmentWebsite() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -144,8 +149,12 @@ export default function TrapEntertainmentWebsite() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
+    const formEndpoint = FORMSPREE_FORM_ID.startsWith("http") 
+      ? FORMSPREE_FORM_ID 
+      : `https://formspree.io/f/${FORMSPREE_FORM_ID}`;
+
     try {
-      const response = await fetch("https://formspree.io/f/meaqvjke", {
+      const response = await fetch(formEndpoint, {
         method: "POST",
         body: data,
         headers: {
@@ -156,7 +165,7 @@ export default function TrapEntertainmentWebsite() {
       if (response.ok) {
         setIsSubmitted(true);
       } else {
-        alert("There was an issue submitting your request. Please try again.");
+        alert("There was an issue submitting your request. Please check Formspree status or try again.");
       }
     } catch (error) {
       alert("There was an issue submitting your request. Please try again.");
